@@ -2,15 +2,188 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>i18nclub.com - Test Alanı</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>i18nclub.com | Siber Depo</title>
+    <style>
+        /* Matrix Arka Plan ve Genel Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        /* Site İçeriği (Matrix'in Üstünde Durması İçin) */
+        .content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 600px;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        /* Site Adı Başlığı */
+        h1 {
+            font-size: 3rem;
+            color: #00ff41; /* Klasik Matrix Yeşili */
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px #00ff41, 0 0 20px #00ff41;
+        }
+        .subtitle {
+            color: #888;
+            font-size: 1rem;
+            margin-bottom: 40px;
+            letter-spacing: 1px;
+        }
+
+        /* Depo Konteyneri ve Butonlar */
+        .depo-container {
+            background: rgba(10, 15, 10, 0.85); /* Hafif şeffaf yeşilimsi siyah */
+            border: 2px solid #00ff41;
+            border-radius: 12px;
+            padding: 30px 20px;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
+        }
+        .depo-title {
+            font-size: 1.4rem;
+            color: #fff;
+            margin-bottom: 25px;
+            border-bottom: 1px dashed #00ff41;
+            padding-bottom: 10px;
+        }
+
+        /* İndirme Butonları Tasarımı */
+        .download-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(0, 0, 0, 0.6);
+            color: #00ff41;
+            text-decoration: none;
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            border: 1px solid #00ff41;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        /* Son butonun altındaki boşluğu sıfırla */
+        .download-btn:last-child {
+            margin-bottom: 0;
+        }
+        /* Butonun üzerine gelindiğinde siber efekt */
+        .download-btn:hover {
+            background: #00ff41;
+            color: #000;
+            box-shadow: 0 0 15px #00ff41;
+            transform: scale(1.02);
+        }
+        .btn-icon {
+            font-size: 1.3rem;
+        }
+    </style>
 </head>
 <body>
-    <h1>Benim Siber Depom</h1>
-    <p> Bu Resime Tıklayıp MediaFire Sayesinde İndirme Yapabilirsin:</p>
 
-    <a href="cors-anywhere.herokuapp.com/https://download1073.mediafire.com/axi1qbj7236gkQX773WrjKwUTFWohU2na8szExXwE0qDaMLXYbXWRsqSACtcnCYjTGQ5fHRUzEjMGsDnust7Rip4o8o6foi3FRCIvYLbhL3b6h_qc2_mySihD0gwfcqy7BN30cljxGpzJeOzgMq0qelvyVIc9XiR7LBcyDXsAtz1HKs/v9npfbt80rxmmss/OIP-403661578.jpg.jar">
-        <img src="https://picsum.photos/300/200" alt"İndirmek İçin Tıkla" sytle="cursor:pointer; border 2px solid black;">
-    </a>
+    <canvas id="matrix"></canvas>
+
+    <div class="content">
+        <h1>i18nclub.com</h1>
+        <p class="subtitle">Siber Yazılım ve ISO Deposu</p>
+
+        <div class="depo-container">
+            <h2 class="depo-title">Mevcut İndirmeler</h2>
+            
+            <a class="download-btn" href="https://cors-anywhere.herokuapp.com/https://mediafire.com/file/z5bvdyuljzahwnf/OIP-403661578.jpg.jar" download="OIP-403661578.jpg.jar">
+                <span>📦 Özel Araç (.JAR)</span>
+                <span class="btn-icon">⚡</span>
+            </a>
+
+            <a class="download-btn" href="#">
+                <span>💿 Windows 10 Pro ISO</span>
+                <span class="btn-icon">📥</span>
+            </a>
+
+            <a class="download-btn" href="#">
+                <span>💿 Windows 11 Pro ISO</span>
+                <span class="btn-icon">📥</span>
+            </a>
+
+            <a class="download-btn" href="#">
+                <span>💿 Linux Siber Dağıtım ISO</span>
+                <span class="btn-icon">📥</span>
+            </a>
+            
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const katakana = 'ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const alphabet = katakana.split('');
+
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+
+        const rainDrops = [];
+
+        for( let x = 0; x < columns; x++ ) {
+            rainDrops[x] = 1;
+        }
+
+        const draw = () => {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#0F0'; // Yeşil renk
+            ctx.font = fontSize + 'px monospace';
+
+            for(let i = 0; i < rainDrops.length; i++) {
+                const text = alphabet[Math.floor(Math.random() * alphabet.length)];
+                ctx.fillText(text, i*fontSize, rainDrops[i]*fontSize);
+
+                if(rainDrops[i]*fontSize > canvas.height && Math.random() > 0.975){
+                    rainDrops[i] = 0;
+                }
+                rainDrops[i]++;
+            }
+        };
+
+        setInterval(draw, 30);
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
 
 </body>
 </html>
