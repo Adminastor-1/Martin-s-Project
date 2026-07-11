@@ -5,67 +5,93 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>i18nclub.com | Siber Depo</title>
     <style>
-        /* Modern Yeni Nesil Düzen */
+        /* Genel Reset ve Modern Gri Tema */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
         body {
-            background-color: #1e293b; /* Yeni nesil mat koyu gri arka plan */
+            background-color: #1e293b; /* Mat koyu gri arka plan */
             color: #f8fafc;
             font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            padding: 50px 20px;
+            padding: 60px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        /* Site Başlığı */
+        /* Konteyner */
+        .container {
+            width: 100%;
+            max-width: 650px;
+            text-align: center;
+        }
+
+        /* Önsöz Bölümü */
         h1 {
             font-size: 2.5rem;
             color: #fff;
-            margin-bottom: 5px;
+            margin-bottom: 15px;
             font-weight: 800;
-            letter-spacing: -0.5px;
         }
-        .subtitle {
+        .onsoz {
             color: #94a3b8;
-            font-size: 1rem;
+            font-size: 1.05rem;
+            line-height: 1.6;
             margin-bottom: 40px;
+            background-color: #0f172a;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #334155;
+            text-align: left;
         }
 
-        /* Grid Yapısı (Platformları Yan Yana / Alt Alta Dizer) */
-        .depo-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            width: 100%;
-            max-width: 1100px;
+        /* Sekme (Tab) Butonları */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #334155;
+            padding-bottom: 10px;
+        }
+        .tab-btn {
+            flex: 1;
+            background-color: #0f172a;
+            color: #94a3b8;
+            border: 1px solid #334155;
+            padding: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .tab-btn:hover {
+            background-color: #1e293b;
+            color: #fff;
+        }
+        /* Aktif olan sekmenin tasarımı */
+        .tab-btn.active {
+            background-color: #38bdf8;
+            color: #0f172a;
+            border-color: #38bdf8;
         }
 
-        /* Platform Kartları */
-        .platform-card {
-            background-color: #0f172a; /* Butonların arkasındaki koyu gri/siyah kart */
+        /* İndirme İçerik Alanları (Varsayılan olarak gizli) */
+        .tab-content {
+            display: none;
+            background-color: #0f172a;
             border: 1px solid #334155;
             border-radius: 12px;
-            padding: 24px;
+            padding: 25px;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.3s ease;
         }
-        .platform-title {
-            font-size: 1.3rem;
-            margin-bottom: 20px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #38bdf8;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        /* Aktif içeriği gösterir */
+        .tab-content.active {
+            display: block;
         }
-        
-        /* Renklendirmeler */
-        .windows { border-bottom-color: #00a4ef; color: #00a4ef; }
-        .linux { border-bottom-color: #fda4af; color: #fda4af; }
-        .android { border-bottom-color: #a3e635; color: #a3e635; }
 
         /* İndirme Butonları */
         .download-btn {
@@ -75,11 +101,11 @@
             background-color: #1e293b;
             color: #e2e8f0;
             text-decoration: none;
-            padding: 12px 16px;
+            padding: 14px 18px;
             margin-bottom: 12px;
             border: 1px solid #475569;
             border-radius: 8px;
-            font-size: 0.95rem;
+            font-size: 1rem;
             font-weight: 500;
             transition: all 0.2s ease;
         }
@@ -92,92 +118,119 @@
             transform: translateY(-1px);
         }
         .btn-icon {
-            color: #94a3b8;
-            font-size: 0.85rem;
+            color: #38bdf8;
+            font-weight: bold;
+        }
+
+        /* Geçiş Efekti */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
 
-    <h1>i18nclub.com</h1>
-    <p class="subtitle">Çoklu Platform Yazılım ve ISO Deposu</p>
+    <div class="container">
+        
+        <h1>i18nclub.com</h1>
+        <div class="onsoz">
+            <strong>Siber Depoya Hoş Geldiniz.</strong><br>
+            Bu platform, işletim sistemleriniz için en güncel ve güvenli yazılımları, ISO kalıplarını ve mobil araçları doğrudan sunuculardan indirmeniz için tasarlanmıştır. Aşağıdaki sekmeleri kullanarak platformunuza uygun indirme listesine ulaşabilirsiniz.
+        </div>
 
-    <div class="depo-grid">
+        <div class="tabs">
+            <button class="tab-btn active" onclick="openTab('windows')">🪟 Windows</button>
+            <button class="tab-btn" onclick="openTab('linux')">🐧 Linux</button>
+            <button class="tab-btn" onclick="openTab('android')">🤖 Android</button>
+        </div>
 
-        <div class="platform-card">
-            <h2 class="platform-title windows">🪟 Windows Deposu</h2>
-            
+        <div id="windows" class="tab-content active">
             <a class="download-btn" href="https://cors-anywhere.herokuapp.com/https://mediafire.com/file/z5bvdyuljzahwnf/OIP-403661578.jpg.jar" download="OIP-403661578.jpg.jar">
                 <span>📦 Özel Araç (.JAR)</span>
                 <span class="btn-icon">İndir 📥</span>
             </a>
             <a class="download-btn" href="#">
-                <span>💿 Windows Buton 2</span>
+                <span>Automated Windows Script 2</span>
                 <span class="btn-icon">Boş 📥</span>
             </a>
             <a class="download-btn" href="#">
-                <span>💿 Windows Buton 3</span>
+                <span>Windows Buton 3</span>
                 <span class="btn-icon">Boş 📥</span>
             </a>
             <a class="download-btn" href="#">
-                <span>💿 Windows Buton 4</span>
+                <span>Windows Buton 4</span>
                 <span class="btn-icon">Boş 📥</span>
             </a>
             <a class="download-btn" href="#">
-                <span>💿 Windows Buton 5</span>
-                <span class="btn-icon">Boş 📥</span>
-            </a>
-        </div>
-
-        <div class="platform-card">
-            <h2 class="platform-title linux">🐧 Linux Deposu</h2>
-            <a class="download-btn" href="#">
-                <span>💿 Linux Buton 1</span>
-                <span class="btn-icon">Boş 📥</span>
-            </a>
-            <a class="download-btn" href="#">
-                <span>💿 Linux Buton 2</span>
-                <span class="btn-icon">Boş 📥</span>
-            </a>
-            <a class="download-btn" href="#">
-                <span>💿 Linux Buton 3</span>
-                <span class="btn-icon">Boş 📥</span>
-            </a>
-            <a class="download-btn" href="#">
-                <span>💿 Linux Buton 4</span>
-                <span class="btn-icon">Boş 📥</span>
-            </a>
-            <a class="download-btn" href="#">
-                <span>💿 Linux Buton 5</span>
+                <span>Windows Buton 5</span>
                 <span class="btn-icon">Boş 📥</span>
             </a>
         </div>
 
-        <div class="platform-card">
-            <h2 class="platform-title android">🤖 Android Deposu</h2>
+        <div id="linux" class="tab-content">
             <a class="download-btn" href="#">
-                <span>📱 Android Buton 1</span>
+                <span>Linux Buton 1</span>
                 <span class="btn-icon">Boş 📥</span>
             </a>
             <a class="download-btn" href="#">
-                <span>📱 Android Buton 2</span>
+                <span>Linux Buton 2</span>
                 <span class="btn-icon">Boş 📥</span>
             </a>
             <a class="download-btn" href="#">
-                <span>📱 Android Buton 3</span>
+                <span>Linux Buton 3</span>
                 <span class="btn-icon">Boş 📥</span>
             </a>
             <a class="download-btn" href="#">
-                <span>📱 Android Buton 4</span>
+                <span>Linux Buton 4</span>
                 <span class="btn-icon">Boş 📥</span>
             </a>
             <a class="download-btn" href="#">
-                <span>📱 Android Buton 5</span>
+                <span>Linux Buton 5</span>
+                <span class="btn-icon">Boş 📥</span>
+            </a>
+        </div>
+
+        <div id="android" class="tab-content">
+            <a class="download-btn" href="#">
+                <span>Android Buton 1</span>
+                <span class="btn-icon">Boş 📥</span>
+            </a>
+            <a class="download-btn" href="#">
+                <span>Android Buton 2</span>
+                <span class="btn-icon">Boş 📥</span>
+            </a>
+            <a class="download-btn" href="#">
+                <span>Android Buton 3</span>
+                <span class="btn-icon">Boş 📥</span>
+            </a>
+            <a class="download-btn" href="#">
+                <span>Android Buton 4</span>
+                <span class="btn-icon">Boş 📥</span>
+            </a>
+            <a class="download-btn" href="#">
+                <span>Android Buton 5</span>
                 <span class="btn-icon">Boş 📥</span>
             </a>
         </div>
 
     </div>
+
+    <script>
+        function openTab(tabId) {
+            // Tüm içerikleri gizle
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+
+            // Tüm butonların aktiflik sınıflarını kaldır
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            // Tıklanan içeriği göster ve butonu aktif yap
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+    </script>
 
 </body>
 </html>
