@@ -3,234 +3,305 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>i18nclub.com | Siber Depo</title>
+    <title>i18nclub.com | Siber İndirme Portalı</title>
     <style>
-        /* Genel Reset ve Modern Gri Tema */
+        /* Genel Reset ve Tema */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
         body {
-            background-color: #1e293b; /* Mat koyu gri arka plan */
-            color: #f8fafc;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            padding: 60px 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            background-color: #1e293b; /* İstediğin mat koyu gri */
+            color: #f1f5f9;
+            font-family: Arial, sans-serif;
+            padding-bottom: 5px;
         }
 
-        /* Konteyner */
-        .container {
-            width: 100%;
-            max-width: 650px;
-            text-align: center;
+        /* Ana Konteyner */
+        .wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #0f172a; /* İç panel koyu gri */
+            border: 1px solid #334155;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
 
-        /* Önsöz Bölümü */
-        h1 {
-            font-size: 2.5rem;
-            color: #fff;
-            margin-bottom: 15px;
-            font-weight: 800;
-        }
-        .onsoz {
-            color: #94a3b8;
-            font-size: 1.05rem;
-            line-height: 1.6;
-            margin-bottom: 40px;
-            background-color: #0f172a;
+        /* 1. Üst Başlık Alti Logo Alanı */
+        .header-logo-area {
             padding: 20px;
-            border-radius: 12px;
-            border: 1px solid #334155;
-            text-align: left;
-        }
-
-        /* Sekme (Tab) Butonları */
-        .tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 25px;
-            border-bottom: 2px solid #334155;
-            padding-bottom: 10px;
-        }
-        .tab-btn {
-            flex: 1;
-            background-color: #0f172a;
-            color: #94a3b8;
-            border: 1px solid #334155;
-            padding: 12px;
-            font-size: 1rem;
-            font-weight: 600;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        .tab-btn:hover {
             background-color: #1e293b;
-            color: #fff;
-        }
-        /* Aktif olan sekmenin tasarımı */
-        .tab-btn.active {
-            background-color: #38bdf8;
-            color: #0f172a;
-            border-color: #38bdf8;
-        }
-
-        /* İndirme İçerik Alanları (Varsayılan olarak gizli) */
-        .tab-content {
-            display: none;
-            background-color: #0f172a;
-            border: 1px solid #334155;
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
-            animation: fadeIn 0.3s ease;
-        }
-        /* Aktif içeriği gösterir */
-        .tab-content.active {
-            display: block;
-        }
-
-        /* İndirme Butonları */
-        .download-btn {
+            border-bottom: 1px solid #334155;
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            background-color: #1e293b;
-            color: #e2e8f0;
-            text-decoration: none;
-            padding: 14px 18px;
-            margin-bottom: 12px;
-            border: 1px solid #475569;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 500;
-            transition: all 0.2s ease;
+            align-items: center;
         }
-        .download-btn:last-child {
-            margin-bottom: 0;
-        }
-        .download-btn:hover {
-            background-color: #334155;
-            border-color: #64748b;
-            transform: translateY(-1px);
-        }
-        .btn-icon {
+        .header-logo-area h1 {
+            font-size: 2rem;
             color: #38bdf8;
             font-weight: bold;
         }
+        .search-box input {
+            padding: 8px 12px;
+            background: #0f172a;
+            border: 1px solid #475569;
+            color: #fff;
+            border-radius: 4px;
+            outline: none;
+        }
 
-        /* Geçiş Efekti */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(5px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* 2. Üst Sekmeler Menüsü (Navigasyon) */
+        .top-nav {
+            background-color: #334155;
+            display: flex;
+            border-bottom: 2px solid #38bdf8;
+        }
+        .nav-tab {
+            padding: 12px 25px;
+            color: #cbd5e1;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.95rem;
+            cursor: pointer;
+            border-right: 1px solid #475569;
+            background: none;
+            border-top: none;
+            border-left: none;
+            border-bottom: none;
+            transition: all 0.2s;
+        }
+        .nav-tab:hover {
+            background-color: #475569;
+            color: #fff;
+        }
+        .nav-tab.active {
+            background-color: #38bdf8;
+            color: #0f172a;
+        }
+
+        /* 3. Reklam / Duyuru Bandı (Görseldeki gibi) */
+        .announcement-bar {
+            background-color: #1e293b;
+            border-bottom: 1px solid #334155;
+            padding: 15px 20px;
+            font-size: 0.95rem;
+            color: #94a3b8;
+            line-height: 1.5;
+        }
+
+        /* 4. Üçlü Sütun Düzeni (Main Grid) */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 220px 1fr 280px;
+            min-height: 500px;
+        }
+
+        /* Sütun Genel Ayarları */
+        .column {
+            padding: 15px;
+        }
+        .column-title {
+            font-size: 0.95rem;
+            font-weight: bold;
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+            border-bottom: 2px solid #475569;
+            color: #38bdf8;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* SOL SÜTUN: Kategoriler */
+        .left-col {
+            border-right: 1px solid #334155;
+            background-color: #0f172a;
+        }
+        .category-list {
+            list-style: none;
+        }
+        .category-list li a {
+            display: block;
+            padding: 8px 5px;
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: bold;
+            border-bottom: 1px dashed #334155;
+            transition: color 0.2s;
+        }
+        .category-list li a:hover {
+            color: #38bdf8;
+        }
+
+        /* ORTA SÜTUN: Ana İndirme Listesi */
+        .center-col {
+            background-color: #0f172a;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* İndirme Satırı Yapısı (Görseldeki gibi ince uzun satırlar) */
+        .download-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 8px;
+            border-bottom: 1px solid #1e293b;
+            text-decoration: none;
+            color: #e2e8f0;
+            transition: background 0.2s;
+        }
+        .download-row:hover {
+            background-color: #1e293b;
+        }
+        .file-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .file-name {
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+        .file-meta {
+            display: flex;
+            gap: 15px;
+            font-size: 0.8rem;
+            color: #64748b;
+        }
+
+        /* SAĞ SÜTUN: En Çok İndirilen Programlar ve Araçlar */
+        .right-col {
+            border-left: 1px solid #334155;
+            background-color: #0f172a;
+        }
+        .top-download-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 5px;
+            font-size: 0.85rem;
+            border-bottom: 1px solid #1e293b;
+            color: #cbd5e1;
+            text-decoration: none;
+        }
+        .top-download-item:hover {
+            color: #38bdf8;
+            background-color: #1e293b;
+        }
+
+        /* Responsive Düzen */
+        @media (max-width: 900px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+            .left-col, .right-col {
+                border: none;
+                background-color: #1e293b;
+                margin-top: 15px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
+    <div class="wrapper">
         
-        <h1>i18nclub.com</h1>
-        <div class="onsoz">
-            <strong>Siber Depoya Hoş Geldiniz.</strong><br>
-            Bu platform, işletim sistemleriniz için en güncel ve güvenli yazılımları, ISO kalıplarını ve mobil araçları doğrudan sunuculardan indirmeniz için tasarlanmıştır. Aşağıdaki sekmeleri kullanarak platformunuza uygun indirme listesine ulaşabilirsiniz.
+        <div class="header-logo-area">
+            <h1>i18nclub.com</h1>
+            <div class="search-box">
+                <input type="text" placeholder="site içi arama...">
+            </div>
         </div>
 
-        <div class="tabs">
-            <button class="tab-btn active" onclick="openTab('windows')">🪟 Windows</button>
-            <button class="tab-btn" onclick="openTab('linux')">🐧 Linux</button>
-            <button class="tab-btn" onclick="openTab('android')">🤖 Android</button>
+        <div class="top-nav">
+            <button class="nav-tab active" onclick="switchTab(event, 'win-tab')">🪟 Windows</button>
+            <button class="nav-tab" onclick="switchTab(event, 'linux-tab')">🐧 Linux</button>
+            <button class="nav-tab" onclick="switchTab(event, 'android-tab')">🤖 Android</button>
         </div>
 
-        <div id="windows" class="tab-content active">
-            <a class="download-btn" href="https://cors-anywhere.herokuapp.com/https://mediafire.com/file/z5bvdyuljzahwnf/OIP-403661578.jpg.jar" download="OIP-403661578.jpg.jar">
-                <span>📦 Özel Araç (.JAR)</span>
-                <span class="btn-icon">İndir 📥</span>
-            </a>
-            <a class="download-btn" href="#">
-                <span>Automated Windows Script 2</span>
-                <span class="btn-icon">Boş 📥</span>
-            </a>
-            <a class="download-btn" href="#">
-                <span>Windows Buton 3</span>
-                <span class="btn-icon">Boş 📥</span>
-            </a>
-            <a class="download-btn" href="#">
-                <span>Windows Buton 4</span>
-                <span class="btn-icon">Boş 📥</span>
-            </a>
-            <a class="download-btn" href="#">
-                <span>Windows Buton 5</span>
-                <span class="btn-icon">Boş 📥</span>
-            </a>
+        <div class="announcement-bar">
+            <strong>Siber Portala Hoş Geldiniz.</strong><br>
+            Güvenli, hızlı ve doğrudan sunucu bağlantılı yazılımların adresi. İhtiyacınız olan güncel paketleri ilgili sekmelerden ve sağdaki araçlar menüsünden anında indirebilirsiniz.
         </div>
 
-        <div id="linux" class="tab-content">
-            <a class="download-btn" href="#">
-                <span>Linux Buton 1</span>
-                <span class="btn-icon">Boş 📥</span>
-            </a>
-            <a class="download-btn" href="#">
-                <span>Linux Buton 2</span>
-                <span class="btn-icon">Boş 📥</span>
-            </a>
-            <a class="download-btn" href="#">
-                <span>Linux Buton 3</span>
-                <span class="btn-icon">Boş 📥</span>
-            </a>
-            <a class="download-btn" href="#">
-                <span>Linux Buton 4</span>
-                <span class="btn-icon">Boş 📥</span>
-            </a>
-            <a class="download-btn" href="#">
-                <span>Linux Buton 5</span>
-                <span class="btn-icon">Boş 📥</span>
-            </a>
-        </div>
+        <div class="main-grid">
+            
+            <div class="column left-col">
+                <div class="column-title">📁 Kategoriler</div>
+                <ul class="category-list">
+                    <li><a href="#">ARAÇLAR</a></li>
+                    <li><a href="#">GÜVENLİK</a></li>
+                    <li><a href="#">İNTERNET</a></li>
+                    <li><a href="#">MULTİMEDYA</a></li>
+                    <li><a href="#">OYUNLAR</a></li>
+                    <li><a href="#">PROGRAMLAMA</a></li>
+                    <li><a href="#">SİSTEM ARAÇLARI</a></li>
+                </ul>
+            </div>
 
-        <div id="android" class="tab-content">
-            <a class="download-btn" href="#">
-                <span>Android Buton 1</span>
-                <span class="btn-icon">Boş 📥</span>
-            </a>
-            <a class="download-btn" href="#">
-                <span>Android Buton 2</span>
-                <span class="btn-icon">Boş 📥</span>
-            </a>
-            <a class="download-btn" href="#">
-                <span>Android Buton 3</span>
-                <span class="btn-icon">Boş 📥</span>
-            </a>
-            <a class="download-btn" href="#">
-                <span>Android Buton 4</span>
-                <span class="btn-icon">Boş 📥</span>
-            </a>
-            <a class="download-btn" href="#">
-                <span>Android Buton 5</span>
-                <span class="btn-icon">Boş 📥</span>
-            </a>
-        </div>
+            <div class="column center-col">
+                <div class="column-title">🔥 Yeni Eklenenler / Güncellenenler</div>
 
-    </div>
+                <div id="win-tab" class="tab-content active">
+                    <a class="download-row" href="https://cors-anywhere.herokuapp.com/https://mediafire.com/file/z5bvdyuljzahwnf/OIP-403661578.jpg.jar" download="OIP-403661578.jpg.jar">
+                        <div class="file-info"><span class="file-name">📦 Özel Siber Araç v1.0 (.JAR)</span></div>
+                        <div class="file-meta"><span>Türkçe</span><span>14.2 MB</span></div>
+                    </a>
+                    <a class="download-row" href="#">
+                        <div class="file-info"><span class="file-name">💿 Windows İşletim Sistemi Kalıbı 2</span></div>
+                        <div class="file-meta"><span>İngilizce</span><span>4.3 GB</span></div>
+                    </a>
+                    <a class="download-row" href="#">
+                        <div class="file-info"><span class="file-name">💿 Windows ISO Buton 3</span></div>
+                        <div class="file-meta"><span>İngilizce</span><span>3.1 GB</span></div>
+                    </a>
+                    <a class="download-row" href="#">
+                        <div class="file-info"><span class="file-name">💿 Windows ISO Buton 4</span></div>
+                        <div class="file-meta"><span>Türkçe</span><span>4.5 GB</span></div>
+                    </a>
+                    <a class="download-row" href="#">
+                        <div class="file-info"><span class="file-name">💿 Windows ISO Buton 5</span></div>
+                        <div class="file-meta"><span>Türkçe</span><span>3.9 GB</span></div>
+                    </a>
+                </div>
 
-    <script>
-        function openTab(tabId) {
-            // Tüm içerikleri gizle
-            const contents = document.querySelectorAll('.tab-content');
-            contents.forEach(content => content.classList.remove('active'));
+                <div id="linux-tab" class="tab-content">
+                    <a class="download-row" href="#">
+                        <div class="file-info"><span class="file-name">💿 Kali Linux Siber Dağıtım ISO</span></div>
+                        <div class="file-meta"><span>İngilizce</span><span>3.8 GB</span></div>
+                    </a>
+                    <a class="download-row" href="#">
+                        <div class="file-info"><span class="file-name">💿 Ubuntu Desktop 24.04 LTS</span></div>
+                        <div class="file-meta"><span>Türkçe</span><span>4.1 GB</span></div>
+                    </a>
+                    <a class="download-row" href="#">
+                        <div class="file-info"><span class="file-name">💿 Linux Buton 3</span></div>
+                        <div class="file-meta"><span>İngilizce</span><span>2.5 GB</span></div>
+                    </a>
+                    <a class="download-row" href="#">
+                        <div class="file-info"><span class="file-name">💿 Linux Buton 4</span></div>
+                        <div class="file-meta"><span>İngilizce</span><span>1.8 GB</span></div>
+                    </a>
+                    <a class="download-row" href="#">
+                        <div class="file-info"><span class="file-name">💿 Linux Buton 5</span></div>
+                        <div class="file-meta"><span>Türkçe</span><span>2.2 GB</span></div>
+                    </a>
+                </div>
 
-            // Tüm butonların aktiflik sınıflarını kaldır
-            const buttons = document.querySelectorAll('.tab-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
-
-            // Tıklanan içeriği göster ve butonu aktif yap
-            document.getElementById(tabId).classList.add('active');
-            event.currentTarget.classList.add('active');
-        }
-    </script>
-
-</body>
-</html>
+                <div id="android-tab" class="tab-content">
+                    <a class="download-row" href="#">
+                        <div class="file-info"><span class="file-name">📱 Android Güvenlik Aracı v3.2 (.APK)</span></div>
+                        <div class="file-meta"><span>Türkçe</span><span>45.2 MB</span></div>
+                    </a>
+                    <a class="download-row" href="#">
+                        <div class="file-info"><span class="file-name">📱 Android Buton 2</span></div>
+                        <div class="file-meta"><span>İngilizce</span><span>120 MB</span></div>
+                    </a>
+                    <a class="download-row" href="#">
+                        <div class="file-info"><span class="file-name">📱 Android Buton 3</span></div>
+                        <div class="file-meta"><span>İngilizce</span><span>14.
