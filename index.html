@@ -12,7 +12,7 @@
             box-sizing: border-box;
         }
         body {
-            background-color: #1e293b; /* İstediğin mat koyu gri */
+            background-color: #1e293b; 
             color: #f1f5f9;
             font-family: Arial, sans-serif;
             padding-bottom: 5px;
@@ -22,12 +22,12 @@
         .wrapper {
             max-width: 1200px;
             margin: 0 auto;
-            background-color: #0f172a; /* İç panel koyu gri */
+            background-color: #0f172a; 
             border: 1px solid #334155;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
 
-        /* 1. Üst Başlık Alti Logo Alanı */
+        /* Üst Başlık ve Arama */
         .header-logo-area {
             padding: 20px;
             background-color: #1e293b;
@@ -50,7 +50,7 @@
             outline: none;
         }
 
-        /* 2. Üst Sekmeler Menüsü (Navigasyon) */
+        /* Üst Sekmeler Menüsü */
         .top-nav {
             background-color: #334155;
             display: flex;
@@ -79,7 +79,7 @@
             color: #0f172a;
         }
 
-        /* 3. Reklam / Duyuru Bandı (Görseldeki gibi) */
+        /* Duyuru Bandı */
         .announcement-bar {
             background-color: #1e293b;
             border-bottom: 1px solid #334155;
@@ -89,14 +89,13 @@
             line-height: 1.5;
         }
 
-        /* 4. Üçlü Sütun Düzeni (Main Grid) */
+        /* Üçlü Sütun Düzeni */
         .main-grid {
             display: grid;
             grid-template-columns: 220px 1fr 280px;
             min-height: 500px;
         }
 
-        /* Sütun Genel Ayarları */
         .column {
             padding: 15px;
         }
@@ -111,7 +110,7 @@
             letter-spacing: 0.5px;
         }
 
-        /* SOL SÜTUN: Kategoriler */
+        /* SOL SÜTUN */
         .left-col {
             border-right: 1px solid #334155;
             background-color: #0f172a;
@@ -133,7 +132,7 @@
             color: #38bdf8;
         }
 
-        /* ORTA SÜTUN: Ana İndirme Listesi */
+        /* ORTA SÜTUN */
         .center-col {
             background-color: #0f172a;
         }
@@ -144,14 +143,14 @@
             display: block;
         }
         
-        /* İndirme Satırı Yapısı (Görseldeki gibi ince uzun satırlar) */
+        /* İndirme Satırı */
         .download-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 12px 8px;
             border-bottom: 1px solid #1e293b;
-            text-decoration: none;
+            cursor: pointer;
             color: #e2e8f0;
             transition: background 0.2s;
         }
@@ -174,7 +173,7 @@
             color: #64748b;
         }
 
-        /* SAĞ SÜTUN: En Çok İndirilen Programlar ve Araçlar */
+        /* SAĞ SÜTUN */
         .right-col {
             border-left: 1px solid #334155;
             background-color: #0f172a;
@@ -187,121 +186,279 @@
             font-size: 0.85rem;
             border-bottom: 1px solid #1e293b;
             color: #cbd5e1;
-            text-decoration: none;
+            cursor: pointer;
         }
         .top-download-item:hover {
             color: #38bdf8;
             background-color: #1e293b;
         }
 
-        /* Responsive Düzen */
+        /* --- SİTE İÇİ AÇILAN SEKME (MODAL) YAPISI --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.75);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .modal-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .modal-box {
+            background-color: #0f172a;
+            border: 2px solid #38bdf8;
+            width: 90%;
+            max-width: 650px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+        }
+        .modal-overlay.open .modal-box {
+            transform: translateY(0);
+        }
+        .modal-header {
+            background-color: #1e293b;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #334155;
+        }
+        .modal-title {
+            font-size: 1.2rem;
+            color: #38bdf8;
+            font-weight: bold;
+        }
+        .close-btn {
+            background: none;
+            border: none;
+            color: #64748b;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .close-btn:hover {
+            color: #ef4444;
+        }
+        .modal-body {
+            padding: 20px;
+            max-height: 70vh;
+            overflow-y: auto;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        .modal-section-title {
+            color: #38bdf8;
+            font-weight: bold;
+            margin: 15px 0 5px 0;
+            border-bottom: 1px dashed #334155;
+            padding-bottom: 3px;
+        }
+        .modal-footer {
+            background-color: #1e293b;
+            padding: 15px 20px;
+            text-align: right;
+            border-top: 1px solid #334155;
+        }
+        .final-download-btn {
+            display: inline-block;
+            background-color: #38bdf8;
+            color: #0f172a;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+        .final-download-btn:hover {
+            background-color: #0ea5e9;
+        }
+
         @media (max-width: 900px) {
-            .main-grid {
-                grid-template-columns: 1fr;
-            }
-            .left-col, .right-col {
-                border: none;
-                background-color: #1e293b;
-                margin-top: 15px;
-            }
+            .main-grid { grid-template-columns: 1fr; }
+            .left-col, .right-col { border: none; background-color: #1e293b; margin-top: 15px; }
         }
     </style>
 </head>
 <body>
 
     <div class="wrapper">
-        
+        <!-- Üst Logo -->
         <div class="header-logo-area">
             <h1>i18nclub.com</h1>
-            <div class="search-box">
-                <input type="text" placeholder="Search Within Site...">
-            </div>
+            <div class="search-box"><input type="text" placeholder="site içi arama..."></div>
         </div>
 
+        <!-- Üst Sekmeler -->
         <div class="top-nav">
-            <button class="nav-tab active" onclick="switchTab(event, 'win-tab')"> Windows</button>
-            <button class="nav-tab" onclick="switchTab(event, 'linux-tab')"> Linux</button>
-            <button class="nav-tab" onclick="switchTab(event, 'android-tab')"> Android</button>
+            <button class="nav-tab active" onclick="switchTab(event, 'win-tab')">🪟 Windows</button>
+            <button class="nav-tab" onclick="switchTab(event, 'linux-tab')">🐧 Linux</button>
+            <button class="nav-tab" onclick="switchTab(event, 'android-tab')">🤖 Android</button>
         </div>
 
         <div class="announcement-bar">
-            <strong>Welcome Home, Rookie</strong><br>
-            You Can Feel Safe Here Thanks To Verified Isos And Programs, You Can Download It Safely And Quickly To Your Device I Hope You Like My Site.
+            <strong>Siber Portala Hoş Geldiniz.</strong> İndirmek istediğiniz yazılımın üzerine tıklayarak kurulum adımlarına ve indirme bağlantılarına ulaşabilirsiniz.
         </div>
 
         <div class="main-grid">
-            
+            <!-- SOL SÜTUN -->
             <div class="column left-col">
-                <div class="column-title">📁 Categories</div>
+                <div class="column-title">📁 Kategoriler</div>
                 <ul class="category-list">
-                    <li><a href="#">Compression Tools</a></li>
-                    <li><a href="#">Safety Tools</a></li>
-                    <li><a href="#">Internet Access Applications/a></li>
-                    <li><a href="#">Media Tools</a></li>
-                    <li><a href="#">Games</a></li>
-                    <li><a href="#">Programming Tools</a></li>
-                    <li><a href="#">System Tools</a></li>
+                    <li><a href="#">ARAÇLAR</a></li>
+                    <li><a href="#">GÜVENLİK</a></li>
+                    <li><a href="#">İNTERNET</a></li>
+                    <li><a href="#">SİSTEM ARAÇLARI</a></li>
                 </ul>
             </div>
 
+            <!-- ORTA SÜTUN (3 Adet Buton Burada) -->
             <div class="column center-col">
-                <div class="column-title"> Everything is safe, you can feel comfortable, my friend :)</div>
+                <div class="column-title">🔥 Yeni Eklenenler / Güncellenenler</div>
 
+                <!-- WINDOWS SEKME -->
                 <div id="win-tab" class="tab-content active">
-                    <a class="download-row" href="https://www.mediafire.com/file/atee4ougmwtsdgd/archlinux-2026.06.01-x86_64.iso/file">
-                        <div class="file-info"><span class="file-name">Linux Arch ISO</span></div>
+                    <!-- BUTON 1 -->
+                    <div class="download-row" onclick="openModal('soft1')">
+                        <div class="file-info"><span class="file-name">📦 Linux Arch ISO</span></div>
                         <div class="file-meta"><span>Türkçe</span><span>14.2 MB</span></div>
-                    </a>
-                    <a class="download-row" href="#">
-                        <div class="file-info"><span class="file-name">💿 -Windows 10 Download-</span></div>
+                    </div>
+                    <!-- BUTON 2 -->
+                    <div class="download-row" onclick="openModal('soft2')">
+                        <div class="file-info"><span class="file-name">💿 Windows Araç Paketi</span></div>
                         <div class="file-meta"><span>İngilizce</span><span>4.3 GB</span></div>
-                    </a>
-                    <a class="download-row" href="#">
-                        <div class="file-info"><span class="file-name">💿 Windows ISO Buton 3</span></div>
-                        <div class="file-meta"><span>İngilizce</span><span>3.1 GB</span></div>
-                    </a>
-                    <a class="download-row" href="#">
-                        <div class="file-info"><span class="file-name">💿 Windows ISO Buton 4</span></div>
-                        <div class="file-meta"><span>Türkçe</span><span>4.5 GB</span></div>
-                    </a>
-                    <a class="download-row" href="#">
-                        <div class="file-info"><span class="file-name">💿 Windows ISO Buton 5</span></div>
-                        <div class="file-meta"><span>Türkçe</span><span>3.9 GB</span></div>
-                    </a>
+                    </div>
+                    <!-- BUTON 3 -->
+                    <div class="download-row" onclick="openModal('soft3')">
+                        <div class="file-info"><span class="file-name">💿 Sistem Optimize Aracılığı</span></div>
+                        <div class="file-meta"><span>Türkçe</span><span>25.5 MB</span></div>
+                    </div>
                 </div>
 
+                <!-- LINUX SEKME -->
                 <div id="linux-tab" class="tab-content">
-                    <a class="download-row" href="#">
-                        <div class="file-info"><span class="file-name">💿 Kali Linux Siber Dağıtım ISO</span></div>
-                        <div class="file-meta"><span>İngilizce</span><span>3.8 GB</span></div>
-                    </a>
-                    <a class="download-row" href="#">
-                        <div class="file-info"><span class="file-name">💿 Ubuntu Desktop 24.04 LTS</span></div>
-                        <div class="file-meta"><span>Türkçe</span><span>4.1 GB</span></div>
-                    </a>
-                    <a class="download-row" href="#">
-                        <div class="file-info"><span class="file-name">💿 Linux Buton 3</span></div>
-                        <div class="file-meta"><span>İngilizce</span><span>2.5 GB</span></div>
-                    </a>
-                    <a class="download-row" href="#">
-                        <div class="file-info"><span class="file-name">💿 Linux Buton 4</span></div>
-                        <div class="file-meta"><span>İngilizce</span><span>1.8 GB</span></div>
-                    </a>
-                    <a class="download-row" href="#">
-                        <div class="file-info"><span class="file-name">💿 Linux Buton 5</span></div>
-                        <div class="file-meta"><span>Türkçe</span><span>2.2 GB</span></div>
-                    </a>
+                    <p style="padding: 10px; color: #94a3b8;">Linux içerikleri ana listeden veya sağ menüden erişilebilir durumdadır.</p>
                 </div>
 
+                <!-- ANDROID SEKME -->
                 <div id="android-tab" class="tab-content">
-                    <a class="download-row" href="#">
-                        <div class="file-info"><span class="file-name">📱 Android Güvenlik Aracı v3.2 (.APK)</span></div>
-                        <div class="file-meta"><span>Türkçe</span><span>45.2 MB</span></div>
-                    </a>
-                    <a class="download-row" href="#">
-                        <div class="file-info"><span class="file-name">📱 Android Buton 2</span></div>
-                        <div class="file-meta"><span>İngilizce</span><span>120 MB</span></div>
-                    </a>
-                    <a class="download-row" href="#">
-                        <div class="file-info"><span class="file-name">📱 Android Buton 3</span></div>
-                        <div class="file-meta"><span>İngilizce</span><span>14.
+                    <p style="padding: 10px; color: #94a3b8;">Android içerikleri çok yakında güncellenecektir.</p>
+                </div>
+            </div>
+
+            <!-- SAĞ SÜTUN (3 Adet Buton Burada - Toplam 6 Buton) -->
+            <div class="column right-col">
+                <div class="column-title">📊 En Çok İndirilen Araçlar</div>
+                <!-- BUTON 4 -->
+                <div class="top-download-item" onclick="openModal('soft4')"><span>🗜️ WinRAR Editör</span> <span>İncele 🔍</span></div>
+                <!-- BUTON 5 -->
+                <div class="top-download-item" onclick="openModal('soft5')"><span>📡 Ağ Trafik İzleyici</span> <span>İncele 🔍</span></div>
+                <!-- BUTON 6 -->
+                <div class="top-download-item" onclick="openModal('soft6')"><span>🛠️ Kayıt Defteri Temizleyici</span> <span>İncele 🔍</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- --- SİTE İÇİ PENCERE (MODAL HTML MİMARİSİ) --- -->
+    <div class="modal-overlay" id="softwareModal" onclick="closeModal(event)">
+        <div class="modal-box" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <div class="modal-title" id="m-title">Yazılım Detayı</div>
+                <button class="close-btn" onclick="document.getElementById('softwareModal').classList.remove('open')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-section-title">⚙️ Sistem Gereksinimleri:</div>
+                <div id="m-specs">Yükleniyor...</div>
+
+                <div class="modal-section-title">🚀 Nasıl Kurulur?</div>
+                <div id="m-guide">Yükleniyor...</div>
+            </div>
+            <div class="modal-footer">
+                <a href="#" id="m-link" target="_blank" rel="noopener noreferrer" class="final-download-btn">Dosyayı Güvenli İndir 📥</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dinamik İçerik Yönetim Scripti -->
+    <script>
+        // Üst Menü Sekme Geçişi
+        function switchTab(evt, tabId) {
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            evt.currentTarget.classList.add('active');
+        }
+
+        // --- 6 BUTONUN KENDİNE ÖZEL VERİ VERİTABANI (BURAYI İSTEDİĞİN GİBİ DÜZENLE) ---
+        const softwareData = {
+            'soft1': {
+                title: 'Linux Arch ISO',
+                specs: '• İşlemci: x86_64 Uyumlu İşlemci<br>• Bellek: 2 GB RAM (Minimum)<br>• Depolama: 20 GB Boş Alan',
+                guide: '1. İndirdiğiniz ISO dosyasını USB belleğe yazdırın.<br>2. Bilgisayarı USB üzerinden boot edin.<br>3. Komut satırından kurulum adımlarını takip edin.',
+                link: 'https://www.mediafire.com/file/atee4ougmwtsdgd/archlinux-2026.06.01-x86_64.iso/file'
+            },
+            'soft2': {
+                title: 'Windows Araç Paketi',
+                specs: '• İşletim Sistemi: Windows 10 / 11<br>• Bellek: 4 GB RAM<br>• Ağ: İnternet Bağlantısı',
+                guide: '1. Zip dosyasını klasöre çıkartın.<br>2. Setup.exe dosyasını yönetici olarak çalıştırın.<br>3. Ekrana gelen adımları onaylayarak kurulumu bitirin.',
+                link: '#'
+            },
+            'soft3': {
+                title: 'Sistem Optimize Aracılığı',
+                specs: '• İşlemci: Herhangi bir modern CPU<br>• Bellek: 1 GB RAM',
+                guide: '1. Uygulamayı indirin ve direkt çalıştırın.<br>2. "Taramayı Başlat" butonuna basın.<br>3. Gereksiz çerezleri tek tıkla temizleyin.',
+                link: '#'
+            },
+            'soft4': {
+                title: 'WinRAR Editör',
+                specs: '• Tüm Windows sürümleriyle uyumludur.',
+                guide: '1. İndirme tamamlandıktan sonra paketi açın.<br>2. Lisans sözleşmesini kabul edip yükle deyin.',
+                link: '#'
+            },
+            'soft5': {
+                title: 'Ağ Trafik İzleyici',
+                specs: '• İşletim Sistemi: Windows/Linux<br>• Ağ Kartı: Destekleyen kablolu/kablosuz adaptör',
+                guide: '1. Terminal veya CMD üzerinden kurulumu başlatın.<br>2. İzlemek istediğiniz ağ arayüzünü seçin.',
+                link: '#'
+            },
+            'soft6': {
+                title: 'Kayıt Defteri Temizleyici',
+                specs: '• Yalnızca Windows tabanlı mimariler.',
+                guide: '1. Kurulum sihirbazını başlatın.<br>2. Eski kayıtları yedekledikten sonra temizleme işlemini onaylayın.',
+                link: '#'
+            }
+        };
+
+        // Pencereyi Açan Fonksiyon
+        function openModal(id) {
+            const data = softwareData[id];
+            if(data) {
+                document.getElementById('m-title').innerText = data.title;
+                document.getElementById('m-specs').innerHTML = data.specs;
+                document.getElementById('m-guide').innerHTML = data.guide;
+                document.getElementById('m-link').href = data.link;
+                
+                document.getElementById('softwareModal').classList.add('open');
+            }
+        }
+
+        // Dışarı Tıklanınca Kapanma Fonksiyonu
+        function closeModal(e) {
+            if(e.target.id === 'softwareModal') {
+                document.getElementById('softwareModal').classList.remove('open');
+            }
+        }
+    </script>
+</body>
+</html>
