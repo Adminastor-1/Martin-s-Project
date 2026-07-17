@@ -1,6 +1,391 @@
-<!-- Dinamik İçerik Yönetim Scripti -->
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>i18nclub.com | Siber İndirme Portalı</title>
+    <style>
+        /* Genel Reset ve Tema */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #1e293b; 
+            color: #f1f5f9;
+            font-family: Arial, sans-serif;
+            padding-bottom: 5px;
+        }
+
+        /* Ana Konteyner */
+        .wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #0f172a; 
+            border: 1px solid #334155;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        /* Üst Başlık ve Arama */
+        .header-logo-area {
+            padding: 20px;
+            background-color: #1e293b;
+            border-bottom: 1px solid #334155;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header-logo-area h1 {
+            font-size: 2rem;
+            color: #38bdf8;
+            font-weight: bold;
+        }
+        .search-box input {
+            padding: 8px 12px;
+            background: #0f172a;
+            border: 1px solid #475569;
+            color: #fff;
+            border-radius: 4px;
+            outline: none;
+        }
+
+        /* Üst Sekmeler Menüsü */
+        .top-nav {
+            background-color: #334155;
+            display: flex;
+            border-bottom: 2px solid #38bdf8;
+        }
+        .nav-tab {
+            padding: 12px 25px;
+            color: #cbd5e1;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.95rem;
+            cursor: pointer;
+            border-right: 1px solid #475569;
+            background: none;
+            border-top: none;
+            border-left: none;
+            border-bottom: none;
+            transition: all 0.2s;
+        }
+        .nav-tab:hover {
+            background-color: #475569;
+            color: #fff;
+        }
+        .nav-tab.active {
+            background-color: #38bdf8;
+            color: #0f172a;
+        }
+
+        /* Duyuru Bandı */
+        .announcement-bar {
+            background-color: #1e293b;
+            border-bottom: 1px solid #334155;
+            padding: 15px 20px;
+            font-size: 0.95rem;
+            color: #94a3b8;
+            line-height: 1.5;
+        }
+
+        /* Üçlü Sütun Düzeni */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 220px 1fr 280px;
+            min-height: 500px;
+        }
+
+        .column {
+            padding: 15px;
+        }
+        .column-title {
+            font-size: 0.95rem;
+            font-weight: bold;
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+            border-bottom: 2px solid #475569;
+            color: #38bdf8;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* SOL SÜTUN */
+        .left-col {
+            border-right: 1px solid #334155;
+            background-color: #0f172a;
+        }
+        .category-list {
+            list-style: none;
+        }
+        .category-list li a {
+            display: block;
+            padding: 8px 5px;
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: bold;
+            border-bottom: 1px dashed #334155;
+            transition: color 0.2s;
+        }
+        .category-list li a:hover {
+            color: #38bdf8;
+        }
+
+        /* ORTA SÜTUN */
+        .center-col {
+            background-color: #0f172a;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* İndirme Satırı */
+        .download-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 8px;
+            border-bottom: 1px solid #1e293b;
+            cursor: pointer;
+            color: #e2e8f0;
+            transition: background 0.2s;
+        }
+        .download-row:hover {
+            background-color: #1e293b;
+        }
+        .file-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .file-name {
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+        .file-meta {
+            display: flex;
+            gap: 15px;
+            font-size: 0.8rem;
+            color: #64748b;
+        }
+
+        /* SAĞ SÜTUN */
+        .right-col {
+            border-left: 1px solid #334155;
+            background-color: #0f172a;
+        }
+        .top-download-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 5px;
+            font-size: 0.85rem;
+            border-bottom: 1px solid #1e293b;
+            color: #cbd5e1;
+            cursor: pointer;
+        }
+        .top-download-item:hover {
+            color: #38bdf8;
+            background-color: #1e293b;
+        }
+
+        /* --- SİTE İÇİ AÇILAN SEKME (MODAL) YAPISI --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.75);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .modal-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .modal-box {
+            background-color: #0f172a;
+            border: 2px solid #38bdf8;
+            width: 90%;
+            max-width: 650px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+        }
+        .modal-overlay.open .modal-box {
+            transform: translateY(0);
+        }
+        .modal-header {
+            background-color: #1e293b;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #334155;
+        }
+        .modal-title {
+            font-size: 1.2rem;
+            color: #38bdf8;
+            font-weight: bold;
+        }
+        .close-btn {
+            background: none;
+            border: none;
+            color: #64748b;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .close-btn:hover {
+            color: #ef4444;
+        }
+        .modal-body {
+            padding: 20px;
+            max-height: 70vh;
+            overflow-y: auto;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        .modal-section-title {
+            color: #38bdf8;
+            font-weight: bold;
+            margin: 15px 0 5px 0;
+            border-bottom: 1px dashed #334155;
+            padding-bottom: 3px;
+        }
+        .modal-footer {
+            background-color: #1e293b;
+            padding: 15px 20px;
+            text-align: right;
+            border-top: 1px solid #334155;
+        }
+        .final-download-btn {
+            display: inline-block;
+            background-color: #38bdf8;
+            color: #0f172a;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+        .final-download-btn:hover {
+            background-color: #0ea5e9;
+        }
+
+        @media (max-width: 900px) {
+            .main-grid { grid-template-columns: 1fr; }
+            .left-col, .right-col { border: none; background-color: #1e293b; margin-top: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+        <!-- Üst Logo -->
+        <div class="header-logo-area">
+            <h1>i18nclub.com</h1>
+            <div class="search-box"><input type="text" placeholder="site içi arama..."></div>
+        </div>
+
+        <!-- Üst Sekmeler -->
+        <div class="top-nav">
+            <button class="nav-tab active" onclick="switchTab(event, 'win-tab')">🪟 Windows</button>
+            <button class="nav-tab" onclick="switchTab(event, 'linux-tab')">🐧 Linux</button>
+            <button class="nav-tab" onclick="switchTab(event, 'android-tab')">🤖 Android</button>
+        </div>
+
+        <div class="announcement-bar">
+            <strong>Welcome Home Bro.</strong> By clicking on the software you want to download, you can access the installation steps and download links.
+        </div>
+
+        <div class="main-grid">
+            <!-- SOL SÜTUN -->
+            <div class="column left-col">
+                <div class="column-title">📁 Categories</div>
+                <ul class="category-list">
+                    <li><a href="#">Tools</a></li>
+                    <li><a href="#">Security</a></li>
+                    <li><a href="#">Internet Tools</a></li>
+                    <li><a href="#">System Tools</a></li>
+                </ul>
+            </div>
+
+            <!-- ORTA SÜTUN -->
+            <div class="column center-col">
+                <div class="column-title">🔥 Recently uploaded</div>
+
+                <!-- WINDOWS SEKME -->
+                <div id="win-tab" class="tab-content active">
+                    <div class="download-row" onclick="openModal('soft1')">
+                        <div class="file-info"><span class="file-name"> Arch Linux ISO</span></div>
+                        <div class="file-meta"><span>Türkçe</span><span>1.46 GB</span></div>
+                    </div>
+                    <div class="download-row" onclick="openModal('soft2')">
+                        <div class="file-info"><span class="file-name">💿 Windows Araç Paketi</span></div>
+                        <div class="file-meta"><span>İngilizce</span><span>4.3 GB</span></div>
+                    </div>
+                    <div class="download-row" onclick="openModal('soft3')">
+                        <div class="file-info"><span class="file-name">💿 Sistem Optimize Aracılığı</span></div>
+                        <div class="file-meta"><span>Türkçe</span><span>25.5 MB</span></div>
+                    </div>
+                </div>
+
+                <!-- LINUX SEKME -->
+                <div id="linux-tab" class="tab-content">
+                    <p style="padding: 10px; color: #94a3b8;">Linux içerikleri ana listeden veya sağ menüden erişilebilir durumdadır.</p>
+                </div>
+
+                <!-- ANDROID SEKME -->
+                <div id="android-tab" class="tab-content">
+                    <p style="padding: 10px; color: #94a3b8;">Android içerikleri çok yakında güncellenecektir.</p>
+                </div>
+            </div>
+
+            <!-- SAĞ SÜTUN -->
+            <div class="column right-col">
+                <div class="column-title">📊 En Çok İndirilen Araçlar</div>
+                <div class="top-download-item" onclick="openModal('soft4')"><span>🗜️ WinRAR Editör</span> <span>İncele 🔍</span></div>
+                <div class="top-download-item" onclick="openModal('soft5')"><span>📡 Ağ Trafik İzleyici</span> <span>İncele 🔍</span></div>
+                <div class="top-download-item" onclick="openModal('soft6')"><span>🛠️ Kayıt Defteri Temizleyici</span> <span>İncele 🔍</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SİTE İÇİ PENCERE -->
+    <div class="modal-overlay" id="softwareModal" onclick="closeModal(event)">
+        <div class="modal-box" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <div class="modal-title" id="m-title">Yazılım Detayı</div>
+                <button class="close-btn" onclick="document.getElementById('softwareModal').classList.remove('open')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-section-title">⚙️ Sistem Gereksinimleri:</div>
+                <div id="m-specs">Yükleniyor...</div>
+
+                <div class="modal-section-title">🚀 Nasıl Kurulur?</div>
+                <div id="m-guide">Yükleniyor...</div>
+            </div>
+            <div class="modal-footer">
+                <a href="#" id="m-link" target="_blank" rel="noopener noreferrer" class="final-download-btn">Dosyayı Güvenli İndir 📥</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Bloku -->
     <script>
-        // Üst Menü Sekme Geçişi
         function switchTab(evt, tabId) {
             document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
             document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
@@ -8,7 +393,6 @@
             evt.currentTarget.classList.add('active');
         }
 
-        // --- 6 BUTONUN KENDİNE ÖZEL VERİ VERİTABANI ---
         const softwareData = {
             'soft1': {
                 title: 'Linux Arch ISO',
@@ -48,7 +432,6 @@
             }
         };
 
-        // Pencereyi Açan Fonksiyon
         function openModal(id) {
             const data = softwareData[id];
             if(data) {
@@ -56,15 +439,15 @@
                 document.getElementById('m-specs').innerHTML = data.specs;
                 document.getElementById('m-guide').innerHTML = data.guide;
                 document.getElementById('m-link').href = data.link;
-                
                 document.getElementById('softwareModal').classList.add('open');
             }
         }
 
-        // Dışarı Tıklanınca Kapanma Fonksiyonu
         function closeModal(e) {
             if(e.target.id === 'softwareModal') {
                 document.getElementById('softwareModal').classList.remove('open');
             }
         }
     </script>
+</body>
+</html>
