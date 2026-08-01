@@ -56,27 +56,30 @@
       gap: 10px;
       height: 100%;
       margin-top: 8px;
+      overflow: hidden;
     }
 
     /* Sol Panel (Kategoriler) */
     .sidebar {
-      width: 220px;
+      width: 230px;
       display: flex;
       flex-direction: column;
-      gap: 8px;
-      padding: 10px;
+      gap: 6px;
+      padding: 8px;
       background: #c0c0c0;
+      overflow-y: auto;
     }
 
     .category-btn {
       width: 100%;
-      padding: 12px;
+      padding: 10px;
       text-align: left;
       font-weight: bold;
       display: flex;
       align-items: center;
-      gap: 10px;
-      font-size: 13px;
+      gap: 8px;
+      font-size: 12px;
+      white-space: nowrap;
     }
 
     .category-btn.active {
@@ -95,7 +98,7 @@
 
     .grid-container {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
       gap: 12px;
       margin-top: 10px;
     }
@@ -105,14 +108,14 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 15px;
-      height: 90px;
+      padding: 12px;
+      height: 85px;
       text-align: center;
-      font-size: 12px;
+      font-size: 11px;
     }
 
     .app-btn span {
-      margin-top: 8px;
+      margin-top: 6px;
     }
 
     /* Özel Sağ Tık Menüsü */
@@ -192,6 +195,9 @@
 </head>
 <body>
 
+  <!-- Başlangıç Sesi -->
+  <audio id="win95-sound" src="https://www.myinstants.com/media/sounds/windows-95-startup.mp3" preload="auto"></audio>
+
   <div class="desktop">
     <!-- Tam Ekran Windows Penceresi -->
     <div class="window main-window">
@@ -205,23 +211,32 @@
       </div>
       
       <div class="window-body">
-        <p style="margin: 4px 0;">Sol menüden bir işletim sistemi seçin ve indirmek istediğiniz yazılıma tıklayın.</p>
+        <p style="margin: 2px 0 6px 0;">Sol menüden bir kategori seçin ve yükleme rehberi için yazılıma tıklayın.</p>
         
         <div class="app-layout">
-          <!-- Sol Kısım: Seçenekler -->
+          <!-- Sol Kısım: Genişletilmiş Kategoriler -->
           <fieldset class="sidebar">
-            <legend>Sistemler</legend>
+            <legend>Kategoriler</legend>
             <button class="category-btn active" id="btn-win" onclick="showCategory('win')">
-              💻 Windows
+              💻 Windows (10)
             </button>
             <button class="category-btn" id="btn-linux" onclick="showCategory('linux')">
-              🐧 Linux
+              🐧 Linux (10)
+            </button>
+            <button class="category-btn" id="btn-dos" onclick="showCategory('dos')">
+              👾 DOS Oyunları (10)
+            </button>
+            <button class="category-btn" id="btn-tools" onclick="showCategory('tools')">
+              🛠️ Sistem Araçları (10)
+            </button>
+            <button class="category-btn" id="btn-drivers" onclick="showCategory('drivers')">
+              📁 Sürücüler (10)
             </button>
           </fieldset>
 
           <!-- Sağ Kısım: İndirme Butonları -->
           <fieldset class="content-area">
-            <legend id="section-title">💻 Windows Yazılımları (10 Program)</legend>
+            <legend id="section-title">💻 Windows Yazılımları</legend>
             <div class="grid-container" id="app-grid"></div>
           </fieldset>
         </div>
@@ -252,11 +267,11 @@
   <div id="custom-context-menu" class="window">
     <div class="window-body" style="padding: 2px;">
       <ul>
-        <li onclick="alert('Sistem: Windows 95 OSR2\nRAM: 32 MB\nEkran: Tam Ekran Modu')">🖥️ Özellikler</li>
+        <li onclick="alert('Sistem: Windows 95 OSR2\nRAM: 32 MB\nMod: Tam Ekran')">🖥️ Özellikler</li>
         <li onclick="location.reload()">🔄 Yenile</li>
         <hr>
-        <li onclick="alert('Tüm indirmeler güvenlidir.')">🛡️ Güvenlik Bilgisi</li>
-        <li onclick="alert('Retro Download Hub v2.0')">ℹ️ Hakkında</li>
+        <li onclick="alert('Tüm indirmeler virüs taramasından geçirilmiştir.')">🛡️ Güvenlik Bilgisi</li>
+        <li onclick="alert('Retro Download Hub v3.0')">ℹ️ Hakkında</li>
       </ul>
     </div>
   </div>
@@ -270,32 +285,74 @@
   </div>
 
   <script>
-    // Windows Programları Listesi (10 Tane)
+    // 1. Windows Programları Listesi
     const winApps = [
-      { name: "WinRAR 3.0", setup: "1. setup.exe dosyasını indirin.\n2. Çalıştırıp varsayılan konuma yükleyin.\n3. Arşiv dosyalarınızı çift tıklayarak açabilirsiniz." },
-      { name: "Winamp 2.91", setup: "1. Kurulumu tamamlayın.\n2. Sevdiğiniz EQ ayarını yapın.\n3. MP3 listenizi sürükleyip bırakın." },
-      { name: "mIRC v6.0", setup: "1. Programı kurun.\n2. Sunucu listesinden 'IRCnet' veya 'DALnet' seçin.\n3. Rumuz yazıp bağlanın." },
-      { name: "Nero Burning ROM", setup: "1. Kurulumu yapın.\n2. Veri CD'si veya Müzik CD'si seçeneğini tıklayın.\n3. Yazdır butonuna basın." },
-      { name: "CCleaner Classic", setup: "1. Yükleyin ve çalıştırın.\n2. 'Analiz Et' butonuna tıklayıp gereksiz dosyaları temizleyin." },
-      { name: "Daemon Tools 3.47", setup: "1. Kurulum tamamlandıktan sonra bilgisayarı yeniden başlatın.\n2. Sağ alttaki simgeden ISO dosyanızı seçin." },
-      { name: "MSN Messenger 4.7", setup: "1. Yükleme sihirbazını izleyin.\n2. Oturum açma bilgilerinizi girip arkadaşlarınızı ekleyin." },
-      { name: "K-Lite Codec Pack", setup: "1. Standart kurulumu tercih edin.\n2. Artık tüm video formatlarını Media Player'da oynatabilirsiniz." },
-      { name: "Total Commander", setup: "1. Çift panelli dosya yöneticisini kurun.\n2. Dosyaları kopyalamak için F5, taşımak için F6 kullanın." },
-      { name: "BS.Player Old", setup: "1. İndirip kurun.\n2. Film dosyalarınızı altyazılarıyla sorunsuz izleyin." }
+      { name: "WinRAR 3.0", setup: "1. setup.exe dosyasını indirin.\n2. Çift tıklayıp varsayılan dizine kurun." },
+      { name: "Winamp 2.91", setup: "1. Kurulumu tamamlayın.\n2. MP3 listenizi sürükleyip oynatın." },
+      { name: "mIRC v6.0", setup: "1. Programı kurun.\n2. Bir rumuz belirleyip IRC sunucusuna bağlanın." },
+      { name: "Nero Burning ROM", setup: "1. Kurulumu yapın.\n2. Veri CD'si seçeneğini tıklayıp yazdırın." },
+      { name: "CCleaner Classic", setup: "1. Yükleyin ve 'Analiz Et' butonuna basarak temizlik yapın." },
+      { name: "Daemon Tools 3.47", setup: "1. Yeniden başlatma sonrası sanal sürücüye .ISO imajı bağlayın." },
+      { name: "MSN Messenger 4.7", setup: "1. Yükleme sonrası kullanıcı bilgilerinizle giriş yapın." },
+      { name: "K-Lite Codec Pack", setup: "1. Kurulumu varsayılan modda tamamlayın." },
+      { name: "Total Commander", setup: "1. Çift panelli gezgin ile dosyaları yönetin." },
+      { name: "BS.Player Old", setup: "1. İndirip kurun, video ve altyazıları sorunsuz oynatın." }
     ];
 
-    // Linux Programları Listesi (10 Tane)
+    // 2. Linux Programları Listesi
     const linuxApps = [
-      { name: "XMMS Player", setup: "1. Terminali açın.\n2. 'sudo apt install xmms' komutunu çalıştırın.\n3. Müziklerinizi oynatmaya başlayın." },
-      { name: "XChat IRC", setup: "1. Paketi indirin ve 'sudo dpkg -i xchat.deb' yazın.\n2. Grafik arayüzden kanal seçip sohbete katılın." },
-      { name: "GIMP 1.2 Retro", setup: "1. Paket yöneticinizden GIMP'i seçin ve yükleyin.\n2. Terminale 'gimp' yazarak çalıştırın." },
-      { name: "Wine 1.0", setup: "1. Terminale 'sudo apt install wine' yazın.\n2. Windows .exe dosyalarına sağ tıklayıp Wine ile çalıştırın." },
-      { name: "Midnight Commander", setup: "1. Terminalde 'sudo apt install mc' yazın.\n2. Çalıştırmak için konsola 'mc' yazın." },
-      { name: "MPlayer CLI", setup: "1. Terminale 'sudo apt install mplayer' yazın.\n2. 'mplayer video.avi' yazarak izleyin." },
-      { name: "Fluxbox Window Mgr", setup: "1. Minimalist pencere yöneticisini kurun.\n2. Oturum kapatıp giriş ekranından Fluxbox'ı seçin." },
-      { name: "HTOP Sys Monitor", setup: "1. 'sudo apt install htop' yazın.\n2. Terminalde işlemci ve RAM kullanımını renkli grafiklerle takip edin." },
-      { name: "Xterm Retro", setup: "1. Klasik X11 terminal uygulamasını kurun.\n2. '~/.Xresources' üzerinden renk yapılandırması yapabilirsiniz." },
-      { name: "Apache Web Server", setup: "1. 'sudo apt install apache2' komutuyla kurun.\n2. Web dosyalarınızı '/var/www/html' içine koyun." }
+      { name: "XMMS Player", setup: "1. Terminale 'sudo apt install xmms' yazın veya tgz'den derleyin." },
+      { name: "XChat IRC", setup: "1. 'sudo dpkg -i xchat.deb' komutuyla yükleyin." },
+      { name: "GIMP 1.2 Retro", setup: "1. Paket yöneticisinden indirin, terminalden 'gimp' yazarak açın." },
+      { name: "Wine 1.0", setup: "1. 'sudo apt install wine' komutunu çalıştırın." },
+      { name: "Midnight Commander", setup: "1. 'sudo apt install mc' yazıp terminalde 'mc' çalıştırın." },
+      { name: "MPlayer CLI", setup: "1. Terminale 'mplayer video.avi' yazarak çalıştırın." },
+      { name: "Fluxbox Mgr", setup: "1. Hafif pencere yöneticisini yükleyip oturum tipini değiştirin." },
+      { name: "HTOP Sys Monitor", setup: "1. 'sudo apt install htop' komutu ile konsoldan kaynakları izleyin." },
+      { name: "Xterm Retro", setup: "1. Klasik terminal istemcisini yükleyin." },
+      { name: "Apache Web Server", setup: "1. 'sudo systemctl start apache2' komutuyla sunucuyu başlatın." }
+    ];
+
+    // 3. DOS Oyunları Listesi
+    const dosApps = [
+      { name: "DOOM (1993)", setup: "1. ZIP dosyasını çıkarın.\n2. DOSBox ile 'DOOM.EXE' dosyasını çalıştırın." },
+      { name: "Duke Nukem 3D", setup: "1. Dosyaları D:\\GAMES\\DUKE3D klasörüne atın.\n2. SETUP.EXE ile ses kartını yapılandırın." },
+      { name: "Prince of Persia", setup: "1. PRINCE.EXE dosyasını çalıştırın.\n2. Yön tuşları ile oynayın." },
+      { name: "Quake I", setup: "1. GLQUAKE veya QUAKE.EXE çalıştırın." },
+      { name: "Wolfenstein 3D", setup: "1. WOLF3D.EXE dosyasını açın." },
+      { name: "Need For Speed 1", setup: "1. NFS.BAT dosyasından oyuna girin." },
+      { name: "GTA 1 (DOS)", setup: "1. GTA.EXE çalıştırıp çözünürlük seçin." },
+      { name: "Mortal Kombat II", setup: "1. MK2.EXE çalıştırıp klavye tuşlarını ayarlayın." },
+      { name: "Command & Conquer", setup: "1. C&C DOS sürümünü yükleyip C&C.EXE başlatın." },
+      { name: "SimCity 2000", setup: "1. SC2000.EXE ile şehri yönetmeye başlayın." }
+    ];
+
+    // 4. Sistem Araçları Listesi
+    const toolsApps = [
+      { name: "Defrag (Disk Birleştirici)", setup: "1. Başlat > Programlar > Donatılar > Sistem Araçları yolunu izleyin." },
+      { name: "Regedit (Kayıt Defteri)", setup: "1. Çalıştır penceresine 'regedit' yazın." },
+      { name: "ScanDisk", setup: "1. Diskteki bozuk sektörleri taratmak için 'Standart' modda başlatın." },
+      { name: "MSConfig Classic", setup: "1. Başlangıçta çalışan programları kapatmak için kullanın." },
+      { name: "DirectX 6.1 Diagnostic", setup: "1. Çalıştır'a 'dxdiag' yazıp ekran kartı testini yapın." },
+      { name: "AIDA16 / EVEREST", setup: "1. Donanım özetini görüntülemek için .exe'yi açın." },
+      { name: "Partition Magic 4.0", setup: "1. Sabit diski format atmadan bölümlere ayırmak için çalıştırın." },
+      { name: "Ghost 5.0 (Symantec)", setup: "1. Diskin tam imajını yedeklemek için DOS ortamında çalıştırın." },
+      { name: "WinZip 6.3", setup: "1. Arşiv dosyaları oluşturmak için kurun." },
+      { name: "MemMaker DOS", setup: "1. Konvansiyonel RAM hafızasını optimize etmek için 'MEMMAKER' yazın." }
+    ];
+
+    // 5. Sürücüler (Drivers) Listesi
+    const driversApps = [
+      { name: "Sound Blaster 16/32 Driver", setup: "1. INSTALL.EXE çalıştırın ve SB16 I/O portunu 220, IRQ 7 seçin." },
+      { name: "S3 Trio64V+ VGA Driver", setup: "1. Aygıt Yöneticisinden Ekran Bağdaştırıcısını güncelleştir seçeneğini kullanın." },
+      { name: "3Com EtherLink III LAN", setup: "1. Ağ kartı sürücüsünü .INF dosyası ile yükleyin." },
+      { name: "USRobotics 56K Modem", setup: "1. COM portunu belirleyip AT komut setini test edin." },
+      { name: "Voodoo 3DFX Glide Driver", setup: "1. 3D Hızlandırıcı kartınız için .exe setup'ını çalıştırın." },
+      { name: "Realtek RTL8139 Driver", setup: "1. Windows 95 Ağ ayarlarından diske basıp yükleyin." },
+      { name: "Intel Chipset INF Update", setup: "1. Anakart çip tanımını yapmak için setup'ı başlatın." },
+      { name: "Yamaha YMF724 Sound Driver", setup: "1. YMF724.EXE çalıştırıp MIDI sentezleyiciyi aktif edin." },
+      { name: "Logitech PS/2 Mouse Driver", setup: "1. Tekerlekli fare işlevleri için yazılımı kurun." },
+      { name: "MS-DOS CD-ROM Driver (OAK)", setup: "1. CONFIG.SYS dosyasına 'DEVICE=OAKCDROM.SYS /D:MSCD001' ekleyin." }
     ];
 
     let currentCategory = 'win';
@@ -306,12 +363,39 @@
       const title = document.getElementById("section-title");
       grid.innerHTML = "";
 
-      const apps = currentCategory === 'win' ? winApps : linuxApps;
-      const icon = currentCategory === 'win' ? "💽" : "🐧";
+      let apps = [];
+      let icon = "💽";
+      let titleText = "";
 
-      title.innerText = currentCategory === 'win' 
-        ? "💻 Windows Yazılımları (10 Program)" 
-        : "🐧 Linux Yazılımları (10 Program)";
+      switch(currentCategory) {
+        case 'win':
+          apps = winApps;
+          icon = "💽";
+          titleText = "💻 Windows Yazılımları (10 Program)";
+          break;
+        case 'linux':
+          apps = linuxApps;
+          icon = "🐧";
+          titleText = "🐧 Linux Yazılımları (10 Program)";
+          break;
+        case 'dos':
+          apps = dosApps;
+          icon = "👾";
+          titleText = "👾 DOS Oyunları (10 Oyun)";
+          break;
+        case 'tools':
+          apps = toolsApps;
+          icon = "🛠️";
+          titleText = "🛠️ Sistem Araçları (10 Araç)";
+          break;
+        case 'drivers':
+          apps = driversApps;
+          icon = "📁";
+          titleText = "📁 Sürücüler & Drivers (10 Sürücü)";
+          break;
+      }
+
+      title.innerText = titleText;
 
       apps.forEach(app => {
         const btn = document.createElement("button");
@@ -325,14 +409,19 @@
     // Sol Menü Tıklama Değişimi
     function showCategory(cat) {
       currentCategory = cat;
-      document.getElementById("btn-win").classList.toggle("active", cat === 'win');
-      document.getElementById("btn-linux").classList.toggle("active", cat === 'linux');
+
+      const categories = ['win', 'linux', 'dos', 'tools', 'drivers'];
+      categories.forEach(c => {
+        const btn = document.getElementById(`btn-${c}`);
+        if(btn) btn.classList.toggle("active", c === cat);
+      });
+
       renderApps();
     }
 
     // Modal Aç/Kapat
     function openModal(title, setupInfo) {
-      document.getElementById("modal-title").innerText = title + " - Kurulum Rehberi";
+      document.getElementById("modal-title").innerText = title + " - Rehber / Kurulum";
       document.getElementById("modal-desc").innerText = setupInfo;
       document.getElementById("info-modal").style.display = "flex";
     }
@@ -340,6 +429,16 @@
     function closeModal() {
       document.getElementById("info-modal").style.display = "none";
     }
+
+    // Windows 95 Açılış Sesi
+    function playWin95Sound() {
+      const audio = document.getElementById("win95-sound");
+      if (audio) {
+        audio.play().catch(() => {});
+      }
+      window.removeEventListener("click", playWin95Sound);
+    }
+    window.addEventListener("click", playWin95Sound);
 
     // Windows 95 Özel Sağ Tık Menüsü
     const contextMenu = document.getElementById("custom-context-menu");
@@ -369,7 +468,7 @@
     setInterval(updateClock, 1000);
     updateClock();
 
-    // İlk Yüklemede Windows Butonlarını Getir
+    // İlk Yüklemede Windows Kategorisini Getir
     renderApps();
   </script>
 </body>
