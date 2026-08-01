@@ -4,46 +4,100 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Retro İndirme Merkezi - Windows 95</title>
-  <!-- Classic Windows 95 CSS Framework -->
+  <!-- Windows 98/95 CSS Framework -->
   <link rel="stylesheet" href="https://unpkg.com/98.css">
   <style>
     /* Windows 95 İmleç Stili */
     * {
       cursor: url('https://cur.cursors-4u.net/computers/com-1/com032.cur'), auto !important;
+      box-sizing: border-box;
     }
 
-    body {
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
       background-color: #008080; /* Win95 Klasik Masaüstü Yeşili */
       font-family: "Pixelated MS Sans Serif", "MS Sans Serif", Tahoma, sans-serif;
-      margin: 0;
-      padding: 20px;
-      padding-bottom: 50px;
+      overflow: hidden;
       user-select: none;
     }
 
+    /* Ana Ekran Düzeni */
     .desktop {
-      max-width: 900px;
-      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      padding: 4px;
+      padding-bottom: 38px; /* Taskbar boşluğu */
     }
 
+    /* Tam Ekran Pencere */
     .main-window {
       width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
     }
 
-    .section-title {
+    .window-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 8px;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    /* Sol ve Sağ Panelleri Ayıran Esnek Düzen */
+    .app-layout {
+      display: flex;
+      flex: 1;
+      gap: 10px;
+      height: 100%;
+      margin-top: 8px;
+    }
+
+    /* Sol Panel (Kategoriler) */
+    .sidebar {
+      width: 220px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 10px;
+      background: #c0c0c0;
+    }
+
+    .category-btn {
+      width: 100%;
+      padding: 12px;
+      text-align: left;
       font-weight: bold;
-      margin-top: 15px;
-      margin-bottom: 10px;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
+      font-size: 13px;
+    }
+
+    .category-btn.active {
+      font-weight: bold;
+      background-color: #000080;
+      color: white;
+    }
+
+    /* Sağ Panel (İçerik/Butonlar) */
+    .content-area {
+      flex: 1;
+      padding: 15px;
+      overflow-y: auto;
+      background: #c0c0c0;
     }
 
     .grid-container {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-      gap: 10px;
-      margin-bottom: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 12px;
+      margin-top: 10px;
     }
 
     .app-btn {
@@ -51,14 +105,14 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 10px;
-      height: 70px;
+      padding: 15px;
+      height: 90px;
       text-align: center;
+      font-size: 12px;
     }
 
     .app-btn span {
-      margin-top: 5px;
-      font-size: 11px;
+      margin-top: 8px;
     }
 
     /* Özel Sağ Tık Menüsü */
@@ -100,7 +154,7 @@
     }
 
     .modal-window {
-      width: 420px;
+      width: 450px;
       max-width: 90%;
     }
 
@@ -139,10 +193,10 @@
 <body>
 
   <div class="desktop">
-    <!-- Ana Pencere -->
+    <!-- Tam Ekran Windows Penceresi -->
     <div class="window main-window">
       <div class="title-bar">
-        <div class="title-bar-text">💾 Retro_Indirme_Merkezi.exe - [Windows & Linux]</div>
+        <div class="title-bar-text">💾 Retro_Indirme_Merkezi.exe - [Tam Ekran]</div>
         <div class="title-bar-controls">
           <button aria-label="Minimize"></button>
           <button aria-label="Maximize"></button>
@@ -151,19 +205,26 @@
       </div>
       
       <div class="window-body">
-        <p style="margin-top: 0;">Hoş geldiniz! İndirmek istediğiniz yazılımı seçin. Her buton kurulum yönergelerini içerir.</p>
+        <p style="margin: 4px 0;">Sol menüden bir işletim sistemi seçin ve indirmek istediğiniz yazılıma tıklayın.</p>
         
-        <fieldset>
-          <legend>💻 WINDOWS YAZILIMLARI (10 Program)</legend>
-          <div class="grid-container" id="windows-apps"></div>
-        </fieldset>
+        <div class="app-layout">
+          <!-- Sol Kısım: Seçenekler -->
+          <fieldset class="sidebar">
+            <legend>Sistemler</legend>
+            <button class="category-btn active" id="btn-win" onclick="showCategory('win')">
+              💻 Windows
+            </button>
+            <button class="category-btn" id="btn-linux" onclick="showCategory('linux')">
+              🐧 Linux
+            </button>
+          </fieldset>
 
-        <br>
-
-        <fieldset>
-          <legend>🐧 LINUX YAZILIMLARI (10 Program)</legend>
-          <div class="grid-container" id="linux-apps"></div>
-        </fieldset>
+          <!-- Sağ Kısım: İndirme Butonları -->
+          <fieldset class="content-area">
+            <legend id="section-title">💻 Windows Yazılımları (10 Program)</legend>
+            <div class="grid-container" id="app-grid"></div>
+          </fieldset>
+        </div>
       </div>
     </div>
   </div>
@@ -178,9 +239,9 @@
         </div>
       </div>
       <div class="window-body">
-        <p id="modal-desc">Kurulum bilgisi bekleniyor...</p>
-        <div class="field-row" style="justify-content: flex-end; margin-top: 20px;">
-          <button onclick="alert('İndirme başlatıldı!')">💾 İndirmeyi Başlat</button>
+        <p id="modal-desc" style="white-space: pre-line; line-height: 1.4;">Kurulum bilgisi bekleniyor...</p>
+        <div class="field-row" style="justify-content: flex-end; margin-top: 20px; gap: 8px;">
+          <button onclick="alert('İndirme Başlatılıyor...')">💾 İndirmeyi Başlat</button>
           <button onclick="closeModal()">Kapat</button>
         </div>
       </div>
@@ -191,18 +252,18 @@
   <div id="custom-context-menu" class="window">
     <div class="window-body" style="padding: 2px;">
       <ul>
-        <li onclick="alert('Sistem: Windows 95 OSR2\nRAM: 32 MB\nİşlemci: Pentium II 233MHz')">🖥️ Özellikler</li>
+        <li onclick="alert('Sistem: Windows 95 OSR2\nRAM: 32 MB\nEkran: Tam Ekran Modu')">🖥️ Özellikler</li>
         <li onclick="location.reload()">🔄 Yenile</li>
         <hr>
-        <li onclick="alert('Tüm indirmeler virüs taramasından geçirilmiştir!')">🛡️ Güvenlik Bilgisi</li>
-        <li onclick="alert('Retro Download Hub v1.0')">ℹ️ Hakkında</li>
+        <li onclick="alert('Tüm indirmeler güvenlidir.')">🛡️ Güvenlik Bilgisi</li>
+        <li onclick="alert('Retro Download Hub v2.0')">ℹ️ Hakkında</li>
       </ul>
     </div>
   </div>
 
   <!-- Taskbar -->
   <div class="taskbar">
-    <button class="start-btn" onclick="alert('Windows 95 İndirme Merkezi v1.0')">
+    <button class="start-btn" onclick="alert('Windows 95 Başlat Menüsü')">
       <b>Başlat</b>
     </button>
     <div class="time-box" id="clock">12:00 PM</div>
@@ -211,48 +272,65 @@
   <script>
     // Windows Programları Listesi (10 Tane)
     const winApps = [
-      { id: 1, name: "WinRAR 3.0", setup: "1. .exe dosyasını indirin.\n2. Çift tıklayarak setup sihirbazını çalıştırın.\n3. 'C:\\Program Files\\WinRAR' dizinine kurun." },
-      { id: 2, name: "Winamp 2.91", setup: "1. Kurulumu çalıştırın.\n2. Skin seçiminizi yapın.\n3. MP3 dosyalarınızı oynatmaya başlayın!" },
-      { id: 3, name: "mIRC v6.0", setup: "1. Kurulum dosyasını açın.\n2. Rumuz (Nickname) belirleyin.\n3. Undernet veya QuakeNet sunucusuna bağlanın." },
-      { id: 4, name: "Nero Burning ROM", setup: "1. Setup.exe'yi açın.\n2. CD-RW sürücünüzü seçin.\n3. ISO imajını seçip 'Yaz' butonuna basın." },
-      { id: 5, name: "CCleaner Classic", setup: "1. İndirip çalıştırın.\n2. Kayıt defteri temizliği öncesi yedek alın." },
-      { id: 6, name: "Daemon Tools 3.47", setup: "1. Kurulum sonrası bilgisayarı yeniden başlatın.\n2. Sanal sürücüye .ISO veya .CUE dosyasını bağlayın." },
-      { id: 7, name: "MSN Messenger 4.7", setup: "1. Kurulumu tamamlayın.\n2. Passport hesabı bilgilerinizle giriş yapın." },
-      { id: 8, name: "K-Lite Codec Pack", setup: "1. 'Normal Mode' seçeneği ile ilerleyin.\n2. Media Player Classic associaton tiklerini işaretleyin." },
-      { id: 9, name: "Total Commander", setup: "1. Çift panelli dosya yöneticisini kurun.\n2. FTP bağlantı ayarlarını yapılandırın." },
-      { id: 10, name: "BS.Player Old", setup: "1. .exe'yi çalıştırıp varsayılan altyazı klasörünü belirleyin." }
+      { name: "WinRAR 3.0", setup: "1. setup.exe dosyasını indirin.\n2. Çalıştırıp varsayılan konuma yükleyin.\n3. Arşiv dosyalarınızı çift tıklayarak açabilirsiniz." },
+      { name: "Winamp 2.91", setup: "1. Kurulumu tamamlayın.\n2. Sevdiğiniz EQ ayarını yapın.\n3. MP3 listenizi sürükleyip bırakın." },
+      { name: "mIRC v6.0", setup: "1. Programı kurun.\n2. Sunucu listesinden 'IRCnet' veya 'DALnet' seçin.\n3. Rumuz yazıp bağlanın." },
+      { name: "Nero Burning ROM", setup: "1. Kurulumu yapın.\n2. Veri CD'si veya Müzik CD'si seçeneğini tıklayın.\n3. Yazdır butonuna basın." },
+      { name: "CCleaner Classic", setup: "1. Yükleyin ve çalıştırın.\n2. 'Analiz Et' butonuna tıklayıp gereksiz dosyaları temizleyin." },
+      { name: "Daemon Tools 3.47", setup: "1. Kurulum tamamlandıktan sonra bilgisayarı yeniden başlatın.\n2. Sağ alttaki simgeden ISO dosyanızı seçin." },
+      { name: "MSN Messenger 4.7", setup: "1. Yükleme sihirbazını izleyin.\n2. Oturum açma bilgilerinizi girip arkadaşlarınızı ekleyin." },
+      { name: "K-Lite Codec Pack", setup: "1. Standart kurulumu tercih edin.\n2. Artık tüm video formatlarını Media Player'da oynatabilirsiniz." },
+      { name: "Total Commander", setup: "1. Çift panelli dosya yöneticisini kurun.\n2. Dosyaları kopyalamak için F5, taşımak için F6 kullanın." },
+      { name: "BS.Player Old", setup: "1. İndirip kurun.\n2. Film dosyalarınızı altyazılarıyla sorunsuz izleyin." }
     ];
 
     // Linux Programları Listesi (10 Tane)
     const linuxApps = [
-      { id: 1, name: "XMMS Player", setup: "1. Terminali açın.\n2. 'sudo apt install xmms' komutunu çalıştırın veya indirilen .tar.gz dosyasını çıkarıp './configure && make && make install' yapın." },
-      { id: 2, name: "XChat IRC", setup: "1. '.deb' paketine çift tıklayın veya 'dpkg -i xchat.deb' yazın." },
-      { id: 3, name: "GIMP 1.2 Retro", setup: "1. Bağımlılıkları yükleyin.\n2. Terminalden 'gimp' yazarak çalıştırın." },
-      { id: 4, name: "Wine 1.0 Compatibility", setup: "1. Paket yöneticinizden kurun.\n2. 'winecfg' yazarak Windows sürümünü Windows 95 olarak ayarlayın." },
-      { id: 5, name: "Midnight Commander", setup: "1. Terminalde 'sudo apt install mc' yazın.\n2. 'mc' komutuyla konsol arayüzünü başlatın." },
-      { id: 6, name: "mplayer CLI", setup: "1. Terminal açın.\n2. 'mplayer video.avi' komutuyla videolarınızı izleyin." },
-      { id: 7, name: "Fluxbox Window Mgr", setup: "1. Kurulumdan sonra Giriş ekranından (GDM) oturum tipi olarak Fluxbox'ı seçin." },
-      { id: 8, name: "HTOP Sys Monitor", setup: "1. 'sudo apt install htop' yazın.\n2. Sistem kaynaklarını terminalde anlık izleyin." },
-      { id: 9, name: "Xterm Retro", setup: "1. Terminal renk ayarlarını '~/.Xresources' dosyasından düzenleyebilirsiniz." },
-      { id: 10, name: "Apache Web Server", setup: "1. 'sudo systemctl start apache2' komutu ile servisi başlatın." }
+      { name: "XMMS Player", setup: "1. Terminali açın.\n2. 'sudo apt install xmms' komutunu çalıştırın.\n3. Müziklerinizi oynatmaya başlayın." },
+      { name: "XChat IRC", setup: "1. Paketi indirin ve 'sudo dpkg -i xchat.deb' yazın.\n2. Grafik arayüzden kanal seçip sohbete katılın." },
+      { name: "GIMP 1.2 Retro", setup: "1. Paket yöneticinizden GIMP'i seçin ve yükleyin.\n2. Terminale 'gimp' yazarak çalıştırın." },
+      { name: "Wine 1.0", setup: "1. Terminale 'sudo apt install wine' yazın.\n2. Windows .exe dosyalarına sağ tıklayıp Wine ile çalıştırın." },
+      { name: "Midnight Commander", setup: "1. Terminalde 'sudo apt install mc' yazın.\n2. Çalıştırmak için konsola 'mc' yazın." },
+      { name: "MPlayer CLI", setup: "1. Terminale 'sudo apt install mplayer' yazın.\n2. 'mplayer video.avi' yazarak izleyin." },
+      { name: "Fluxbox Window Mgr", setup: "1. Minimalist pencere yöneticisini kurun.\n2. Oturum kapatıp giriş ekranından Fluxbox'ı seçin." },
+      { name: "HTOP Sys Monitor", setup: "1. 'sudo apt install htop' yazın.\n2. Terminalde işlemci ve RAM kullanımını renkli grafiklerle takip edin." },
+      { name: "Xterm Retro", setup: "1. Klasik X11 terminal uygulamasını kurun.\n2. '~/.Xresources' üzerinden renk yapılandırması yapabilirsiniz." },
+      { name: "Apache Web Server", setup: "1. 'sudo apt install apache2' komutuyla kurun.\n2. Web dosyalarınızı '/var/www/html' içine koyun." }
     ];
 
-    // Butonları Oluşturma
-    function buildButtons(apps, containerId, icon) {
-      const container = document.getElementById(containerId);
+    let currentCategory = 'win';
+
+    // Ekranı Güncelleme Fonksiyonu
+    function renderApps() {
+      const grid = document.getElementById("app-grid");
+      const title = document.getElementById("section-title");
+      grid.innerHTML = "";
+
+      const apps = currentCategory === 'win' ? winApps : linuxApps;
+      const icon = currentCategory === 'win' ? "💽" : "🐧";
+
+      title.innerText = currentCategory === 'win' 
+        ? "💻 Windows Yazılımları (10 Program)" 
+        : "🐧 Linux Yazılımları (10 Program)";
+
       apps.forEach(app => {
         const btn = document.createElement("button");
         btn.className = "app-btn";
-        btn.innerHTML = `${icon} <span>${app.name}</span>`;
+        btn.innerHTML = `<span style="font-size:20px;">${icon}</span><span>${app.name}</span>`;
         btn.onclick = () => openModal(app.name, app.setup);
-        container.appendChild(btn);
+        grid.appendChild(btn);
       });
     }
 
-    buildButtons(winApps, "windows-apps", "💽");
-    buildButtons(linuxApps, "linux-apps", "🐧");
+    // Sol Menü Tıklama Değişimi
+    function showCategory(cat) {
+      currentCategory = cat;
+      document.getElementById("btn-win").classList.toggle("active", cat === 'win');
+      document.getElementById("btn-linux").classList.toggle("active", cat === 'linux');
+      renderApps();
+    }
 
-    // Modal Pencere Kontrolleri
+    // Modal Aç/Kapat
     function openModal(title, setupInfo) {
       document.getElementById("modal-title").innerText = title + " - Kurulum Rehberi";
       document.getElementById("modal-desc").innerText = setupInfo;
@@ -263,7 +341,7 @@
       document.getElementById("info-modal").style.display = "none";
     }
 
-    // Windows 95 Özel Sağ Tık Menüsü Kontrolü
+    // Windows 95 Özel Sağ Tık Menüsü
     const contextMenu = document.getElementById("custom-context-menu");
 
     window.addEventListener("contextmenu", (e) => {
@@ -290,6 +368,9 @@
     }
     setInterval(updateClock, 1000);
     updateClock();
+
+    // İlk Yüklemede Windows Butonlarını Getir
+    renderApps();
   </script>
 </body>
 </html>
