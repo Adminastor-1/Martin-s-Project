@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Retro İndirme Merkezi - Sürüm Arşivi</title>
+  <title>i18nclub.com </title>
   <!-- Windows 98/95 CSS Framework -->
   <link rel="stylesheet" href="https://unpkg.com/98.css">
   <style>
@@ -207,7 +207,7 @@
   <div class="desktop">
     <div class="window main-window">
       <div class="title-bar">
-        <div class="title-bar-text">💾 Retro_Indirme_Merkezi.exe - [Tüm Sürümler]</div>
+        <div class="title-bar-text">💾 i18nclub.exe (Çalışıyor) - [Tüm Sürümler]</div>
         <div class="title-bar-controls">
           <button aria-label="Minimize"></button>
           <button aria-label="Maximize"></button>
@@ -216,14 +216,14 @@
       </div>
       
       <div class="window-body">
-        <p style="margin: 2px 0 6px 0;">Soldan spesifik işletim sistemi sürümüne tıklayın. Sağda o sürüme ait 10 indirme/rehber butonu açılacaktır.</p>
+        <p style="margin: 2px 0 6px 0;">Kral Evine Hoşgeldin.Bu Siteden Bizzat Doğrulanmış İsoları Bilgisayarına İndirebilirsin (Reklamsız Olma Sözümüz İle).</p>
         
         <div class="app-layout">
           <!-- Sol Kısım: Her Sürüm İçin Müstakil Klasör -->
           <fieldset class="sidebar">
             <legend>Sürüm Klasörleri</legend>
             
-            <div class="nav-header">🪟 WINDOWS SÜRÜMLERİ</div>
+            <div class="nav-header">🪟 Windows İsoları</div>
             <button class="category-btn" id="btn-win10" onclick="showCategory('win10')">📁 Windows 1.0</button>
             <button class="category-btn" id="btn-win20" onclick="showCategory('win20')">📁 Windows 2.0</button>
             <button class="category-btn" id="btn-win31" onclick="showCategory('win31')">📁 Windows 3.1</button>
@@ -234,6 +234,7 @@
             <button class="category-btn" id="btn-winxp" onclick="showCategory('winxp')">📁 Windows XP</button>
             <button class="category-btn" id="btn-winvista" onclick="showCategory('winvista')">📁 Windows Vista</button>
             <button class="category-btn" id="btn-win7" onclick="showCategory('win7')">📁 Windows 7</button>
+            <button class="category-btn" id="btn-win8" onclick="showCategory('win8')">📁 Windows 8</button>
             <button class="category-btn" id="btn-win8" onclick="showCategory('win8')">📁 Windows 8.1</button>
             <button class="category-btn" id="btn-win10sys" onclick="showCategory('win10sys')">📁 Windows 10</button>
             <button class="category-btn" id="btn-win11" onclick="showCategory('win11')">📁 Windows 11</button>
@@ -244,7 +245,7 @@
             <button class="category-btn" id="btn-fedora" onclick="showCategory('fedora')">🐧 Fedora</button>
             <button class="category-btn" id="btn-arch" onclick="showCategory('arch')">🐧 Arch Linux</button>
             <button class="category-btn" id="btn-mint" onclick="showCategory('mint')">🐧 Linux Mint</button>
-            <button class="category-btn" id="btn-slack" onclick="showCategory('slack')">🐧 Slackware (Retro)</button>
+            <button class="category-btn" id="btn-slack" onclick="showCategory('slack')">🐧 BlackArch</button>
           </fieldset>
 
           <!-- Sağ Kısım: İndirme Butonları (10'ar adet) -->
@@ -269,8 +270,8 @@
       <div class="window-body">
         <p id="modal-desc" style="white-space: pre-line; line-height: 1.4;">Kurulum bilgisi bekleniyor...</p>
         <div class="field-row" style="justify-content: flex-end; margin-top: 20px; gap: 8px;">
-          <button onclick="alert('İndirme Başlatılıyor...')">💾 İndirmeyi Başlat</button>
-          <button onclick="closeModal()">Kapat</button>
+          <button onclick="alert('İndirme Başlatılıyor...')">💾 İndir</button>
+          <button onclick="closeModal()">Çık</button>
         </div>
       </div>
     </div>
@@ -592,7 +593,7 @@
         ]
       },
       'slack': {
-        title: "🐧 Slackware (Retro Linux)",
+        title: "🐧 BlackArch Linux",
         icon: "🕹️",
         apps: [
           { name: "pkgtool", setup: "1. Slackware metin tabanlı paket yöneticisi." },
