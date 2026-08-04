@@ -21,6 +21,231 @@
         body { background-color: var(--bg-dark); color: var(--text-main); display: flex; height: 100vh; overflow: hidden; }
 
         /* SOL MENÜ (SIDEBAR) */
+        .sidebar { width: 320px; background-color: var(--panel-bg); border-right: 1px solid var(--border-color); padding: 15px; overflow-y: auto; }
+        
+        /* GİRİŞ / DUYURU ALANI (SOL EN ÜST) */
+        .welcome-box { background: rgba(56, 189, 248, 0.08); border: 1px solid var(--accent-blue); padding: 12px; border-radius: 8px; margin-bottom: 15px; }
+        .welcome-box h3 { font-size: 14px; color: var(--accent-blue); margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+        .welcome-box p { font-size: 11px; color: var(--text-muted); line-height: 1.4; }
+
+        .sidebar h2 { font-size: 12px; text-transform: uppercase; color: var(--accent-blue); margin: 15px 0 8px 0; letter-spacing: 1px; }
+        .nav-btn { width: 100%; text-align: left; padding: 9px 12px; background: transparent; border: 1px solid transparent; color: var(--text-muted); border-radius: 6px; cursor: pointer; transition: all 0.2s ease; margin-bottom: 3px; font-weight: 500; font-size: 13px; display: flex; align-items: center; gap: 8px; }
+        .nav-btn:hover { background-color: rgba(56, 189, 248, 0.1); color: var(--accent-blue); }
+        .nav-btn.active { background-color: var(--accent-blue); color: #000; font-weight: bold; }
+
+        /* SAĞ İÇERİK ALANI (GENİŞ SEKME) */
+        .main-content { flex: 1; padding: 35px; overflow-y: auto; display: flex; flex-direction: column; gap: 25px; }
+        .tab-content { display: none; flex-direction: column; gap: 25px; }
+        .tab-content.active { display: flex; }
+
+        /* BAŞLIK & ISO INDIRME ALANI */
+        .header-box { background: linear-gradient(135deg, #1e293b, #0f172a); border: 1px solid var(--border-color); border-radius: 12px; padding: 25px; display: flex; justify-content: space-between; align-items: center; }
+        .download-main-btn { background-color: #22c55e; color: white; border: none; padding: 14px 28px; border-radius: 8px; font-weight: bold; font-size: 15px; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 10px; }
+        .download-main-btn:hover { background-color: #16a34a; transform: translateY(-2px); }
+
+        /* TUTORIAL SEKTÖRÜ */
+        .tutorial-box { background: var(--panel-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; }
+        .tutorial-box h3 { color: var(--accent-blue); margin-bottom: 12px; font-size: 16px; }
+        .tutorial-box ol { margin-left: 20px; color: var(--text-muted); line-height: 1.7; font-size: 14px; }
+
+        /* 6 ADET YAN BUTON GRİDİ */
+        .tools-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+        .tool-card { background: var(--panel-bg); border: 1px solid var(--border-color); padding: 18px; border-radius: 10px; text-align: center; cursor: pointer; transition: 0.3s; color: var(--text-main); text-decoration: none; }
+        .tool-card:hover { border-color: var(--accent-blue); transform: translateY(-3px); }
+        .tool-card i { font-size: 22px; color: var(--accent-blue); margin-bottom: 8px; }
+
+        /* MODAL (ROBOT DOĞRULAMA VE RAR ŞİFRESİ EKRANI) */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); display: none; justify-content: center; align-items: center; z-index: 1000; }
+        .modal-card { background: var(--panel-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 30px; max-width: 450px; width: 90%; text-align: center; }
+        .rar-img { width: 100%; max-height: 200px; object-fit: contain; margin-top: 15px; border-radius: 8px; border: 1px solid var(--border-color); }
+    </style>
+</head>
+<body>
+
+    <!-- SOL MENÜ (TÜM SÜRÜMLER EKSİKSİZ) -->
+    <div class="sidebar">
+        
+        <!-- 🟢 SOL EN ÜST GİRİŞ / DUYURU ALANI -->
+        <div class="welcome-box">
+            <h3><i class="fa-solid fa-circle-info"></i> İndirme Merkezine Hoş Geldiniz</h3>
+            <p>Soldaki menüden spesifik işletim sistemi sürümüne tıklayın. Sağ tarafta o sürüme ait ISO indirme, rehber ve 6 adet özel yardımcı yazılım açılacaktır.</p>
+        </div>
+
+        <h2>Windows Sürümleri</h2>
+        <button class="nav-btn" onclick="openTab('win1')"><i class="fa-brands fa-windows"></i> Windows 1.0</button>
+        <button class="nav-btn" onclick="openTab('win2')"><i class="fa-brands fa-windows"></i> Windows 2.0</button>
+        <button class="nav-btn" onclick="openTab('win31')"><i class="fa-brands fa-windows"></i> Windows 3.1</button>
+        <button class="nav-btn" onclick="openTab('win95')"><i class="fa-brands fa-windows"></i> Windows 95</button>
+        <button class="nav-btn" onclick="openTab('win98')"><i class="fa-brands fa-windows"></i> Windows 98</button>
+        <button class="nav-btn" onclick="openTab('winme')"><i class="fa-brands fa-windows"></i> Windows ME</button>
+        <button class="nav-btn" onclick="openTab('win2000')"><i class="fa-brands fa-windows"></i> Windows 2000</button>
+        <button class="nav-btn" onclick="openTab('winxp')"><i class="fa-brands fa-windows"></i> Windows XP</button>
+        <button class="nav-btn" onclick="openTab('winvista')"><i class="fa-brands fa-windows"></i> Windows Vista</button>
+        <button class="nav-btn active" onclick="openTab('win7')"><i class="fa-brands fa-windows"></i> Windows 7</button>
+        <button class="nav-btn" onclick="openTab('win81')"><i class="fa-brands fa-windows"></i> Windows 8.1</button>
+        <button class="nav-btn" onclick="openTab('win10')"><i class="fa-brands fa-windows"></i> Windows 10</button>
+        <button class="nav-btn" onclick="openTab('win11')"><i class="fa-brands fa-windows"></i> Windows 11</button>
+
+        <h2>Linux Dağıtımları</h2>
+        <button class="nav-btn" onclick="openTab('ubuntu')"><i class="fa-brands fa-ubuntu"></i> Ubuntu</button>
+        <button class="nav-btn" onclick="openTab('debian')"><i class="fa-linux"></i> Debian</button>
+        <button class="nav-btn" onclick="openTab('fedora')"><i class="fa-linux"></i> Fedora</button>
+        <button class="nav-btn" onclick="openTab('arch')"><i class="fa-linux"></i> Arch Linux</button>
+        <button class="nav-btn" onclick="openTab('mint')"><i class="fa-linux"></i> Linux Mint</button>
+        <button class="nav-btn" onclick="openTab('slackware')"><i class="fa-linux"></i> Slackware (Retro)</button>
+    </div>
+
+    <!-- SAĞ ANA İÇERİK (GENİŞ SEKME) -->
+    <div class="main-content">
+        
+        <!-- WINDOWS 7 SEKMESİ (VARSAYILAN AKTİF) -->
+        <div id="win7" class="tab-content active">
+            <div class="header-box">
+                <div>
+                    <h2>Windows 7 SP1 Ultimate (x64 / x86)</h2>
+                    <p style="color: var(--text-muted); margin-top: 5px;">Orijinal el değmemiş ISO dosyası ve doğrudan kurulum desteği.</p>
+                </div>
+                <!-- Base64 Şifreli Link ve Gösterilecek RAR Şifresi Görseli -->
+                <button class="download-main-btn" onclick="startDownload('aHR0cHM6Ly93d3cubWVkaWFmaXJlLmNvbS9maWxlL2E4Y2IwOW05MW03OHUwci9XaV8tN194ODZfZmxsXzY3NzQ2MC5yYXIvZmlsZQ==', 'win7-rar.png')">
+                    <i class="fa-solid fa-download"></i> Windows 7 ISO İndir
+                </button>
+            </div>
+
+            <div class="tutorial-box">
+                <h3><i class="fa-solid fa-book-open"></i> Windows 7 Kurulum Rehberi (Tutorial)</h3>
+                <ol>
+                    <li>İndirdiğiniz ISO dosyasını <b>Rufus</b> programı yardımıyla en az 8 GB'lık bir USB belleğe yazdırın.</li>
+                    <li>Bilgisayarınızı yeniden başlatarak BIOS ayarlarına girin ve boot sırasını USB bellek olarak ayarlayın.</li>
+                    <li>Kurulum esnasında disk bölme adımında tüm bölümleri silip temiz kurulum yapmanız önerilir.</li>
+                </ol>
+            </div>
+
+            <!-- 6 ADET EKSTRA PROGRAM BUTONU -->
+            <h3 style="color: var(--text-main);">Windows 7 İçin Gerekli 6 Araç</h3>
+            <div class="tools-grid">
+                <a href="#" class="tool-card"><i class="fa-solid fa-file-zipper"></i><h4>7-Zip 9.20</h4></a>
+                <a href="#" class="tool-card"><i class="fa-brands fa-chrome"></i><h4>Google Chrome Old</h4></a>
+                <a href="#" class="tool-card"><i class="fa-solid fa-phone"></i><h4>Skype 5.0</h4></a>
+                <a href="#" class="tool-card"><i class="fa-solid fa-compact-disc"></i><h4>CDBurnerXP</h4></a>
+                <a href="#" class="tool-card"><i class="fa-solid fa-shield-halved"></i><h4>Malwarebytes 1.75</h4></a>
+                <a href="#" class="tool-card"><i class="fa-solid fa-desktop"></i><h4>VirtualBox 4.0</h4></a>
+            </div>
+        </div>
+
+        <!-- DİĞER SÜRÜMLER İÇİN ÖRNEK ŞABLON (WIN 98) -->
+        <div id="win98" class="tab-content">
+            <div class="header-box">
+                <div>
+                    <h2>Windows 98 Second Edition (SE)</h2>
+                    <p style="color: var(--text-muted); margin-top: 5px;">Retro sistemler için orijinal boot edilebilir kalıp.</p>
+                </div>
+                <button class="download-main-btn" onclick="startDownload('BASE64_LINK_BURAYA', 'win98-rar.png')">
+                    <i class="fa-solid fa-download"></i> Windows 98 ISO İndir
+                </button>
+            </div>
+            <div class="tutorial-box">
+                <h3><i class="fa-solid fa-book-open"></i> Kurulum Rehberi</h3>
+                <ol><li>MS-DOS başlangıç disketi veya ISO boot seçeneğini kullanın...</li></ol>
+            </div>
+            <div class="tools-grid">
+                <a href="#" class="tool-card"><i class="fa-solid fa-floppy-disk"></i><h4>Boot Disketi</h4></a>
+                <a href="#" class="tool-card"><i class="fa-solid fa-music"></i><h4>Winamp 2.91</h4></a>
+                <a href="#" class="tool-card"><i class="fa-solid fa-gamepad"></i><h4>DirectX 7.0</h4></a>
+                <a href="#" class="tool-card"><i class="fa-solid fa-globe"></i><h4>IE 5.0</h4></a>
+                <a href="#" class="tool-card"><i class="fa-solid fa-box"></i><h4>Daemon Tools</h4></a>
+                <a href="#" class="tool-card"><i class="fa-solid fa-terminal"></i><h4>DOSBox</h4></a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ROBOT DOĞRULAMA VE RAR ŞİFRESİ EKRANI -->
+    <div class="modal-overlay" id="downloadModal">
+        <div class="modal-card">
+            <h3 id="modalTitle">Güvenlik Doğrulanıyor...</h3>
+            <p style="color: var(--text-muted); font-size: 13px; margin: 10px 0;" id="modalDesc">İndirmeyi başlatmak için lütfen doğrulayın.</p>
+
+            <div id="cf-turnstile-container" style="display: flex; justify-content: center; margin: 15px 0;">
+                <div class="cf-turnstile" data-sitekey="YOUR_CLOUDFLARE_SITE_KEY" data-callback="onTurnstileSuccess"></div>
+            </div>
+
+            <div id="rarPasswordArea" style="display: none;">
+                <h4 style="color: #22c55e;">✔ Doğrulama Başarılı! İndirme Başlıyor...</h4>
+                <p style="margin-top: 8px; font-size: 12px;">Dosya RAR Şifresi Görseli:</p>
+                <img id="rarImg" src="" alt="RAR Şifresi" class="rar-img">
+                <br>
+                <button onclick="closeModal()" style="margin-top: 15px; padding: 8px 20px; background: var(--accent-blue); border:none; border-radius: 5px; cursor:pointer; font-weight:bold;">Pencereyi Kapat</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentDecodedLink = "";
+        let currentRarImg = "";
+
+        function openTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
+            
+            const targetTab = document.getElementById(tabId);
+            if(targetTab) {
+                targetTab.classList.add('active');
+            } else {
+                alert("Bu sürümün içeriği henüz hazırlanıyor!");
+            }
+            event.currentTarget.classList.add('active');
+        }
+
+        function startDownload(base64Link, rarImageName) {
+            currentDecodedLink = atob(base64Link);
+            currentRarImg = rarImageName;
+
+            document.getElementById('modalTitle').innerText = "Güvenlik Doğrulaması";
+            document.getElementById('cf-turnstile-container').style.display = "flex";
+            document.getElementById('rarPasswordArea').style.display = "none";
+            document.getElementById('downloadModal').style.display = "flex";
+        }
+
+        function onTurnstileSuccess(token) {
+            document.getElementById('modalTitle').innerText = "İndirme ve Şifre Bilgisi";
+            document.getElementById('cf-turnstile-container').style.display = "none";
+            
+            document.getElementById('rarImg').src = currentRarImg; 
+            document.getElementById('rarPasswordArea').style.display = "block";
+
+            setTimeout(() => {
+                window.open(currentDecodedLink, '_blank');
+            }, 1500);
+        }
+
+        function closeModal() {
+            document.getElementById('downloadModal').style.display = "none";
+        }
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro & Modern İndirme Merkezi</title>
+    <!-- FontAwesome İkonları ve Cloudflare Turnstile -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --panel-bg: #1e293b;
+            --accent-blue: #38bdf8;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--bg-dark); color: var(--text-main); display: flex; height: 100vh; overflow: hidden; }
+
+        /* SOL MENÜ (SIDEBAR) */
         .sidebar { width: 280px; background-color: var(--panel-bg); border-right: 1px solid var(--border-color); padding: 20px; overflow-y: auto; }
         .sidebar h2 { font-size: 14px; text-transform: uppercase; color: var(--accent-blue); margin: 15px 0 10px 0; letter-spacing: 1px; }
         .nav-btn { width: 100%; text-align: left; padding: 12px 15px; background: transparent; border: 1px solid transparent; color: var(--text-muted); border-radius: 8px; cursor: pointer; transition: all 0.3s ease; margin-bottom: 5px; font-weight: 500; display: flex; align-items: center; gap: 10px; }
