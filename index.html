@@ -1,511 +1,193 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Retro İndirme Merkezi - Sürüm Arşivi</title>
-  <!-- Windows 98/95 CSS Framework -->
-  <link rel="stylesheet" href="https://unpkg.com/98.css">
-  <style>
-    /* Windows 95 İmleç Stili */
-    * {
-      cursor: url('https://cur.cursors-4u.net/computers/com-1/com032.cur'), auto !important;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro & Modern İndirme Merkezi</title>
+    <!-- FontAwesome İkonları ve Cloudflare Turnstile -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --panel-bg: #1e293b;
+            --accent-blue: #38bdf8;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+        }
 
-    html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      background-color: #008080;
-      font-family: "Pixelated MS Sans Serif", "MS Sans Serif", Tahoma, sans-serif;
-      overflow: hidden;
-      user-select: none;
-    }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--bg-dark); color: var(--text-main); display: flex; height: 100vh; overflow: hidden; }
 
-    /* --- WINDOWS 95 AÇILIŞ (BOOT) EKRANI --- */
-    #boot-screen {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background-color: #000000;
-      z-index: 99999;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      color: white;
-      transition: opacity 0.8s ease;
-    }
+        /* SOL MENÜ (SIDEBAR) */
+        .sidebar { width: 280px; background-color: var(--panel-bg); border-right: 1px solid var(--border-color); padding: 20px; overflow-y: auto; }
+        .sidebar h2 { font-size: 14px; text-transform: uppercase; color: var(--accent-blue); margin: 15px 0 10px 0; letter-spacing: 1px; }
+        .nav-btn { width: 100%; text-align: left; padding: 12px 15px; background: transparent; border: 1px solid transparent; color: var(--text-muted); border-radius: 8px; cursor: pointer; transition: all 0.3s ease; margin-bottom: 5px; font-weight: 500; display: flex; align-items: center; gap: 10px; }
+        .nav-btn:hover { background-color: rgba(56, 189, 248, 0.1); color: var(--accent-blue); }
+        .nav-btn.active { background-color: var(--accent-blue); color: #000; font-weight: bold; }
 
-    .boot-logo {
-      text-align: center;
-      margin-bottom: 40px;
-    }
+        /* SAĞ İÇERİK ALANI (GENİŞ SEKME) */
+        .main-content { flex: 1; padding: 40px; overflow-y: auto; display: flex; flex-direction: column; gap: 30px; }
+        .tab-content { display: none; flex-direction: column; gap: 25px; }
+        .tab-content.active { display: flex; }
 
-    .boot-logo h1 {
-      font-size: 50px;
-      font-family: "Times New Roman", serif;
-      font-style: italic;
-      font-weight: bold;
-      margin: 0;
-      letter-spacing: -1px;
-      text-shadow: 2px 2px 4px #000;
-    }
+        /* BAŞLIK & ISO INDIRME ALANI */
+        .header-box { background: linear-gradient(135deg, #1e293b, #0f172a); border: 1px solid var(--border-color); border-radius: 12px; padding: 25px; display: flex; justify-content: space-between; align-items: center; }
+        .download-main-btn { background-color: #22c55e; color: white; border: none; padding: 15px 30px; border-radius: 8px; font-weight: bold; font-size: 16px; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 10px; }
+        .download-main-btn:hover { background-color: #16a34a; transform: translateY(-2px); }
 
-    .boot-logo span {
-      font-size: 65px;
-      color: #000080;
-      background: #ffffff;
-      padding: 0 10px;
-      font-style: normal;
-      font-family: Arial, sans-serif;
-      font-weight: 900;
-      display: inline-block;
-      margin-left: 10px;
-      box-shadow: 3px 3px 0px #808080;
-    }
+        /* TUTORIAL SEKTÖRÜ */
+        .tutorial-box { background: var(--panel-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 25px; }
+        .tutorial-box h3 { color: var(--accent-blue); margin-bottom: 15px; }
+        .tutorial-box ol { margin-left: 20px; color: var(--text-muted); line-height: 1.8; }
 
-    .boot-tagline {
-      font-size: 14px;
-      color: #c0c0c0;
-      margin-top: 5px;
-      letter-spacing: 2px;
-    }
+        /* 6 ADET YAN BUTON GRİDİ */
+        .tools-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+        .tool-card { background: var(--panel-bg); border: 1px solid var(--border-color); padding: 20px; border-radius: 10px; text-align: center; cursor: pointer; transition: 0.3s; color: var(--text-main); text-decoration: none; }
+        .tool-card:hover { border-color: var(--accent-blue); transform: translateY(-3px); }
+        .tool-card i { font-size: 24px; color: var(--accent-blue); margin-bottom: 10px; }
 
-    /* Win95 Yükleme Çubuğu */
-    .boot-progress-container {
-      width: 280px;
-      height: 18px;
-      border: 2px solid #808080;
-      background: #000;
-      padding: 2px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .boot-progress-bar {
-      height: 100%;
-      width: 60px;
-      background: linear-gradient(90deg, #000080, #0000ff, #000080);
-      position: absolute;
-      animation: win95-load 1.8s infinite linear;
-    }
-
-    @keyframes win95-load {
-      0% { left: -60px; }
-      100% { left: 280px; }
-    }
-
-    .boot-start-btn {
-      margin-top: 30px;
-      padding: 8px 16px;
-      font-size: 12px;
-    }
-
-    /* Ana Ekran Düzeni */
-    .desktop {
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
-      padding: 4px;
-      padding-bottom: 38px;
-    }
-
-    .main-window {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .window-body {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      padding: 8px;
-      margin: 0;
-      overflow: hidden;
-    }
-
-    .app-layout {
-      display: flex;
-      flex: 1;
-      gap: 10px;
-      height: 100%;
-      margin-top: 8px;
-      overflow: hidden;
-    }
-
-    /* Sol Panel */
-    .sidebar {
-      width: 250px;
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-      padding: 6px;
-      background: #c0c0c0;
-      overflow-y: auto;
-    }
-
-    .nav-header {
-      font-weight: bold;
-      font-size: 11px;
-      margin-top: 8px;
-      margin-bottom: 3px;
-      color: #000080;
-      text-transform: uppercase;
-    }
-
-    .category-btn {
-      width: 100%;
-      padding: 5px 8px;
-      text-align: left;
-      font-size: 11px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      white-space: nowrap;
-    }
-
-    .category-btn.active {
-      font-weight: bold;
-      background-color: #000080;
-      color: white;
-    }
-
-    /* Sağ Panel */
-    .content-area {
-      flex: 1;
-      padding: 15px;
-      overflow-y: auto;
-      background: #c0c0c0;
-    }
-
-    .grid-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-      gap: 12px;
-      margin-top: 10px;
-    }
-
-    .app-btn {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 10px;
-      height: 80px;
-      text-align: center;
-      font-size: 11px;
-    }
-
-    .app-btn span {
-      margin-top: 5px;
-    }
-
-    /* Sağ Tık Menüsü */
-    #custom-context-menu {
-      display: none;
-      position: absolute;
-      z-index: 10000;
-      width: 160px;
-    }
-
-    #custom-context-menu ul {
-      list-style: none;
-      margin: 0;
-      padding: 2px;
-    }
-
-    #custom-context-menu li {
-      padding: 4px 10px;
-      font-size: 12px;
-    }
-
-    #custom-context-menu li:hover {
-      background-color: #000080;
-      color: white;
-    }
-
-    /* Modal */
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.4);
-      z-index: 9000;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .modal-window {
-      width: 450px;
-      max-width: 90%;
-    }
-
-    /* Taskbar */
-    .taskbar {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 35px;
-      background: #c0c0c0;
-      border-top: 2px solid #ffffff;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 2px 5px;
-      z-index: 8000;
-    }
-
-    .start-btn {
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      height: 28px;
-    }
-
-    .time-box {
-      border: 2px inset #ffffff;
-      padding: 2px 8px;
-      font-size: 11px;
-      background: #c0c0c0;
-    }
-  </style>
+        /* MODAL (ROBOT DOĞRULAMA VE RAR ŞİFRESİ EKRANI) */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); display: none; justify-content: center; align-items: center; z-index: 1000; }
+        .modal-card { background: var(--panel-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 30px; max-width: 450px; width: 90%; text-align: center; }
+        .rar-img { width: 100%; max-height: 200px; object-fit: contain; margin-top: 15px; border-radius: 8px; border: 1px solid var(--border-color); }
+    </style>
 </head>
 <body>
 
-  <!-- Windows 95 Boot Ekranı -->
-  <div id="boot-screen">
-    <div class="boot-logo">
-      <h1>Microsoft<span>95</span></h1>
-      <div class="boot-tagline">Windows 95 Sürüm Arşivi Başlatılıyor...</div>
+    <!-- SOL MENÜ -->
+    <div class="sidebar">
+        <h2>Windows Sürümleri</h2>
+        <button class="nav-btn active" onclick="openTab('win7')"><i class="fa-brands fa-windows"></i> Windows 7</button>
+        <button class="nav-btn" onclick="openTab('win10')"><i class="fa-brands fa-windows"></i> Windows 10</button>
+        <button class="nav-btn" onclick="openTab('win11')"><i class="fa-brands fa-windows"></i> Windows 11</button>
+
+        <h2>Linux Dağıtımları</h2>
+        <button class="nav-btn" onclick="openTab('ubuntu')"><i class="fa-brands fa-ubuntu"></i> Ubuntu</button>
+        <button class="nav-btn" onclick="openTab('arch')"><i class="fa-linux"></i> Arch Linux</button>
+        <button class="nav-btn" onclick="openTab('mint')"><i class="fa-linux"></i> Linux Mint</button>
     </div>
-    
-    <div class="boot-progress-container">
-      <div class="boot-progress-bar"></div>
-    </div>
 
-    <!-- Tarayıcıların otomatik ses engeline takılmamak için isteğe bağlı başlatma butonu -->
-    <button class="boot-start-btn" onclick="startSystem()">Sistemi Başlat (Sesi Aç)</button>
-  </div>
-
-  <!-- Açılış Sesi -->
-  <audio id="win95-sound" src="https://www.myinstants.com/media/sounds/windows-95-startup.mp3" preload="auto"></audio>
-
-  <div class="desktop">
-    <div class="window main-window">
-      <div class="title-bar">
-        <div class="title-bar-text">💾 Retro_Indirme_Merkezi.exe - [Tüm Sürümler]</div>
-        <div class="title-bar-controls">
-          <button aria-label="Minimize"></button>
-          <button aria-label="Maximize"></button>
-          <button aria-label="Close"></button>
-        </div>
-      </div>
-      
-      <div class="window-body">
-        <p style="margin: 2px 0 6px 0;">Soldan spesifik işletim sistemi sürümüne tıklayın. Sağda o sürüme ait 10 indirme/rehber butonu açılacaktır.</p>
+    <!-- SAĞ ANA İÇERİK -->
+    <div class="main-content">
         
-        <div class="app-layout">
-          <!-- Sol Kısım: Sürüm Klasörleri -->
-          <fieldset class="sidebar">
-            <legend>Sürüm Klasörleri</legend>
+        <!-- WINDOWS 7 SEKMESİ -->
+        <div id="win7" class="tab-content active">
+            <div class="header-box">
+                <div>
+                    <h2>Windows 7 SP1 Ultimate (x64 / x86)</h2>
+                    <p style="color: var(--text-muted); margin-top: 5px;">Güncel sürücüler ve araçlar dahil ISO dosyası.</p>
+                </div>
+                <!-- Base64 Şifrelenmiş Mediafire Linki data-link alanında -->
+                <button class="download-main-btn" onclick="startDownload('aHR0cHM6Ly93d3cubWVkaWFmaXJlLmNvbS9maWxlL2E4Y2IwOW05MW03OHUwci9XaV8tN194ODZfZmxsXzY3NzQ2MC5yYXIvZmlsZQ==', 'win7-rar.png')">
+                    <i class="fa-solid fa-download"></i> Windows 7 ISO İndir
+                </button>
+            </div>
+
+            <!-- TUTORIAL REHBERİ -->
+            <div class="tutorial-box">
+                <h3><i class="fa-solid fa-book-open"></i> Kurulum ve Hazırlık Rehberi (Tutorial)</h3>
+                <ol>
+                    <li>İndirdiğiniz ISO dosyasını <b>Rufus</b> programı yardımıyla en az 8 GB'lık bir USB belleğe yazdırın.</li>
+                    <li>Bilgisayarınızı yeniden başlatarak BIOS ayarlarına girin ve boot sırasını USB bellek olarak ayarlayın.</li>
+                    <li>Kurulum esnasında disk bölme adımında tüm bölümleri silip temiz kurulum yapmanız önerilir.</li>
+                </ol>
+            </div>
+
+            <!-- 6 ADET EKSTRA PROGRAM BUTONU -->
+            <h3 style="color: var(--text-main);">Gerekli Yardımcı Yazılımlar (6 Araç)</h3>
+            <div class="tools-grid">
+                <a href="#" class="tool-card"><i class="fa-solid fa-file-zipper"></i><h4>7-Zip 23.01</h4></a>
+                <a href="#" class="tool-card"><i class="fa-brands fa-chrome"></i><h4>Chrome Super-Legacy</h4></a>
+                <a href="#" class="tool-card"><i class="fa-solid fa-shield-halved"></i><h4>Malwarebytes</h4></a>
+                <a href="#" class="tool-card"><i class="fa-solid fa-compact-disc"></i><h4>CDBurnerXP</h4></a>
+                <a href="#" class="tool-card"><i class="fa-solid fa-microchip"></i><h4>Driver Pack</h4></a>
+                <a href="#" class="tool-card"><i class="fa-solid fa-box-archive"></i><h4>DirectX 11 End-User</h4></a>
+            </div>
+        </div>
+
+        <!-- WINDOWS 10 SEKMESİ (Örnek Şablon) -->
+        <div id="win10" class="tab-content">
+            <div class="header-box">
+                <h2>Windows 10 Pro 22H2</h2>
+                <button class="download-main-btn" onclick="startDownload('BASE64_LINK_BURAYA', 'win10-rar.png')">
+                    <i class="fa-solid fa-download"></i> Windows 10 ISO İndir
+                </button>
+            </div>
+            <div class="tutorial-box"><h3>Tutorial</h3><p>Windows 10 Kurulum detayları...</p></div>
+        </div>
+
+    </div>
+
+    <!-- ROBOT DOĞRULAMA VE RAR ŞİFRESİ MODAL EKRANI -->
+    <div class="modal-overlay" id="downloadModal">
+        <div class="modal-card">
+            <h3 id="modalTitle">Güvenlik Doğrulanıyor...</h3>
+            <p style="color: var(--text-muted); font-size: 14px; margin: 10px 0;" id="modalDesc">İndirmeyi başlatmak için lütfen doğrulayın.</p>
+
+            <!-- Cloudflare Turnstile Widget (Robot Doğrulama) -->
+            <div id="cf-turnstile-container" style="display: flex; justify-content: center; margin: 15px 0;">
+                <div class="cf-turnstile" data-sitekey="YOUR_CLOUDFLARE_SITE_KEY" data-callback="onTurnstileSuccess"></div>
+            </div>
+
+            <!-- Doğrulama Sonrası Görünecek RAR Şifresi Visual Alanı -->
+            <div id="rarPasswordArea" style="display: none;">
+                <h4 style="color: #22c55e;">✔ Doğrulama Başarılı! İndirme Başlıyor...</h4>
+                <p style="margin-top: 10px; font-size: 13px;">Dosya RAR Şifresi:</p>
+                <!-- RAR Şifresi Görseli -->
+                <img id="rarImg" src="" alt="RAR Şifresi" class="rar-img">
+                <br>
+                <button onclick="closeModal()" style="margin-top: 15px; padding: 8px 20px; background: var(--accent-blue); border:none; border-radius: 5px; cursor:pointer;">Pencereyi Kapat</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentDecodedLink = "";
+        let currentRarImg = "";
+
+        // Sekmeler Arası Geçiş
+        function openTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
             
-            <div class="nav-header">🪟 WINDOWS SÜRÜMLERİ</div>
-            <button class="category-btn" id="btn-win10" onclick="showCategory('win10')">📁 Windows 1.0</button>
-            <button class="category-btn" id="btn-win20" onclick="showCategory('win20')">📁 Windows 2.0</button>
-            <button class="category-btn" id="btn-win31" onclick="showCategory('win31')">📁 Windows 3.1</button>
-            <button class="category-btn active" id="btn-win95" onclick="showCategory('win95')">📁 Windows 95</button>
-            <button class="category-btn" id="btn-win98" onclick="showCategory('win98')">📁 Windows 98</button>
-            <button class="category-btn" id="btn-winme" onclick="showCategory('winme')">📁 Windows ME</button>
-            <button class="category-btn" id="btn-win2k" onclick="showCategory('win2k')">📁 Windows 2000</button>
-            <button class="category-btn" id="btn-winxp" onclick="showCategory('winxp')">📁 Windows XP</button>
-            <button class="category-btn" id="btn-winvista" onclick="showCategory('winvista')">📁 Windows Vista</button>
-            <button class="category-btn" id="btn-win7" onclick="showCategory('win7')">📁 Windows 7</button>
-            <button class="category-btn" id="btn-win8" onclick="showCategory('win8')">📁 Windows 8.1</button>
-            <button class="category-btn" id="btn-win10sys" onclick="showCategory('win10sys')">📁 Windows 10</button>
-            <button class="category-btn" id="btn-win11" onclick="showCategory('win11')">📁 Windows 11</button>
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
 
-            <div class="nav-header">🐧 LINUX DAĞITIMLARI</div>
-            <button class="category-btn" id="btn-ubuntu" onclick="showCategory('ubuntu')">🐧 Ubuntu</button>
-            <button class="category-btn" id="btn-debian" onclick="showCategory('debian')">🐧 Debian</button>
-            <button class="category-btn" id="btn-fedora" onclick="showCategory('fedora')">🐧 Fedora</button>
-            <button class="category-btn" id="btn-arch" onclick="showCategory('arch')">🐧 Arch Linux</button>
-            <button class="category-btn" id="btn-mint" onclick="showCategory('mint')">🐧 Linux Mint</button>
-            <button class="category-btn" id="btn-slack" onclick="showCategory('slack')">🐧 Slackware (Retro)</button>
-          </fieldset>
+        // İndirme Butonuna Basılınca Modalı Aç
+        function startDownload(base64Link, rarImageName) {
+            // Base64 Şifresini Orijinal Mediafire Linkine Çözüyoruz (atob fonksiyonu ile)
+            currentDecodedLink = atob(base64Link);
+            currentRarImg = rarImageName;
 
-          <!-- Sağ Kısım: İndirme Butonları -->
-          <fieldset class="content-area">
-            <legend id="section-title">📁 Windows 95</legend>
-            <div class="grid-container" id="app-grid"></div>
-          </fieldset>
-        </div>
-      </div>
-    </div>
-  </div>
+            // Modalı Sıfırla ve Aç
+            document.getElementById('modalTitle').innerText = "Güvenlik Doğrulaması";
+            document.getElementById('cf-turnstile-container').style.display = "flex";
+            document.getElementById('rarPasswordArea').style.display = "none";
+            document.getElementById('downloadModal').style.display = "flex";
+        }
 
-  <!-- Modal -->
-  <div class="modal-overlay" id="info-modal">
-    <div class="window modal-window">
-      <div class="title-bar">
-        <div class="title-bar-text" id="modal-title">Program Detayı</div>
-        <div class="title-bar-controls">
-          <button aria-label="Close" onclick="closeModal()"></button>
-        </div>
-      </div>
-      <div class="window-body">
-        <p id="modal-desc" style="white-space: pre-line; line-height: 1.4;">Kurulum bilgisi bekleniyor...</p>
-        <div class="field-row" style="justify-content: flex-end; margin-top: 20px; gap: 8px;">
-          <button onclick="alert('İndirme Başlatılıyor...')">💾 İndirmeyi Başlat</button>
-          <button onclick="closeModal()">Kapat</button>
-        </div>
-      </div>
-    </div>
-  </div>
+        // Cloudflare Robot Doğrulaması Başarılı Olduğunda Otomatik Çalışan Fonksiyon
+        function onTurnstileSuccess(token) {
+            // Robot testini geçti!
+            document.getElementById('modalTitle').innerText = "İndirme ve Şifre Bilgisi";
+            document.getElementById('cf-turnstile-container').style.display = "none";
+            
+            // RAR Şifresi Görselini Yükle ve Göster
+            document.getElementById('rarImg').src = currentRarImg; 
+            document.getElementById('rarPasswordArea').style.display = "block";
 
-  <!-- Sağ Tık Menüsü -->
-  <div id="custom-context-menu" class="window">
-    <div class="window-body" style="padding: 2px;">
-      <ul>
-        <li onclick="alert('Sistem: Windows 95 OSR2\nRAM: 32 MB')">🖥️ Özellikler</li>
-        <li onclick="location.reload()">🔄 Yenile</li>
-        <hr>
-        <li onclick="alert('Tüm indirmeler güvenlidir.')">🛡️ Güvenlik Bilgisi</li>
-        <li onclick="alert('Retro Archive v5.0')">ℹ️ Hakkında</li>
-      </ul>
-    </div>
-  </div>
+            // 1.5 Saniye sonra Mediafire İndirme Linkini Yeni Sekmede Aç
+            setTimeout(() => {
+                window.open(currentDecodedLink, '_blank');
+            }, 1500);
+        }
 
-  <!-- Taskbar -->
-  <div class="taskbar">
-    <button class="start-btn" onclick="alert('Windows 95 Başlat Menüsü')">
-      <b>Başlat</b>
-    </button>
-    <div class="time-box" id="clock">12:00 PM</div>
-  </div>
-
-  <script>
-    const appDatabase = {
-      'win10': { title: "📁 Windows 1.0 (1985)", icon: "💾", apps: [{ name: "MS Paint 1.0", setup: "1. PAINT.EXE çalıştırın." }, { name: "Write 1.0", setup: "1. WRITE.EXE ile doküman oluşturun." }, { name: "Reversi Game", setup: "1. REVERSI.EXE mantık oyunu." }, { name: "Calendar 1.0", setup: "1. Takvim ve hatırlatıcı." }, { name: "Cardfile", setup: "1. Kartvizit yöneticisi." }, { name: "Notepad 1.0", setup: "1. Metin editörü." }, { name: "Terminal 1.0", setup: "1. Seri haberleşme aracı." }, { name: "Clock 1.0", setup: "1. Analog saat." }, { name: "Control Panel", setup: "1. Renk ayarları penceresi." }, { name: "Clipboard", setup: "1. Pano görüntüleyici." }] },
-      'win20': { title: "📁 Windows 2.0 (1987)", icon: "💾", apps: [{ name: "MS Word 1.0 DOS", setup: "1. Word belgesi oluşturucu." }, { name: "MS Excel 2.0", setup: "1. Tablo hesaplama yazılımı." }, { name: "Aldus PageMaker", setup: "1. Masaüstü yayıncılık programı." }, { name: "Smartcom II", setup: "1. İletişim yazılımı." }, { name: "PifEdit", setup: "1. DOS uygulaması ayarları." }, { name: "CorelDRAW 1.0", setup: "1. Vektörel çizim yazılımı." }, { name: "PC Paintbrush", setup: "1. Gelişmiş resim düzenleme." }, { name: "Calculator 2.0", setup: "1. Güncellenmiş hesap makinesi." }, { name: "Spooler", setup: "1. Yazıcı kuyruğu yöneticisi." }, { name: "Win2D Driver", setup: "1. Ekran sürücüsü adaptörü." }] },
-      'win31': { title: "📁 Windows 3.1 (1992)", icon: "💾", apps: [{ name: "WinZip 3.1", setup: "1. .ZIP dosyalarını açmak için kurun." }, { name: "Minesweeper 3.1", setup: "1. Mayın tarlası oyunu." }, { name: "Program Manager", setup: "1. Masaüstü simge yöneticisi." }, { name: "Solitaire Classic", setup: "1. İskambil oyunu." }, { name: "Media Player 3.1", setup: "1. .WAV sesleri çalın." }, { name: "Video for Win", setup: "1. .AVI videoları için codec." }, { name: "Trumpet Winsock", setup: "1. İnternet TCP/IP katmanı." }, { name: "WordPad 3.1", setup: "1. Metin düzenleyici." }, { name: "Calc Scientific", setup: "1. Bilimsel hesap makinesi." }, { name: "File Manager", setup: "1. WINFILE.EXE gezgini." }] },
-      'win95': { title: "📁 Windows 95 (1995)", icon: "💽", apps: [{ name: "WinRAR 3.0", setup: "1. setup.exe'yi çalıştırın." }, { name: "Winamp 2.91", setup: "1. MP3 müzik çalar." }, { name: "mIRC v6.0", setup: "1. IRC sohbet yazılımı." }, { name: "Nero Burning ROM", setup: "1. CD yazdırma programı." }, { name: "Internet Explorer 4", setup: "1. Web tarayıcısı." }, { name: "Daemon Tools 3.47", setup: "1. Sanal ISO sürücü." }, { name: "MSN Messenger 1.0", setup: "1. Anlık mesajlaşma." }, { name: "K-Lite Codec Pack", setup: "1. Video çözücüler." }, { name: "Total Commander", setup: "1. Çift panelli dosya gezgini." }, { name: "DirectX 6.1", setup: "1. 3D grafik kütüphanesi." }] },
-      'win98': { title: "📁 Windows 98 (1998)", icon: "💿", apps: [{ name: "Winamp 2.80", setup: "1. Efsanevi MP3 çalar." }, { name: "ICQ 99b", setup: "1. UIN sohbet programı." }, { name: "GetRight 4.5", setup: "1. İndirme yöneticisi." }, { name: "RealPlayer 8", setup: "1. RealMedia videoları açın." }, { name: "Flash Player 5", setup: "1. Web animasyon eklentisi." }, { name: "ACDSee 3.0", setup: "1. Resim görüntüleme aracı." }, { name: "DirectX 8.1", setup: "1. Oyun oynatma bileşeni." }, { name: "Netscape 6.0", setup: "1. Alternatif web tarayıcı." }, { name: "CuteFTP 4.0", setup: "1. FTP dosya aktarım aracı." }, { name: "Norton AntiVirus 2000", setup: "1. Virüs koruma programı." }] },
-      'winme': { title: "📁 Windows ME (2000)", icon: "💿", apps: [{ name: "Movie Maker 1.0", setup: "1. Video düzenleme aracı." }, { name: "Media Player 7.0", setup: "1. Windows medya yürütücüsü." }, { name: "System Restore Tool", setup: "1. Sistem geri yükleme." }, { name: "Kazaa Lite", setup: "1. P2P müzik indirme." }, { name: "ZoneAlarm 2.6", setup: "1. Güvenlik duvarı." }, { name: "MSN Messenger 3.0", setup: "1. Sohbet istemcisi." }, { name: "DirectX 9.0a", setup: "1. Multimedya kütüphanesi." }, { name: "CleanSweep", setup: "1. Yazılım kaldırma yöneticisi." }, { name: "InCD Drive", setup: "1. CD-RW disk yönetimi." }, { name: "WebTV for Windows", setup: "1. TV kartı yayını açıcı." }] },
-      'win2k': { title: "📁 Windows 2000 (2000)", icon: "🖥️", apps: [{ name: "IIS Server 5.0", setup: "1. Web sunucusu servisi." }, { name: "WinZip 8.0", setup: "1. Kurumsal dosya sıkıştırıcı." }, { name: "PuTTY 0.52", setup: "1. SSH ve Telnet istemcisi." }, { name: "Ad-Aware 6.0", setup: "1. Casus yazılım temizleyici." }, { name: "Acrobat Reader 5.0", setup: "1. PDF belgesi açıcı." }, { name: "Paint Shop Pro 7", setup: "1. Grafik tasarım aracı." }, { name: "UltraEdit-32", setup: "1. Metin ve HEX editörü." }, { name: "VMware Workstation 3", setup: "1. Sanallaştırma yazılımı." }, { name: "Diskeeper 6.0", setup: "1. Otomatik disk birleştirici." }, { name: "DirectX 7.0a", setup: "1. 2000 uyumlu DirectX." }] },
-      'winxp': { title: "📁 Windows XP (2001)", icon: "💻", apps: [{ name: "CCleaner 2.0", setup: "1. Sistem temizliği." }, { name: "uTorrent 1.6", setup: "1. Torrent istemcisi." }, { name: "VLC Player 0.8", setup: "1. Medya oynatıcı." }, { name: "MSN Messenger 7.5", setup: "1. Titreşimli sohbet." }, { name: "IDM (Download Mgr)", setup: "1. İndirme hızlandırıcı." }, { name: "Alcohol 120%", setup: "1. CD/DVD kalıp yazıcı." }, { name: "NOD32 Antivirus", setup: "1. Hafif antivirüs." }, { name: "Photoshop CS2", setup: "1. Fotoğraf işleme." }, { name: "DirectX 9.0c", setup: "1. Oyunlar için gerekli kütüphane." }, { name: "Winamp 5.0", setup: "1. MP3 ve Skin destekli çalar." }] },
-      'winvista': { title: "📁 Windows Vista (2006)", icon: "🖥️", apps: [{ name: "Windows Sidebar", setup: "1. Masaüstü araçları." }, { name: "Media Center Vista", setup: "1. Multimedya arayüzü." }, { name: "BitLocker Drive Setup", setup: "1. Disk şifreleme." }, { name: "Aero Glass Theme", setup: "1. Saydam pencere sürücüsü." }, { name: "DirectX 10", setup: "1. Vista özel grafik kütüphanesi." }, { name: "Windows Defender 1.0", setup: "1. Kötü amaçlı yazılım tarayıcısı." }, { name: "7-Zip 4.65", setup: "1. Arşiv açıcı." }, { name: "Spybot Search&Destroy", setup: "1. Güvenlik tarayıcısı." }, { name: "Live Messenger 8.1", setup: "1. Yenilenmiş MSN." }, { name: "Defraggler", setup: "1. Gelişmiş disk birleştirici." }] },
-      'win7': { title: "📁 Windows 7 (2009)", icon: "🖥️", apps: [{ name: "7-Zip 9.20", setup: "1. Dosya sıkıştırma." }, { name: "Google Chrome Old", setup: "1. Win7 uyumlu tarayıcı." }, { name: "Skype 5.0", setup: "1. Görüntülü konuşma." }, { name: "CDBurnerXP", setup: "1. ISO yazdırma." }, { name: "Malwarebytes 1.75", setup: "1. Anti-Malware." }, { name: "Speccy", setup: "1. Sistem detayları." }, { name: "Classic Shell", setup: "1. Win95 başlat menüsü eklentisi." }, { name: "Notepad++", setup: "1. Kod editörü." }, { name: "VirtualBox 4.0", setup: "1. Sanal makine." }, { name: "DirectX 11", setup: "1. Grafik kütüphanesi." }] },
-      'win8': { title: "📁 Windows 8.1 (2013)", icon: "📱", apps: [{ name: "Start8 / StartIsBack", setup: "1. Klasik başlat menüsü kurucu." }, { name: "VLC for Win8", setup: "1. Metro arayüzlü medya oynatıcı." }, { name: "Classic Shell 4.0", setup: "1. Başlat menüsü yazılımı." }, { name: "WinRAR 5.0", setup: "1. RAR5 format destekli arşivci." }, { name: "Skype Metro", setup: "1. Dokunmatik arayüzlü Skype." }, { name: "CCleaner v4.0", setup: "1. Win8 uyumlu temizleyici." }, { name: "DirectX 11.2", setup: "1. Multimedya bileşeni." }, { name: "Process Hacker", setup: "1. Gelişmiş görev yöneticisi." }, { name: "Driver Booster", setup: "1. Sürücü güncelleme." }, { name: "Glass8 Aero", setup: "1. Şeffaflık efekti geri getirici." }] },
-      'win10sys': { title: "📁 Windows 10 (2015)", icon: "💻", apps: [{ name: "Rufus 3.0", setup: "1. USB format diski hazırlayıcı." }, { name: "PowerToys", setup: "1. Windows araç seti." }, { name: "VS Code", setup: "1. Kod editörü." }, { name: "OBS Studio", setup: "1. Ekran kaydı." }, { name: "Discord", setup: "1. Topluluk sohbeti." }, { name: "Everything", setup: "1. Hızlı dosya arama." }, { name: "HWMonitor", setup: "1. Donanım takibi." }, { name: "ShareX", setup: "1. Ekran görüntüsü alma." }, { name: "Brave Browser", setup: "1. Gizli tarayıcı." }, { name: "Steam Client", setup: "1. Oyun platformu." }] },
-      'win11': { title: "📁 Windows 11 (2021)", icon: "⚡", apps: [{ name: "Start11", setup: "1. Görev çubuğu ve Başlat özelleştirici." }, { name: "Rufus (Bypass TPM)", setup: "1. TPM şartsız kurulum diski." }, { name: "Windows Terminal", setup: "1. Gelişmiş konsol." }, { name: "WSL2 (Linux Subsystem)", setup: "1. Windows içinde Linux çalıştırma." }, { name: "Files App", setup: "1. Modern dosya gezgini." }, { name: "NanaZip", setup: "1. Win11 sağ tık uyumlu 7-Zip." }, { name: "EarTrumpet", setup: "1. Gelişmiş ses karıştırıcısı." }, { name: "PowerToys Win11", setup: "1. Özelleştirme paketleri." }, { name: "Winget UI", setup: "1. Grafik arayüzlü paket kurucu." }, { name: "AutoHotkey v2", setup: "1. Kısayol otomasyonu." }] },
-      'ubuntu': { title: "🐧 Ubuntu Linux", icon: "🐧", apps: [{ name: "Ubuntu Software Center", setup: "1. Grafik paket deposu." }, { name: "GIMP 2.10", setup: "1. 'sudo apt install gimp'" }, { name: "VLC for Ubuntu", setup: "1. 'sudo apt install vlc'" }, { name: "Transmission", setup: "1. Dahili torrent istemcisi." }, { name: "Neofetch", setup: "1. Terminalde sistem kimliği." }, { name: "Gparted", setup: "1. Disk bölümleme." }, { name: "Timeshift", setup: "1. Yedekleme aracı." }, { name: "GNOME Tweaks", setup: "1. Arayüz ince ayarları." }, { name: "Synaptic", setup: "1. Detaylı paket yöneticisi." }, { name: "Terminator", setup: "1. Bölünmüş terminal." }] },
-      'debian': { title: "🐧 Debian Linux", icon: "🍥", apps: [{ name: "Apt Package Mgr", setup: "1. 'apt-get update && apt-get upgrade'" }, { name: "Debian Installer GUI", setup: "1. Kurulum sihirbazı." }, { name: "Firefox ESR", setup: "1. Kararlı sürüm tarayıcı." }, { name: "XFCE Desktop", setup: "1. Hafif masaüstü ortamı." }, { name: "LibreOffice", setup: "1. Ofis paketi." }, { name: "CUPS Print Server", setup: "1. Yazıcı servisi." }, { name: "Debian Handbook", setup: "1. Kullanım kılavuzu dokümanı." }, { name: "htop", setup: "1. Terminal kaynak takipçisi." }, { name: "SSH Server", setup: "1. Uzak sunucu bağlantısı." }, { name: "dpkg Tool", setup: "1. Manuel .deb paketi kurucu." }] },
-      'fedora': { title: "🐧 Fedora Linux", icon: "🎩", apps: [{ name: "DNF Package Mgr", setup: "1. 'sudo dnf install [paket]'" }, { name: "Cockpit Web UI", setup: "1. Web tabanlı sunucu paneli." }, { name: "Flatpak Manager", setup: "1. Evrensel paket kurucu." }, { name: "Podman", setup: "1. Konteyner yöneticisi." }, { name: "SELinux Tools", setup: "1. Güvenlik politikaları." }, { name: "RPM Fusion Repo", setup: "1. Ekstra medya depoları." }, { name: "Fedora Media Writer", setup: "1. USB imaj oluşturucu." }, { name: "Wayland Display", setup: "1. Grafik sunucusu." }, { name: "Boxbuddy", setup: "1. Distrobox yöneticisi." }, { name: "KDE Plasma Fedora", setup: "1. Masaüstü arayüzü." }] },
-      'arch': { title: "🐧 Arch Linux", icon: "🏹", apps: [{ name: "Pacman Package Mgr", setup: "1. 'pacman -Syu' ile güncelleme." }, { name: "Yay (AUR Helper)", setup: "1. Kullanıcı depolarına erişim." }, { name: "Pamac GUI", setup: "1. Arayüzlü paket kurucu." }, { name: "Alacritty Terminal", setup: "1. Hızlı terminal." }, { name: "i3 Window Manager", setup: "1. Döşemeli pencere yöneticisi." }, { name: "Hyprland", setup: "1. Modern animasyonlu Wayland." }, { name: "Btop System Monitor", setup: "1. Şık konsol izleyici." }, { name: "Rofi Launcher", setup: "1. Uygulama arama menüsü." }, { name: "Fish Shell", setup: "1. Gelişmiş komut satırı." }, { name: "Archinstall Script", setup: "1. Kolay kurulum komut dosyası." }] },
-      'mint': { title: "🐧 Linux Mint", icon: "🍃", apps: [{ name: "Cinnamon Desktop", setup: "1. Klasik masaüstü arayüzü." }, { name: "MintUpdate", setup: "1. Güncelleme yöneticisi." }, { name: "Software Manager", setup: "1. Mağaza uygulaması." }, { name: "Timeshift Mint", setup: "1. Otomatik sistem yedekleyici." }, { name: "Warpinator", setup: "1. Yerel ağ dosya paylaşımı." }, { name: "Hypnotix", setup: "1. IPTV ve TV izleme aracı." }, { name: "Pix Image Viewer", setup: "1. Fotoğraf düzenleme ve izleme." }, { name: "Xed Text Editor", setup: "1. Metin düzenleyici." }, { name: "Sticky Notes", setup: "1. Masaüstü notları." }, { name: "Driver Manager", setup: "1. Sürücü kurucu." }] },
-      'slack': { title: "🐧 Slackware (Retro Linux)", icon: "🕹️", apps: [{ name: "pkgtool", setup: "1. Slackware metin tabanlı paket yöneticisi." }, { name: "XMMS 1.2", setup: "1. Winamp benzeri retro Linux çalar." }, { name: "XChat 2.0", setup: "1. IRC istemcisi." }, { name: "Fluxbox Desktop", setup: "1. 90'lar stili hafif arayüz." }, { name: "fvwm2", setup: "1. Windows 95 benzeri pencereler." }, { name: "Midnight Commander", setup: "1. 'mc' konsol dosya gezgini." }, { name: "Lynx Browser", setup: "1. Metin tabanlı internet tarayıcısı." }, { name: "Netscape Navigator", setup: "1. Nostaljik web tarayıcı." }, { name: "Xterm Classic", setup: "1. Standart konsol." }, { name: "LILO Bootloader", setup: "1. Eski önyükleyici yapılandırması." }] }
-    };
-
-    let currentCategory = 'win95';
-
-    // AÇILIŞ EKRANI MANTIĞI
-    function startSystem() {
-      const audio = document.getElementById("win95-sound");
-      if (audio) {
-        audio.play().catch(() => {});
-      }
-      dismissBoot();
-    }
-
-    function dismissBoot() {
-      const bootScreen = document.getElementById("boot-screen");
-      bootScreen.style.opacity = "0";
-      setTimeout(() => {
-        bootScreen.style.display = "none";
-      }, 800);
-    }
-
-    // Tıklanmazsa 3.5 saniye sonra otomatik açılma mantığı
-    setTimeout(() => {
-      const bootScreen = document.getElementById("boot-screen");
-      if (bootScreen && bootScreen.style.display !== "none") {
-        dismissBoot();
-      }
-    }, 3500);
-
-    // Ekran Render İşlemleri
-    function renderApps() {
-      const grid = document.getElementById("app-grid");
-      const title = document.getElementById("section-title");
-      grid.innerHTML = "";
-
-      const currentData = appDatabase[currentCategory];
-      if(!currentData) return;
-
-      title.innerText = currentData.title;
-
-      currentData.apps.forEach(app => {
-        const btn = document.createElement("button");
-        btn.className = "app-btn";
-        btn.innerHTML = `<span style="font-size:18px;">${currentData.icon}</span><span>${app.name}</span>`;
-        btn.onclick = () => openModal(app.name, app.setup);
-        grid.appendChild(btn);
-      });
-    }
-
-    function showCategory(cat) {
-      currentCategory = cat;
-      document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
-      const activeBtn = document.getElementById(`btn-${cat}`);
-      if(activeBtn) activeBtn.classList.add("active");
-      renderApps();
-    }
-
-    function openModal(title, setupInfo) {
-      document.getElementById("modal-title").innerText = title + " - Rehber / Kurulum";
-      document.getElementById("modal-desc").innerText = setupInfo;
-      document.getElementById("info-modal").style.display = "flex";
-    }
-
-    function closeModal() {
-      document.getElementById("info-modal").style.display = "none";
-    }
-
-    // Context Menu
-    const contextMenu = document.getElementById("custom-context-menu");
-    window.addEventListener("contextmenu", (e) => {
-      e.preventDefault();
-      contextMenu.style.top = `${e.pageY}px`;
-      contextMenu.style.left = `${e.pageX}px`;
-      contextMenu.style.display = "block";
-    });
-    window.addEventListener("click", () => contextMenu.style.display = "none");
-
-    // Saat
-    function updateClock() {
-      const now = new Date();
-      let hours = now.getHours();
-      let minutes = now.getMinutes();
-      const ampm = hours >= 12 ? 'PM' : 'AM';
-      hours = hours % 12 || 12;
-      minutes = minutes < 10 ? '0' + minutes : minutes;
-      document.getElementById('clock').innerText = hours + ':' + minutes + ' ' + ampm;
-    }
-    setInterval(updateClock, 1000);
-    updateClock();
-
-    renderApps();
-  </script>
+        function closeModal() {
+            document.getElementById('downloadModal').style.display = "none";
+        }
+    </script>
 </body>
 </html>
