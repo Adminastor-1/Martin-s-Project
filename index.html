@@ -23,7 +23,7 @@
         /* SOL MENÜ */
         .sidebar { width: 300px; background-color: var(--panel-bg); border-right: 1px solid var(--border-color); padding: 15px; overflow-y: auto; }
         
-        /* GİRİŞ ALANI (SOL EN ÜST) */
+        /* GİRİŞ ALANI */
         .welcome-box { background: rgba(56, 189, 248, 0.08); border: 1px solid var(--accent-blue); padding: 12px; border-radius: 8px; margin-bottom: 15px; }
         .welcome-box h3 { font-size: 13px; color: var(--accent-blue); margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
         .welcome-box p { font-size: 11px; color: var(--text-muted); line-height: 1.4; }
@@ -40,10 +40,17 @@
         .tab-content { display: none; flex-direction: column; gap: 25px; }
         .tab-content.active { display: flex; }
 
-        /* BAŞLIK & ISO INDIRME ALANI */
-        .header-box { background: linear-gradient(135deg, #1e293b, #0f172a); border: 1px solid var(--border-color); border-radius: 12px; padding: 25px; display: flex; justify-content: space-between; align-items: center; }
-        .download-main-btn { background-color: #22c55e; color: white; border: none; padding: 14px 28px; border-radius: 8px; font-weight: bold; font-size: 15px; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 10px; }
+        /* BAŞLIK & İKİLİ/TEKLİ BUTON ALANI */
+        .header-box { background: linear-gradient(135deg, #1e293b, #0f172a); border: 1px solid var(--border-color); border-radius: 12px; padding: 25px; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+        
+        .download-group { display: flex; gap: 10px; }
+        
+        .download-main-btn { background-color: #22c55e; color: white; border: none; padding: 12px 22px; border-radius: 8px; font-weight: bold; font-size: 14px; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 8px; text-decoration: none; }
         .download-main-btn:hover { background-color: #16a34a; transform: translateY(-2px); }
+        
+        /* 32-BIT BUTONU İÇİN MAVİ TON */
+        .download-main-btn.x86-btn { background-color: #0284c7; }
+        .download-main-btn.x86-btn:hover { background-color: #0369a1; }
 
         /* TUTORIAL SEKTÖRÜ */
         .tutorial-box { background: var(--panel-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; }
@@ -56,7 +63,7 @@
         .tool-card:hover { border-color: var(--accent-blue); transform: translateY(-3px); }
         .tool-card i { font-size: 24px; color: var(--accent-blue); }
 
-        /* MODAL (ROBOT DOĞRULAMA VE RAR ŞİFRESİ EKRANI) */
+        /* MODAL */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); display: none; justify-content: center; align-items: center; z-index: 1000; }
         .modal-card { background: var(--panel-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 30px; max-width: 450px; width: 90%; text-align: center; }
         .rar-img { width: 100%; max-height: 200px; object-fit: contain; margin-top: 15px; border-radius: 8px; border: 1px solid var(--border-color); }
@@ -67,7 +74,6 @@
     <!-- SOL MENÜ -->
     <div class="sidebar">
         
-        <!-- SOL EN ÜST GİRİŞ / DUYURU ALANI -->
         <div class="welcome-box">
             <h3><i class="fa-solid fa-circle-info"></i> İndirme Merkezi</h3>
             <p>Soldan spesifik işletim sistemi sürümüne tıklayın. Sağda o sürüme ait ISO indirme, rehber ve özel araçlar açılacaktır.</p>
@@ -86,6 +92,8 @@
         <button class="nav-btn" onclick="openTab('win98', event)"><i class="fa-brands fa-windows"></i> Windows 98</button>
         <button class="nav-btn" onclick="openTab('winme', event)"><i class="fa-brands fa-windows"></i> Windows ME</button>
         <button class="nav-btn" onclick="openTab('win2000', event)"><i class="fa-brands fa-windows"></i> Windows 2000</button>
+        
+        <!-- XP VE SONRASI ARCHITECTURE DESTEKLİ -->
         <button class="nav-btn" onclick="openTab('winxp', event)"><i class="fa-brands fa-windows"></i> Windows XP</button>
         <button class="nav-btn" onclick="openTab('winvista', event)"><i class="fa-brands fa-windows"></i> Windows Vista</button>
         <button class="nav-btn active" onclick="openTab('win7', event)"><i class="fa-brands fa-windows"></i> Windows 7</button>
@@ -102,63 +110,15 @@
     <!-- SAĞ ANA İÇERİK -->
     <div class="main-content">
 
-        <!-- WINDOWS 1.0 -->
-        <div id="win1" class="tab-content">
-            <div class="header-box">
-                <div><h2>Windows 1.01 (1985)</h2><p style="color: var(--text-muted); margin-top: 5px;">İlk grafik arayüzlü Windows kalıbı.</p></div>
-                <button class="download-main-btn" onclick="startDownload('BASE64_LINK', 'win1-rar.png')"><i class="fa-solid fa-download"></i> Windows 1.0 İndir</button>
-            </div>
-            <div class="tutorial-box"><h3><i class="fa-solid fa-book-open"></i> Kurulum Rehberi</h3><ol><li>MS-DOS 3.3 ortamında setup.exe çalıştırılarak kurulur.</li></ol></div>
-            <h3 style="color: var(--text-main);">Önerilen Araçlar</h3>
-            <div class="tools-grid">
-                <a href="#" class="tool-card"><i class="fa-solid fa-terminal"></i><h4>DOSBox</h4></a>
-                <a href="#" class="tool-card"><i class="fa-solid fa-floppy-disk"></i><h4>720K Image Builder</h4></a>
-            </div>
-        </div>
+        <!-- ================= XP ÖNCESİ (TEK BUTONLU) ================= -->
 
-        <!-- WINDOWS 2.0 -->
-        <div id="win2" class="tab-content">
-            <div class="header-box">
-                <div><h2>Windows 2.03 (1987)</h2><p style="color: var(--text-muted); margin-top: 5px;">Pencerelerin üst üste bindiği ilk sürüm.</p></div>
-                <button class="download-main-btn" onclick="startDownload('BASE64_LINK', 'win2-rar.png')"><i class="fa-solid fa-download"></i> Windows 2.0 İndir</button>
-            </div>
-            <div class="tutorial-box"><h3><i class="fa-solid fa-book-open"></i> Kurulum Rehberi</h3><ol><li>Disket imajlarını sanal sürücüye yükleyin.</li></ol></div>
-            <h3 style="color: var(--text-main);">Önerilen Araçlar</h3>
-            <div class="tools-grid"><a href="#" class="tool-card"><i class="fa-solid fa-terminal"></i><h4>DOSBox-X</h4></a></div>
-        </div>
-
-        <!-- WINDOWS 3.1 -->
-        <div id="win31" class="tab-content">
-            <div class="header-box">
-                <div><h2>Windows 3.11 (1992)</h2><p style="color: var(--text-muted); margin-top: 5px;">Workgroups destekli popüler retro sürüm.</p></div>
-                <button class="download-main-btn" onclick="startDownload('BASE64_LINK', 'win31-rar.png')"><i class="fa-solid fa-download"></i> Windows 3.11 İndir</button>
-            </div>
-            <div class="tutorial-box"><h3><i class="fa-solid fa-book-open"></i> Kurulum Rehberi</h3><ol><li>MS-DOS 6.22 kurulumundan sonra `WIN` komutu ile başlatın.</li></ol></div>
-            <h3 style="color: var(--text-main);">Önerilen Araçlar</h3>
-            <div class="tools-grid">
-                <a href="#" class="tool-card"><i class="fa-solid fa-gamepad"></i><h4>Minesweeper Retro</h4></a>
-                <a href="#" class="tool-card"><i class="fa-solid fa-music"></i><h4>MIDI Player</h4></a>
-            </div>
-        </div>
-
-        <!-- WINDOWS 95 -->
-        <div id="win95" class="tab-content">
-            <div class="header-box">
-                <div><h2>Windows 95 OSR2</h2><p style="color: var(--text-muted); margin-top: 5px;">Başlat menüsünün doğduğu ikonik sürüm.</p></div>
-                <button class="download-main-btn" onclick="startDownload('BASE64_LINK', 'win95-rar.png')"><i class="fa-solid fa-download"></i> Windows 95 ISO İndir</button>
-            </div>
-            <div class="tutorial-box"><h3><i class="fa-solid fa-book-open"></i> Kurulum Rehberi</h3><ol><li>Boot disketi kullanarak `setup.exe` ile kuruluma başlayın.</li></ol></div>
-            <h3 style="color: var(--text-main);">Önerilen Araçlar</h3>
-            <div class="tools-grid"><a href="#" class="tool-card"><i class="fa-solid fa-compact-disc"></i><h4>Daemon Tools 1.0</h4></a></div>
-        </div>
-
-        <!-- WINDOWS 98 -->
+        <!-- WINDOWS 98 SE -->
         <div id="win98" class="tab-content">
             <div class="header-box">
-                <div><h2>Windows 98 Second Edition (SE)</h2><p style="color: var(--text-muted); margin-top: 5px;">Retro oyun bilgisayarlarının vazgeçilmezi.</p></div>
+                <div><h2>Windows 98 Second Edition (SE)</h2><p style="color: var(--text-muted); margin-top: 5px;">Retro sistemler için orijinal boot edilebilir kalıp.</p></div>
                 <button class="download-main-btn" onclick="startDownload('BASE64_LINK', 'win98-rar.png')"><i class="fa-solid fa-download"></i> Windows 98 ISO İndir</button>
             </div>
-            <div class="tutorial-box"><h3><i class="fa-solid fa-book-open"></i> Kurulum Rehberi</h3><ol><li>ISO dosyasını CD-R'ye yazın veya sanal makinede boot edin.</li></ol></div>
+            <div class="tutorial-box"><h3><i class="fa-solid fa-book-open"></i> Kurulum Rehberi</h3><ol><li>MS-DOS başlangıç disketi veya ISO boot seçeneğini kullanın.</li></ol></div>
             <h3 style="color: var(--text-main);">Önerilen Araçlar</h3>
             <div class="tools-grid">
                 <a href="#" class="tool-card"><i class="fa-solid fa-music"></i><h4>Winamp 2.91</h4></a>
@@ -166,42 +126,34 @@
             </div>
         </div>
 
-        <!-- WINDOWS ME -->
-        <div id="winme" class="tab-content">
-            <div class="header-box">
-                <div><h2>Windows Millennium Edition (ME)</h2><p style="color: var(--text-muted); margin-top: 5px;">2000 yılının ev odaklı multimedya sürümü.</p></div>
-                <button class="download-main-btn" onclick="startDownload('BASE64_LINK', 'winme-rar.png')"><i class="fa-solid fa-download"></i> Windows ME ISO İndir</button>
-            </div>
-            <div class="tutorial-box"><h3><i class="fa-solid fa-book-open"></i> Kurulum Rehberi</h3><ol><li>Orijinal CD Boot kullanarak doğrudan kuruluma geçin.</li></ol></div>
-            <h3 style="color: var(--text-main);">Önerilen Araçlar</h3>
-            <div class="tools-grid"><a href="#" class="tool-card"><i class="fa-solid fa-film"></i><h4>Movie Maker Old</h4></a></div>
-        </div>
-
         <!-- WINDOWS 2000 -->
         <div id="win2000" class="tab-content">
             <div class="header-box">
-                <div><h2>Windows 2000 Professional SP4</h2><p style="color: var(--text-muted); margin-top: 5px;">NT mimarili kaya gibi sağlam efsanevi sürüm.</p></div>
-                <button class="download-main-btn" onclick="startDownload('BASE64_WIN2000_LINKI', 'win2000-rar.png')"><i class="fa-solid fa-download"></i> Windows 2000 ISO İndir</button>
+                <div><h2>Windows 2000 Professional SP4</h2><p style="color: var(--text-muted); margin-top: 5px;">NT mimarili efsanevi orijinal ISO.</p></div>
+                <button class="download-main-btn" onclick="startDownload('BASE64_LINK', 'win2000-rar.png')"><i class="fa-solid fa-download"></i> Windows 2000 ISO İndir</button>
             </div>
-            <div class="tutorial-box"><h3><i class="fa-solid fa-book-open"></i> Kurulum Rehberi</h3><ol><li>ISO'yu başlatın ve SP4 paketlerinin tam yüklendiğinden emin olun.</li></ol></div>
+            <div class="tutorial-box"><h3><i class="fa-solid fa-book-open"></i> Kurulum Rehberi</h3><ol><li>ISO'yu CD'ye yazdırın ve doğrudan kuruluma geçin.</li></ol></div>
             <h3 style="color: var(--text-main);">Önerilen Araçlar</h3>
-            <div class="tools-grid">
-                <a href="#" class="tool-card"><i class="fa-solid fa-box-archive"></i><h4>WinRAR 3.90</h4></a>
-                <a href="#" class="tool-card"><i class="fa-solid fa-shield-cat"></i><h4>IE 6.0</h4></a>
-            </div>
+            <div class="tools-grid"><a href="#" class="tool-card"><i class="fa-solid fa-box-archive"></i><h4>WinRAR 3.90</h4></a></div>
         </div>
+
+
+        <!-- ================= XP VE SONRASI (X64 VE X86 ÇİFT BUTONLU) ================= -->
 
         <!-- WINDOWS XP -->
         <div id="winxp" class="tab-content">
             <div class="header-box">
-                <div><h2>Windows XP Professional SP3 (x86 / x64)</h2><p style="color: var(--text-muted); margin-top: 5px;">Tarihin en çok sevilen işletim sistemi (Luna Temalı).</p></div>
-                <button class="download-main-btn" onclick="startDownload('BASE64_LINK', 'winxp-rar.png')"><i class="fa-solid fa-download"></i> Windows XP ISO İndir</button>
+                <div><h2>Windows XP Professional SP3</h2><p style="color: var(--text-muted); margin-top: 5px;">Tarihin en popüler işletim sistemi (x64 ve x86 seçenekleri).</p></div>
+                <div class="download-group">
+                    <button class="download-main-btn" onclick="startDownload('BASE64_XP_X64', 'winxp-x64-rar.png')"><i class="fa-solid fa-download"></i> XP x64 İndir</button>
+                    <button class="download-main-btn x86-btn" onclick="startDownload('BASE64_XP_X86', 'winxp-x86-rar.png')"><i class="fa-solid fa-download"></i> XP x86 İndir</button>
+                </div>
             </div>
             <div class="tutorial-box"><h3><i class="fa-solid fa-book-open"></i> Kurulum Rehberi</h3><ol><li>Rufus ile USB'ye MBR formatında yazdırarak kurun.</li></ol></div>
             <h3 style="color: var(--text-main);">Önerilen Araçlar</h3>
             <div class="tools-grid">
                 <a href="#" class="tool-card"><i class="fa-solid fa-bolt"></i><h4>DriverPack Solution</h4></a>
-                <a href="#" class="tool-card"><i class="fa-solid fa-file-zipper"></i><h4>7-Zip XP Edition</h4></a>
+                <a href="#" class="tool-card"><i class="fa-solid fa-file-zipper"></i><h4>7-Zip XP</h4></a>
             </div>
         </div>
 
@@ -209,7 +161,10 @@
         <div id="winvista" class="tab-content">
             <div class="header-box">
                 <div><h2>Windows Vista Ultimate SP2</h2><p style="color: var(--text-muted); margin-top: 5px;">Aero cam efektli görsel devrim.</p></div>
-                <button class="download-main-btn" onclick="startDownload('BASE64_LINK', 'winvista-rar.png')"><i class="fa-solid fa-download"></i> Windows Vista ISO İndir</button>
+                <div class="download-group">
+                    <button class="download-main-btn" onclick="startDownload('BASE64_VISTA_X64', 'vista-x64-rar.png')"><i class="fa-solid fa-download"></i> Vista x64 İndir</button>
+                    <button class="download-main-btn x86-btn" onclick="startDownload('BASE64_VISTA_X86', 'vista-x86-rar.png')"><i class="fa-solid fa-download"></i> Vista x86 İndir</button>
+                </div>
             </div>
             <div class="tutorial-box"><h3><i class="fa-solid fa-book-open"></i> Kurulum Rehberi</h3><ol><li>En az 2 GB RAM içeren bir sisteme kurmanız tavsiye edilir.</li></ol></div>
             <h3 style="color: var(--text-main);">Önerilen Araçlar</h3>
@@ -219,10 +174,17 @@
         <!-- WINDOWS 7 (VARSAYILAN AKTİF) -->
         <div id="win7" class="tab-content active">
             <div class="header-box">
-                <div><h2>Windows 7 SP1 Ultimate (x64 / x86)</h2><p style="color: var(--text-muted); margin-top: 5px;">Gelişmiş performans ve sürücü paketli orijinal ISO.</p></div>
-                <button class="download-main-btn" onclick="startDownload('aHR0cHM6Ly93d3cubWVkaWFmaXJlLmNvbS9maWxlL2E4Y2IwOW05MW03OHUwci9XaV8tN194ODZfZmxsXzY3NzQ2MC5yYXIvZmlsZQ==', 'win7-rar.png')">
-                    <i class="fa-solid fa-download"></i> Windows 7 ISO İndir
-                </button>
+                <div><h2>Windows 7 SP1 Ultimate</h2><p style="color: var(--text-muted); margin-top: 5px;">Gelişmiş performans ve sürücü paketli orijinal ISO.</p></div>
+                <div class="download-group">
+                    <!-- x64 Linki ve Şifre Resmi -->
+                    <button class="download-main-btn" onclick="startDownload('aHR0cHM6Ly93d3cubWVkaWFmaXJlLmNvbS9maWxlL2E4Y2IwOW05MW03OHUwci9XaV8tN194ODZfZmxsXzY3NzQ2MC5yYXIvZmlsZQ==', 'win7-x64-rar.png')">
+                        <i class="fa-solid fa-download"></i> Win 7 x64 İndir
+                    </button>
+                    <!-- x86 (32-Bit) Linki ve Şifre Resmi -->
+                    <button class="download-main-btn x86-btn" onclick="startDownload('BASE64_WIN7_X86_LINKI', 'win7-x86-rar.png')">
+                        <i class="fa-solid fa-download"></i> Win 7 x86 İndir
+                    </button>
+                </div>
             </div>
             <div class="tutorial-box">
                 <h3><i class="fa-solid fa-book-open"></i> Windows 7 Kurulum Rehberi (Tutorial)</h3>
@@ -244,7 +206,10 @@
         <div id="win81" class="tab-content">
             <div class="header-box">
                 <div><h2>Windows 8.1 Pro (Update 3)</h2><p style="color: var(--text-muted); margin-top: 5px;">Hızlı ve düşük kaynak tüketen modern Windows.</p></div>
-                <button class="download-main-btn" onclick="startDownload('BASE64_LINK', 'win81-rar.png')"><i class="fa-solid fa-download"></i> Windows 8.1 ISO İndir</button>
+                <div class="download-group">
+                    <button class="download-main-btn" onclick="startDownload('BASE64_WIN81_X64', 'win81-x64-rar.png')"><i class="fa-solid fa-download"></i> Win 8.1 x64 İndir</button>
+                    <button class="download-main-btn x86-btn" onclick="startDownload('BASE64_WIN81_X86', 'win81-x86-rar.png')"><i class="fa-solid fa-download"></i> Win 8.1 x86 İndir</button>
+                </div>
             </div>
             <div class="tutorial-box"><h3><i class="fa-solid fa-book-open"></i> Kurulum Rehberi</h3><ol><li>UEFI/GPT uyumlu Rufus USB oluşturun.</li></ol></div>
             <h3 style="color: var(--text-main);">Önerilen Araçlar</h3>
@@ -255,55 +220,27 @@
         <div id="win10" class="tab-content">
             <div class="header-box">
                 <div><h2>Windows 10 Pro 22H2</h2><p style="color: var(--text-muted); margin-top: 5px;">Güncel ve tüm oyun/yazılımlarla %100 uyumlu.</p></div>
-                <button class="download-main-btn" onclick="startDownload('BASE64_LINK', 'win10-rar.png')"><i class="fa-solid fa-download"></i> Windows 10 ISO İndir</button>
+                <div class="download-group">
+                    <button class="download-main-btn" onclick="startDownload('BASE64_WIN10_X64', 'win10-x64-rar.png')"><i class="fa-solid fa-download"></i> Win 10 x64 İndir</button>
+                    <button class="download-main-btn x86-btn" onclick="startDownload('BASE64_WIN10_X86', 'win10-x86-rar.png')"><i class="fa-solid fa-download"></i> Win 10 x86 İndir</button>
+                </div>
             </div>
             <div class="tutorial-box"><h3><i class="fa-solid fa-book-open"></i> Kurulum Rehberi</h3><ol><li>Rufus ile UEFI USB oluşturup direkt kurulum yapın.</li></ol></div>
             <h3 style="color: var(--text-main);">Önerilen Araçlar</h3>
             <div class="tools-grid"><a href="#" class="tool-card"><i class="fa-solid fa-shield-virus"></i><h4>Defender Control</h4></a></div>
         </div>
 
-        <!-- WINDOWS 11 -->
+        <!-- WINDOWS 11 (SADECE X64 VARDIR AMA BİLGİ VERİLDİ) -->
         <div id="win11" class="tab-content">
             <div class="header-box">
-                <div><h2>Windows 11 Pro 23H2 (Bypass TPM)</h2><p style="color: var(--text-muted); margin-top: 5px;">TPM 2.0 ve Secure Boot gereksinimi kaldırılmış ISO.</p></div>
-                <button class="download-main-btn" onclick="startDownload('BASE64_LINK', 'win11-rar.png')"><i class="fa-solid fa-download"></i> Windows 11 ISO İndir</button>
+                <div><h2>Windows 11 Pro 23H2 (Bypass TPM)</h2><p style="color: var(--text-muted); margin-top: 5px;">TPM 2.0 ve Secure Boot gereksinimi kaldırılmış ISO (Sadece 64-Bit destekler).</p></div>
+                <div class="download-group">
+                    <button class="download-main-btn" onclick="startDownload('BASE64_WIN11_X64', 'win11-x64-rar.png')"><i class="fa-solid fa-download"></i> Win 11 x64 İndir</button>
+                </div>
             </div>
             <div class="tutorial-box"><h3><i class="fa-solid fa-book-open"></i> Kurulum Rehberi</h3><ol><li>Rufus ayarlarında "Remove TPM 2.0" kutucuğunu işaretleyin.</li></ol></div>
             <h3 style="color: var(--text-main);">Önerilen Araçlar</h3>
             <div class="tools-grid"><a href="#" class="tool-card"><i class="fa-solid fa-sliders"></i><h4>StartAllBack</h4></a></div>
-        </div>
-
-        <!-- UBUNTU -->
-        <div id="ubuntu" class="tab-content">
-            <div class="header-box">
-                <div><h2>Ubuntu 24.04 LTS</h2><p style="color: var(--text-muted); margin-top: 5px;">Dünyanın en popüler kullanıcı dostu Linux dağıtımı.</p></div>
-                <button class="download-main-btn" onclick="startDownload('BASE64_LINK', 'ubuntu-rar.png')"><i class="fa-solid fa-download"></i> Ubuntu ISO İndir</button>
-            </div>
-            <div class="tutorial-box"><h3><i class="fa-solid fa-book-open"></i> Kurulum Rehberi</h3><ol><li>BalenaEtcher veya Ventoy ile USB'ye yazdırın.</li></ol></div>
-            <h3 style="color: var(--text-main);">Önerilen Araçlar</h3>
-            <div class="tools-grid"><a href="#" class="tool-card"><i class="fa-solid fa-terminal"></i><h4>GParted Live</h4></a></div>
-        </div>
-
-        <!-- DEBIAN -->
-        <div id="debian" class="tab-content">
-            <div class="header-box">
-                <div><h2>Debian 12 "Bookworm"</h2><p style="color: var(--text-muted); margin-top: 5px;">Kaya gibi kararlı sunucu ve masaüstü Linux sistemi.</p></div>
-                <button class="download-main-btn" onclick="startDownload('BASE64_LINK', 'debian-rar.png')"><i class="fa-solid fa-download"></i> Debian ISO İndir</button>
-            </div>
-            <div class="tutorial-box"><h3><i class="fa-solid fa-book-open"></i> Kurulum Rehberi</h3><ol><li>Non-free firmware içeren ISO dosyasını kullanın.</li></ol></div>
-            <h3 style="color: var(--text-main);">Önerilen Araçlar</h3>
-            <div class="tools-grid"><a href="#" class="tool-card"><i class="fa-solid fa-server"></i><h4>Webmin</h4></a></div>
-        </div>
-
-        <!-- ARCH LINUX -->
-        <div id="arch" class="tab-content">
-            <div class="header-box">
-                <div><h2>Arch Linux (Rolling Release)</h2><p style="color: var(--text-muted); margin-top: 5px;">Hafif, özelleştirilebilir saf Linux deneyimi.</p></div>
-                <button class="download-main-btn" onclick="startDownload('BASE64_LINK', 'arch-rar.png')"><i class="fa-solid fa-download"></i> Arch Linux ISO İndir</button>
-            </div>
-            <div class="tutorial-box"><h3><i class="fa-solid fa-book-open"></i> Kurulum Rehberi</h3><ol><li>Terminalden `archinstall` komutunu çalıştırarak hızlıca kurun.</li></ol></div>
-            <h3 style="color: var(--text-main);">Önerilen Araçlar</h3>
-            <div class="tools-grid"><a href="#" class="tool-card"><i class="fa-solid fa-box-open"></i><h4>Yay AUR Helper</h4></a></div>
         </div>
 
         <!-- TÜM ARAÇLAR KÜTÜPHANESİ -->
@@ -321,9 +258,6 @@
                 <a href="#" class="tool-card"><i class="fa-solid fa-shield-halved"></i><h4>Malwarebytes</h4></a>
                 <a href="#" class="tool-card"><i class="fa-solid fa-desktop"></i><h4>VirtualBox 4.0</h4></a>
                 <a href="#" class="tool-card"><i class="fa-solid fa-microchip"></i><h4>DirectX 11</h4></a>
-                <a href="#" class="tool-card"><i class="fa-solid fa-music"></i><h4>Winamp 2.91</h4></a>
-                <a href="#" class="tool-card"><i class="fa-solid fa-box"></i><h4>Daemon Tools</h4></a>
-                <a href="#" class="tool-card"><i class="fa-solid fa-bolt"></i><h4>Rufus Portable</h4></a>
             </div>
         </div>
 
