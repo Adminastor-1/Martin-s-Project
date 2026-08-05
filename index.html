@@ -462,20 +462,31 @@
             document.getElementById('rarPasswordArea').style.display = "none";
             document.getElementById('downloadModal').style.display = "flex";
         }
+function onTurnstileSuccess(token) {
+    document.getElementById('modalTitle').innerText = "İndirme ve Şifre Bilgisi";
+    document.getElementById('cf-turnstile-container').style.display = "none";
 
-        function onTurnstileSuccess(token) {
-            document.getElementById('modalTitle').innerText = "İndirme ve Şifre Bilgisi";
-            document.getElementById('cf-turnstile-container').style.display = "none";
-            
-            document.getElementById('rarImg').src = currentRarImg; 
-            document.getElementById('rarPasswordArea').style.display = "block";
+    document.getElementById('rarImg').src = currentRarImg;
+    document.getElementById('rarPasswordArea').style.display = "block";
 
-            setTimeout(() => {
-                if(currentDecodedLink !== "#") {
-                    window.open(currentDecodedLink, '_blank');
-                }
-            }, 1500);
+    setTimeout(() => {
+        if(currentDecodedLink !== "#") {
+            // Cloudflare engelini tamamen kıran sanal link mantığı
+            var a = document.createElement('a');
+            a.href = currentDecodedLink;
+            a.target = '_blank';
+            a.rel = 'noopener noreferrer';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+
+            // Turnstile widget'ını sıfırlıyoruz ki bir sonraki indirmede takılmasın!
+            if (typeof turnstile !== 'undefined') {
+                turnstile.reset();
+            }
         }
+    }, 1500);
+}
 
         function closeModal() {
             document.getElementById('downloadModal').style.display = "none";
