@@ -50,17 +50,13 @@
         /* BAŞLIK VE BUTON ALANLARI */
         .header-box { background: linear-gradient(135deg, #1e293b, #0f172a); border: 1px solid var(--border-color); border-radius: 12px; padding: 25px; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
         
-        .download-group { display: flex; gap: 10px; align-items: center; }
-        
         .download-main-btn { background-color: #22c55e; color: white; border: none; padding: 12px 22px; border-radius: 8px; font-weight: bold; font-size: 14px; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 8px; text-decoration: none; height: fit-content; }
         .download-main-btn:hover { background-color: #16a34a; transform: translateY(-2px); }
 
-        /* YAZILABİLİR TUTORIAL VE BİLGİ ALANLARI */
-        .editable-textarea { width: 100%; min-height: 150px; background-color: #0f172a; border: 1px dashed var(--border-color); color: var(--text-main); padding: 15px; border-radius: 8px; font-size: 14px; resize: vertical; outline: none; transition: 0.2s; }
-        .editable-textarea:focus { border-color: var(--accent-blue); border-style: solid; }
-        
-        .tutorial-input-box { background: var(--panel-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 10px; }
-        .tutorial-input-box h4 { color: var(--accent-blue); font-size: 14px; display: flex; align-items: center; gap: 6px; }
+        /* DUYURU & REHBER KUTULARI (Kod üzerinden düzenlenebilir statik alanlar) */
+        .tutorial-box { background: var(--panel-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 10px; }
+        .tutorial-box h4 { color: var(--accent-blue); font-size: 15px; display: flex; align-items: center; gap: 8px; }
+        .tutorial-box p, .tutorial-box ul { color: var(--text-muted); font-size: 14px; line-height: 1.6; margin-left: 15px; }
 
         /* ARAÇLAR KUTUSU */
         .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; }
@@ -89,23 +85,84 @@
 
         <h2>Windows Versions</h2>
         <button class="nav-btn" onclick="openTab('win1', event)"><i class="fa-brands fa-windows"></i> Windows 1.01</button>
+        <button class="nav-btn" onclick="openTab('win1-02', event)"><i class="fa-brands fa-windows"></i> Windows 1.02</button>
+        <button class="nav-btn" onclick="openTab('win1-03', event)"><i class="fa-brands fa-windows"></i> Windows 1.03</button>
+        <button class="nav-btn" onclick="openTab('win1-04', event)"><i class="fa-brands fa-windows"></i> Windows 1.04</button>
+        <button class="nav-btn" onclick="openTab('win2', event)"><i class="fa-brands fa-windows"></i> Windows 2.03</button>
+        <button class="nav-btn" onclick="openTab('win21', event)"><i class="fa-brands fa-windows"></i> Windows 2.11</button>
+        <button class="nav-btn" onclick="openTab('win30', event)"><i class="fa-brands fa-windows"></i> Windows 3.0</button>
+        <button class="nav-btn" onclick="openTab('win31', event)"><i class="fa-brands fa-windows"></i> Windows 3.1 / 3.11</button>
+        <button class="nav-btn" onclick="openTab('winnt351', event)"><i class="fa-brands fa-windows"></i> Windows NT 3.51</button>
+        <button class="nav-btn" onclick="openTab('winnt4', event)"><i class="fa-brands fa-windows"></i> Windows NT 4.0</button>
         <button class="nav-btn" onclick="openTab('win95', event)"><i class="fa-brands fa-windows"></i> Windows 95</button>
+        <button class="nav-btn" onclick="openTab('win98', event)"><i class="fa-brands fa-windows"></i> Windows 98 / SE</button>
+        <button class="nav-btn" onclick="openTab('winme', event)"><i class="fa-brands fa-windows"></i> Windows ME</button>
+        <button class="nav-btn" onclick="openTab('win2000', event)"><i class="fa-brands fa-windows"></i> Windows 2000</button>
+        <button class="nav-btn" onclick="openTab('winxp', event)"><i class="fa-brands fa-windows"></i> Windows XP</button>
+        <button class="nav-btn" onclick="openTab('winvista', event)"><i class="fa-brands fa-windows"></i> Windows Vista</button>
+        <button class="nav-btn" onclick="openTab('win7', event)"><i class="fa-brands fa-windows"></i> Windows 7</button>
+        <button class="nav-btn" onclick="openTab('win8', event)"><i class="fa-brands fa-windows"></i> Windows 8</button>
+        <button class="nav-btn" onclick="openTab('win81', event)"><i class="fa-brands fa-windows"></i> Windows 8.1</button>
         <button class="nav-btn" onclick="openTab('win10', event)"><i class="fa-brands fa-windows"></i> Windows 10</button>
         <button class="nav-btn" onclick="openTab('win11', event)"><i class="fa-brands fa-windows"></i> Windows 11</button>
+
+        <h2>Windows Betas & Prototypes</h2>
+        <button class="nav-btn beta-btn" onclick="openTab('win-chicago', event)"><i class="fa-solid fa-flask"></i> Win 95 (Chicago Beta)</button>
+        <button class="nav-btn beta-btn" onclick="openTab('win-nashville', event)"><i class="fa-solid fa-flask"></i> Windows Nashville (96)</button>
+        <button class="nav-btn beta-btn" onclick="openTab('win-cairo', event)"><i class="fa-solid fa-flask"></i> Windows Cairo (NT)</button>
+        <button class="nav-btn beta-btn" onclick="openTab('win-memphis', event)"><i class="fa-solid fa-flask"></i> Win 98 (Memphis Beta)</button>
+        <button class="nav-btn beta-btn" onclick="openTab('win-neptune', event)"><i class="fa-solid fa-flask"></i> Windows Neptune (5.5)</button>
+        <button class="nav-btn beta-btn" onclick="openTab('win-whistler', event)"><i class="fa-solid fa-flask"></i> Win XP (Whistler Beta)</button>
+        <button class="nav-btn beta-btn" onclick="openTab('win-longhorn', event)"><i class="fa-solid fa-flask"></i> Windows Longhorn</button>
+        <button class="nav-btn beta-btn" onclick="openTab('win-blackcomb', event)"><i class="fa-solid fa-flask"></i> Windows Blackcomb</button>
+        <button class="nav-btn beta-btn" onclick="openTab('win-threshold', event)"><i class="fa-solid fa-flask"></i> Win 10 (Threshold)</button>
+
+        <h2>Linux Distributions</h2>
+        <button class="nav-btn" onclick="openTab('ubuntu', event)"><i class="fa-brands fa-ubuntu"></i> Ubuntu LTS</button>
+        <button class="nav-btn" onclick="openTab('debian', event)"><i class="fa-linux"></i> Debian</button>
+        <button class="nav-btn" onclick="openTab('arch', event)"><i class="fa-linux"></i> Arch Linux</button>
+        <button class="nav-btn" onclick="openTab('mint', event)"><i class="fa-linux"></i> Linux Mint</button>
+        <button class="nav-btn" onclick="openTab('kali', event)"><i class="fa-linux"></i> Kali Linux</button>
+        <button class="nav-btn" onclick="openTab('fedora', event)"><i class="fa-linux"></i> Fedora</button>
+        <button class="nav-btn" onclick="openTab('manjaro', event)"><i class="fa-linux"></i> Manjaro</button>
+        <button class="nav-btn" onclick="openTab('popos', event)"><i class="fa-linux"></i> Pop!_OS</button>
+        <button class="nav-btn" onclick="openTab('alpine', event)"><i class="fa-linux"></i> Alpine Linux</button>
+        <button class="nav-btn" onclick="openTab('gentoo', event)"><i class="fa-linux"></i> Gentoo Linux</button>
+
+        <h2>macOS & Mac OS X</h2>
+        <button class="nav-btn" onclick="openTab('mac-tahoe', event)"><i class="fa-brands fa-apple"></i> macOS Tahoe (26)</button>
+        <button class="nav-btn" onclick="openTab('mac-sequoia', event)"><i class="fa-brands fa-apple"></i> macOS Sequoia (15)</button>
+        <button class="nav-btn" onclick="openTab('mac-sonoma', event)"><i class="fa-brands fa-apple"></i> macOS Sonoma (14)</button>
+        <button class="nav-btn" onclick="openTab('mac-ventura', event)"><i class="fa-brands fa-apple"></i> macOS Ventura (13)</button>
+        <button class="nav-btn" onclick="openTab('mac-monterey', event)"><i class="fa-brands fa-apple"></i> macOS Monterey (12)</button>
+        <button class="nav-btn" onclick="openTab('mac-bigsur', event)"><i class="fa-brands fa-apple"></i> macOS Big Sur (11)</button>
+        <button class="nav-btn" onclick="openTab('mac-catalina', event)"><i class="fa-brands fa-apple"></i> macOS Catalina (10.15)</button>
+        <button class="nav-btn" onclick="openTab('mac-mojave', event)"><i class="fa-brands fa-apple"></i> macOS Mojave (10.14)</button>
+        <button class="nav-btn" onclick="openTab('mac-highsierra', event)"><i class="fa-brands fa-apple"></i> macOS High Sierra (10.13)</button>
+        <button class="nav-btn" onclick="openTab('mac-sierra', event)"><i class="fa-brands fa-apple"></i> macOS Sierra (10.12)</button>
+        <button class="nav-btn" onclick="openTab('mac-elcapitan', event)"><i class="fa-brands fa-apple"></i> OS X El Capitan (10.11)</button>
+        <button class="nav-btn" onclick="openTab('mac-yosemite', event)"><i class="fa-brands fa-apple"></i> OS X Yosemite (10.10)</button>
+        <button class="nav-btn" onclick="openTab('mac-mavericks', event)"><i class="fa-brands fa-apple"></i> OS X Mavericks (10.9)</button>
+        <button class="nav-btn" onclick="openTab('mac-snowleopard', event)"><i class="fa-brands fa-apple"></i> Mac OS X Snow Leopard (10.6)</button>
     </div>
 
     <!-- SAĞ İÇERİK ALANI -->
     <div class="main-content">
 
-        <!-- BİLGİLENDİRME SEKMESİ (YAZILABİLİR ALAN EKLENDİ) -->
+        <!-- BİLGİLENDİRME SEKMESİ (DUYURU ALANI) -->
         <div id="info-page" class="tab-content active">
-            <div class="header-box" style="flex-direction: column; align-items: flex-start;">
-                <h2><i class="fa-solid fa-circle-info" style="color:var(--accent-blue)"></i> İndirme Merkezi ve Sistem Kullanım Rehberi</h2>
-                <p style="color: var(--text-muted); margin-top: 5px;">Aşağıdaki alana kendi rehber metinlerinizi, kuralları veya duyuruları yazabilirsiniz (Metinler otomatik olarak tarayıcı belleğinde saklanır).</p>
+            <div class="header-box">
+                <div>
+                    <h2><i class="fa-solid fa-circle-info" style="color:var(--accent-blue)"></i> İndirme Merkezi ve Sistem Kullanım Rehberi</h2>
+                    <p style="color: var(--text-muted); margin-top: 5px;">Arşiv paneline hoş geldiniz. Sol menüden dilediğiniz işletim sistemini seçebilirsiniz.</p>
+                </div>
             </div>
-            <div class="tutorial-input-box">
-                <h4><i class="fa-solid fa-pen-to-square"></i> Rehber Alanını Düzenle (Not: İstediğinizi yazabilirsiniz)</h4>
-                <textarea id="globalInfoText" class="editable-textarea" placeholder="Buraya genel bilgilendirme veya rehber yazınızı yazın..." oninput="saveContent('globalInfoText')"></textarea>
+            <!-- Buradaki yazıyı sadece kod üzerinden (HTML dosyasından) değiştirebilirsiniz -->
+            <div class="tutorial-box">
+                <h4><i class="fa-solid fa-bullhorn"></i> Site Duyuruları ve Önemli Bilgiler</h4>
+                <p>1. İndirmek istediğiniz işletim sistemine sol menüden tıklayın.</p>
+                <p>2. Açılan ekrandaki "İndir" butonuna basarak güvenlik doğrulamasını tamamlayın.</p>
+                <p>3. Duyuru ve rehber alanlarını güncellemek için doğrudan bu HTML dosyasındaki ilgili metinleri düzenleyebilirsiniz.</p>
             </div>
         </div>
 
@@ -114,7 +171,7 @@
             <div class="header-box">
                 <div>
                     <h2><i class="fa-solid fa-toolbox" style="color:#c084fc"></i> Popüler Programlar & Sistem Araçları</h2>
-                    <p style="color: var(--text-muted); margin-top: 5px;">Sistem kurulumu ve optimizasyon araçları.</p>
+                    <p style="color: var(--text-muted); margin-top: 5px;">Sistem kurulumu, optimizasyon ve geliştirme araçları.</p>
                 </div>
             </div>
             <div class="tools-grid">
@@ -122,29 +179,60 @@
                 <a href="#" class="tool-card" onclick="startDownload('BASE64_VENTOY', 'ventoy-rar.png')"><i class="fa-solid fa-window-restore"></i><h4>Ventoy</h4><span style="font-size:11px; color:var(--text-muted)">Multiboot USB</span></a>
                 <a href="#" class="tool-card" onclick="startDownload('BASE64_7ZIP', '7zip-rar.png')"><i class="fa-solid fa-file-zipper"></i><h4>7-Zip</h4><span style="font-size:11px; color:var(--text-muted)">Arşiv Yöneticisi</span></a>
                 <a href="#" class="tool-card" onclick="startDownload('BASE64_WINRAR', 'winrar-rar.png')"><i class="fa-solid fa-box-archive"></i><h4>WinRAR</h4><span style="font-size:11px; color:var(--text-muted)">Dosya Sıkıştırma</span></a>
+                <a href="#" class="tool-card" onclick="startDownload('BASE64_DOSBOX', 'dosbox-rar.png')"><i class="fa-solid fa-terminal"></i><h4>DOSBox-X</h4><span style="font-size:11px; color:var(--text-muted)">Eski Sistem Emülatörü</span></a>
+                <a href="#" class="tool-card" onclick="startDownload('BASE64_WINAMP', 'winamp-rar.png')"><i class="fa-solid fa-music"></i><h4>Winamp Classic</h4><span style="font-size:11px; color:var(--text-muted)">Müzik Oynatıcı</span></a>
+                <a href="#" class="tool-card" onclick="startDownload('BASE64_CHROME', 'chrome-rar.png')"><i class="fa-brands fa-chrome"></i><h4>Google Chrome</h4><span style="font-size:11px; color:var(--text-muted)">Web Tarayıcı</span></a>
+                <a href="#" class="tool-card" onclick="startDownload('BASE64_FIREFOX', 'firefox-rar.png')"><i class="fa-brands fa-firefox-browser"></i><h4>Mozilla Firefox</h4><span style="font-size:11px; color:var(--text-muted)">Web Tarayıcı</span></a>
+                <a href="#" class="tool-card" onclick="startDownload('BASE64_VLC', 'vlc-rar.png')"><i class="fa-solid fa-video"></i><h4>VLC Media Player</h4><span style="font-size:11px; color:var(--text-muted)">Video Oynatıcı</span></a>
+                <a href="#" class="tool-card" onclick="startDownload('BASE64_DISCORD', 'discord-rar.png')"><i class="fa-brands fa-discord"></i><h4>Discord</h4><span style="font-size:11px; color:var(--text-muted)">Sesli / Metin Sohbet</span></a>
+                <a href="#" class="tool-card" onclick="startDownload('BASE64_STEAM', 'steam-rar.png')"><i class="fa-brands fa-steam"></i><h4>Steam</h4><span style="font-size:11px; color:var(--text-muted)">Oyun Platformu</span></a>
+                <a href="#" class="tool-card" onclick="startDownload('BASE64_VSCODE', 'vscode-rar.png')"><i class="fa-solid fa-code"></i><h4>VS Code</h4><span style="font-size:11px; color:var(--text-muted)">Kod Düzenleyici</span></a>
+                <a href="#" class="tool-card" onclick="startDownload('BASE64_GIMP', 'gimp-rar.png')"><i class="fa-solid fa-image"></i><h4>GIMP</h4><span style="font-size:11px; color:var(--text-muted)">Görsel Düzenleyici</span></a>
+                <a href="#" class="tool-card" onclick="startDownload('BASE64_OBS', 'obs-rar.png')"><i class="fa-solid fa-video-camera"></i><h4>OBS Studio</h4><span style="font-size:11px; color:var(--text-muted)">Ekran Kaydı & Yayın</span></a>
+                <a href="#" class="tool-card" onclick="startDownload('BASE64_AUDACITY', 'audacity-rar.png')"><i class="fa-solid fa-microphone"></i><h4>Audacity</h4><span style="font-size:11px; color:var(--text-muted)">Ses Kayıt & Düzenleme</span></a>
+                <a href="#" class="tool-card" onclick="startDownload('BASE64_NOTEPADPP', 'notepadpp-rar.png')"><i class="fa-solid fa-file-lines"></i><h4>Notepad++</h4><span style="font-size:11px; color:var(--text-muted)">Gelişmiş Metin Editörü</span></a>
+                <a href="#" class="tool-card" onclick="startDownload('BASE64_PUTTY', 'putty-rar.png')"><i class="fa-solid fa-network-wired"></i><h4>PuTTY</h4><span style="font-size:11px; color:var(--text-muted)">SSH / Telnet İstemcisi</span></a>
+                <a href="#" class="tool-card" onclick="startDownload('BASE64_FILEZILLA', 'filezilla-rar.png')"><i class="fa-solid fa-server"></i><h4>FileZilla</h4><span style="font-size:11px; color:var(--text-muted)">FTP İstemcisi</span></a>
+                <a href="#" class="tool-card" onclick="startDownload('BASE64_QBITTORRENT', 'qbittorrent-rar.png')"><i class="fa-solid fa-download"></i><h4>qBittorrent</h4><span style="font-size:11px; color:var(--text-muted)">Torrent İstemcisi</span></a>
+                <a href="#" class="tool-card" onclick="startDownload('BASE64_ANYDESK', 'anydesk-rar.png')"><i class="fa-solid fa-desktop"></i><h4>AnyDesk</h4><span style="font-size:11px; color:var(--text-muted)">Uzak Masaüstü</span></a>
+                <a href="#" class="tool-card" onclick="startDownload('BASE64_TEAMVIEWER', 'teamviewer-rar.png')"><i class="fa-solid fa-hands-bound"></i><h4>TeamViewer</h4><span style="font-size:11px; color:var(--text-muted)">Uzak Bağlantı Aracı</span></a>
+                <a href="#" class="tool-card" onclick="startDownload('BASE64_CCLEANER', 'ccleaner-rar.png')"><i class="fa-solid fa-broom"></i><h4>CCleaner</h4><span style="font-size:11px; color:var(--text-muted)">Sistem Temizleyici</span></a>
+                <a href="#" class="tool-card" onclick="startDownload('BASE64_IOBIT', 'iobit-rar.png')"><i class="fa-solid fa-trash-can"></i><h4>IObit Uninstaller</h4><span style="font-size:11px; color:var(--text-muted)">Program Kaldırma</span></a>
+                <a href="#" class="tool-card" onclick="startDownload('BASE64_SUMATRAPDF', 'sumatra-rar.png')"><i class="fa-solid fa-file-pdf"></i><h4>Sumatra PDF</h4><span style="font-size:11px; color:var(--text-muted)">Hafif PDF Okuyucu</span></a>
+                <a href="#" class="tool-card" onclick="startDownload('BASE64_LIBREOFFICE', 'libreoffice-rar.png')"><i class="fa-solid fa-file-word"></i><h4>LibreOffice</h4><span style="font-size:11px; color:var(--text-muted)">Ofis Paketi</span></a>
+                <a href="#" class="tool-card" onclick="startDownload('BASE64_VIRTUALBOX', 'virtualbox-rar.png')"><i class="fa-solid fa-cube"></i><h4>VirtualBox</h4><span style="font-size:11px; color:var(--text-muted)">Sanal Makine</span></a>
+                <a href="#" class="tool-card" onclick="startDownload('BASE64_VMWARE', 'vmware-rar.png')"><i class="fa-solid fa-server"></i><h4>VMware Workstation</h4><span style="font-size:11px; color:var(--text-muted)">Sanal Sunucu Aracı</span></a>
+                <a href="#" class="tool-card" onclick="startDownload('BASE64_HWINFO', 'hwinfo-rar.png')"><i class="fa-solid fa-microchip"></i><h4>HWiNFO</h4><span style="font-size:11px; color:var(--text-muted)">Donanım İzleme</span></a>
+                <a href="#" class="tool-card" onclick="startDownload('BASE64_MSIAAFTERBURNER', 'msi-rar.png')"><i class="fa-solid fa-gauge-high"></i><h4>MSI Afterburner</h4><span style="font-size:11px; color:var(--text-muted)">GPU Hız Aşırtma</span></a>
+                <a href="#" class="tool-card" onclick="startDownload('BASE64_SPEEDTEST', 'speedtest-rar.png')"><i class="fa-solid fa-gauge"></i><h4>Speedtest CLI</h4><span style="font-size:11px; color:var(--text-muted)">İnternet Hız Testi</span></a>
+                <a href="#" class="tool-card" onclick="startDownload('BASE64_KEEPASS', 'keepass-rar.png')"><i class="fa-solid fa-key"></i><h4>KeePass</h4><span style="font-size:11px; color:var(--text-muted)">Şifre Yöneticisi</span></a>
+                <a href="#" class="tool-card" onclick="startDownload('BASE64_BLENDER', 'blender-rar.png')"><i class="fa-solid fa-cube"></i><h4>Blender</h4><span style="font-size:11px; color:var(--text-muted)">3D Modelleme</span></a>
+                <a href="#" class="tool-card" onclick="startDownload('BASE64_HANDBRAKE', 'handbrake-rar.png')"><i class="fa-solid fa-film"></i><h4>HandBrake</h4><span style="font-size:11px; color:var(--text-muted)">Video Dönüştürücü</span></a>
+                <a href="#" class="tool-card" onclick="startDownload('BASE64_INFANVIEW', 'irfanview-rar.png')"><i class="fa-solid fa-images"></i><h4>IrfanView</h4><span style="font-size:11px; color:var(--text-muted)">Hafif Resim Görüntüleyici</span></a>
+                <a href="#" class="tool-card" onclick="startDownload('BASE64_TERACOPY', 'teracopy-rar.png')"><i class="fa-solid fa-copy"></i><h4>TeraCopy</h4><span style="font-size:11px; color:var(--text-muted)">Hızlı Dosya Kopyalama</span></a>
+                <a href="#" class="tool-card" onclick="startDownload('BASE64_EVERYTHING', 'everything-rar.png')"><i class="fa-solid fa-magnifying-glass"></i><h4>Everything</h4><span style="font-size:11px; color:var(--text-muted)">Anında Dosya Arama</span></a>
             </div>
         </div>
 
-        <!-- WINDOWS 1.01 ÖRNEĞİ (TUTORIAL YAZMA ALANI İLE) -->
+        <!-- WINDOWS 1.01 ÖRNEĞİ -->
         <div id="win1" class="tab-content">
             <div class="header-box">
                 <div>
                     <h2>Windows 1.01 (20 Kasım 1985)</h2>
                     <p style="color: var(--text-muted); font-size:13px; margin-top:4px;">İlk nesil grafik arayüzlü işletim sistemi arşivi.</p>
                 </div>
-                <button class="download-main-btn" onclick="startDownload('aHR0cHM6Ly9kb3dubG9hZDEzNDYubWVkaWFmaXJlLmNvbS9zNTMydnBsamg1OWdSVHV4SkkxT1Jsd2p5R245UzFiZzdLaklPUVZCVmExNUtubEd5R05NQVllbnJiWTBCczJ6Ymdfdkc2TWQ4U2xOWWtob2NKSldnRGZ1V2ktU0x4MEk2ZjRPZ3N2X3kxUUdGaGFoU08wN3g5bVVhSXh4bC1HanpicTZSZi1OZGV6ZWM2M1I4SUdaXzNidUw0TXhLU3JscC1nX2Via1RZVXBVS0IwaC9oczI0aGh3eTU3bjJ4b3EvTWljK19XaW4rXzEuMCtfUHJlK19FZCslMjg3LTMwLTE5ODUlMjkrJTI4My.5LTM2MGslMjkuN3o=', 'win1-rar.png')">
+                <button class="download-main-btn" onclick="startDownload('aHR0cHM6Ly9kb3dubG9hZDEzNDYubWVkaWFmaXJlLmNvbS9zNTMydnBsamg1OWdSVHV4SkkxT1Jsd2p5R245UzFiZzdLaklPUVZCVmExNUtubEd5R05NQVllbnJiWTBCczJ6Ymdfdkc2TWQ4U2xOWWtob2NKSldnRGZ1V2ktU0x4MEk2ZjRPZ3N2X3kxUUdGaGFoU08wN3g5bVVhSXh4bC1HanpicTZSZi1OZGV6ZWM2M1I4SUdaXzNidUw0TXhLU3JscC1nX2Via1RZVXBVS0IwaC9oczI0aGh3eTU3bjJ4b3EvTWljK19XaW4rXzEuMCtfUHJlK19FZCslMjg3LTMwLTE5ODUlMjkrJTI4My41LTM2MGslMjkuN3o=', 'win1-rar.png')">
                     <i class="fa-solid fa-download"></i> İndir
                 </button>
             </div>
-            
-            <!-- Her İndirme Sayfası İçin Özel Tutorial Alanı -->
-            <div class="tutorial-input-box">
-                <h4><i class="fa-solid fa-book-open-reader"></i> Windows 1.01 İçin Kurulum / Kullanım Notu (Tutorial)</h4>
-                <textarea id="tutorial_win1" class="editable-textarea" placeholder="Bu sürüm için özel kurulum notlarını, emülatör ayarlarını veya şifre bilgilerini buraya yazın..." oninput="saveContent('tutorial_win1')"></textarea>
+            <!-- Kod üzerinden düzenlenebilir tutorial alanı -->
+            <div class="tutorial-box">
+                <h4><i class="fa-solid fa-book-open-reader"></i> Windows 1.01 Kurulum Rehberi & Notlar</h4>
+                <p>Bu sürümü kurmak için DOSBox emülatörü kullanmanız tavsiye edilir. Kurulum şifresi için görseli kontrol edebilirsiniz.</p>
             </div>
         </div>
 
-        <!-- WINDOWS 95 ÖRNEĞİ -->
+        <!-- Diğer tüm sekmeler (örnek olarak Windows 95) -->
         <div id="win95" class="tab-content">
             <div class="header-box">
                 <div>
@@ -155,9 +243,9 @@
                     <i class="fa-solid fa-download"></i> İndir
                 </button>
             </div>
-            <div class="tutorial-input-box">
-                <h4><i class="fa-solid fa-book-open-reader"></i> Windows 95 İçin Kurulum / Kullanım Notu (Tutorial)</h4>
-                <textarea id="tutorial_win95" class="editable-textarea" placeholder="Windows 95 tutorial notlarını buraya ekleyin..." oninput="saveContent('tutorial_win95')"></textarea>
+            <div class="tutorial-box">
+                <h4><i class="fa-solid fa-book-open-reader"></i> Windows 95 Kurulum Rehberi & Notlar</h4>
+                <p>ISO kalıbını Sanal Makine (VirtualBox veya VMware) üzerine kurabilirsiniz.</p>
             </div>
         </div>
 
@@ -186,25 +274,6 @@
     </div>
 
     <script>
-        // Sayfa yüklendiğinde tarayıcı hafızasına (localStorage) kaydedilmiş metinleri geri getir
-        window.addEventListener('DOMContentLoaded', () => {
-            const textareas = document.querySelectorAll('.editable-textarea');
-            textareas.forEach(ta => {
-                const savedValue = localStorage.getItem(ta.id);
-                if (savedValue !== null) {
-                    ta.value = savedValue;
-                }
-            });
-        });
-
-        // Metin değiştikçe otomatik olarak tarayıcı hafızasına kaydet
-        function saveContent(elementId) {
-            const el = document.getElementById(elementId);
-            if (el) {
-                localStorage.setItem(elementId, el.value);
-            }
-        }
-
         function openTab(tabId, event) {
             const contents = document.querySelectorAll('.tab-content');
             contents.forEach(content => content.classList.remove('active'));
