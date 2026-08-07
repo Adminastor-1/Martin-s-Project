@@ -47,27 +47,58 @@
             max-height: 100vh;
         }
 
-        .welcome-box {
+        .clock-widget {
             background: linear-gradient(135deg, #1e1b4b, #312e81);
             padding: 16px;
             border-radius: 12px;
             border: 1px solid #4338ca;
             box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            text-align: center;
         }
 
-        .welcome-box h2 {
-            font-size: 1.15rem;
+        .clock-widget .clock-time {
+            font-size: 1.6rem;
+            font-weight: 700;
             color: #a5b4fc;
-            margin-bottom: 6px;
+            letter-spacing: 1px;
+        }
+
+        .clock-widget .clock-date {
+            font-size: 0.85rem;
+            color: #c7d2fe;
+            margin-top: 4px;
+            text-transform: capitalize;
+        }
+
+        .clock-widget .clock-tz {
+            font-size: 0.72rem;
+            color: #8b8fd8;
+            margin-top: 6px;
+        }
+
+        /* Bilgilendirme Sekmesi İçerik Blokları */
+        .info-block {
+            background-color: #0f172a;
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--accent);
+            padding: 20px;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 18px;
+            line-height: 1.7;
+        }
+
+        .info-block h4 {
+            color: var(--accent);
+            font-size: 1.05rem;
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
             gap: 8px;
         }
 
-        .welcome-box p {
-            font-size: 0.82rem;
-            color: #c7d2fe;
-            line-height: 1.4;
+        .info-block p {
+            font-size: 0.92rem;
+            color: var(--text-main);
         }
 
         .category-title {
@@ -317,10 +348,12 @@
 
     <!-- SOL PANEL (SIDEBAR) -->
     <div class="sidebar">
-        <!-- 1. Karşılama Alanı -->
-        <div class="welcome-box">
-            <h2><i class="fa-solid fa-rocket"></i> Hoş Geldin!</h2>
-            <p>Aşağıdan istediğin İşletim Sistemi sürümüne veya 40 popüler yazılımdan birine tıklayarak rehber ve indirme bağlantılarına erişebilirsin.</p>
+        <!-- 1. Karşılama Alanı (artık buton - tıklanınca sağda bilgi sekmesi açılır) -->
+        <!-- 1. Saat & Tarih Alanı -->
+        <div class="clock-widget">
+            <div class="clock-time" id="clock-time">--:--:--</div>
+            <div class="clock-date" id="clock-date">--</div>
+            <div class="clock-tz" id="clock-tz">--</div>
         </div>
 
         <!-- 2. Programlar Menüsü -->
@@ -342,21 +375,35 @@
             <i class="fa-solid fa-chevron-down"></i>
         </button>
         <div id="win-menu" class="submenu">
-            <button class="item-btn" onclick="selectItem('Windows 1.01', 'Windows', 'Win 1.01 ISO / IMG Kalıbı')"><i class="fa-brands fa-windows"></i> Windows 1.01</button>
-            <button class="item-btn" onclick="selectItem('Windows 2.03', 'Windows', 'Win 2.03 Disket Kalıpları')"><i class="fa-brands fa-windows"></i> Windows 2.03</button>
-            <button class="item-btn" onclick="selectItem('Windows 3.1', 'Windows', 'Win 3.1 Orijinal Kurulum')"><i class="fa-brands fa-windows"></i> Windows 3.1</button>
-            <button class="item-btn" onclick="selectItem('Windows 3.11', 'Windows', 'Windows for Workgroups 3.11')"><i class="fa-brands fa-windows"></i> Windows 3.11</button>
-            <button class="item-btn" onclick="selectItem('Windows 95', 'Windows', 'Windows 95 OSR2 ISO')"><i class="fa-brands fa-windows"></i> Windows 95</button>
-            <button class="item-btn" onclick="selectItem('Windows 98 SE', 'Windows', 'Windows 98 Second Edition ISO')"><i class="fa-brands fa-windows"></i> Windows 98 SE</button>
-            <button class="item-btn" onclick="selectItem('Windows ME', 'Windows', 'Windows Millennium Edition ISO')"><i class="fa-brands fa-windows"></i> Windows ME</button>
-            <button class="item-btn" onclick="selectItem('Windows 2000', 'Windows', 'Windows 2000 Pro SP4 ISO')"><i class="fa-brands fa-windows"></i> Windows 2000</button>
-            <button class="item-btn" onclick="selectItem('Windows XP Pro SP3', 'Windows', 'Windows XP Professional SP3')"><i class="fa-brands fa-windows"></i> Windows XP</button>
-            <button class="item-btn" onclick="selectItem('Windows Vista SP2', 'Windows', 'Windows Vista Ultimate SP2')"><i class="fa-brands fa-windows"></i> Windows Vista</button>
-            <button class="item-btn" onclick="selectItem('Windows 7 SP1', 'Windows', 'Windows 7 Ultimate SP1 ISO')"><i class="fa-brands fa-windows"></i> Windows 7</button>
-            <button class="item-btn" onclick="selectItem('Windows 8.1 Pro', 'Windows', 'Windows 8.1 Pro Orijinal ISO')"><i class="fa-brands fa-windows"></i> Windows 8.1</button>
-            <button class="item-btn" onclick="selectItem('Windows 10 (22H2)', 'Windows', 'Windows 10 Türkçe Orijinal ISO')"><i class="fa-brands fa-windows"></i> Windows 10</button>
-            <button class="item-btn" onclick="selectItem('Windows 11 (23H2)', 'Windows', 'Windows 11 Orijinal ISO Kalıbı')"><i class="fa-brands fa-windows"></i> Windows 11</button>
+            <button class="item-btn" onclick="selectItem('Windows 1.01', 'Windows', 'İlk kamu sürümü - 20 Kasım 1985', ['x86'])"><i class="fa-brands fa-windows"></i> Windows 1.01 (1985)</button>
+            <button class="item-btn" onclick="selectItem('Windows 1.02', 'Windows', 'Uluslararası (Avrupa) sürüm - Mayıs 1986', ['x86'])"><i class="fa-brands fa-windows"></i> Windows 1.02 (1986)</button>
+            <button class="item-btn" onclick="selectItem('Windows 1.03', 'Windows', 'ABD ve uluslararası düzeltme sürümü - Ağustos 1986', ['x86'])"><i class="fa-brands fa-windows"></i> Windows 1.03 (1986)</button>
+            <button class="item-btn" onclick="selectItem('Windows 1.04', 'Windows', 'IBM PS/2 desteği eklendi - Nisan 1987', ['x86'])"><i class="fa-brands fa-windows"></i> Windows 1.04 (1987)</button>
+            <button class="item-btn" onclick="selectItem('Windows 2.01', 'Windows', 'OEM sürümü - Eylül 1987', ['x86'])"><i class="fa-brands fa-windows"></i> Windows 2.01 (1987)</button>
+            <button class="item-btn" onclick="selectItem('Windows 2.03', 'Windows', 'Perakende sürüm - Aralık 1987', ['x86'])"><i class="fa-brands fa-windows"></i> Windows 2.03 (1987)</button>
+            <button class="item-btn" onclick="selectItem('Windows 2.10', 'Windows', 'Windows 2.1x güncellemesi - 1988', ['x86'])"><i class="fa-brands fa-windows"></i> Windows 2.10 (1988)</button>
+            <button class="item-btn" onclick="selectItem('Windows 2.11', 'Windows', 'Windows 2.x serisinin son sürümü - 1989', ['x86'])"><i class="fa-brands fa-windows"></i> Windows 2.11 (1989)</button>
+            <button class="item-btn" onclick="selectItem('Windows 3.0', 'Windows', 'Ticari çığır açan sürüm - Mayıs 1990', ['x86'])"><i class="fa-brands fa-windows"></i> Windows 3.0 (1990)</button>
+            <button class="item-btn" onclick="selectItem('Windows 3.1', 'Windows', 'Win 3.1 Orijinal Kurulum - Nisan 1992', ['x86'])"><i class="fa-brands fa-windows"></i> Windows 3.1 (1992)</button>
+            <button class="item-btn" onclick="selectItem('Windows 3.11', 'Windows', 'Windows for Workgroups 3.11 - Şubat 1994', ['x86'])"><i class="fa-brands fa-windows"></i> Windows 3.11 (1994)</button>
+            <button class="item-btn" onclick="selectItem('Windows NT 3.1', 'Windows NT', 'NT ailesinin ilk sürümü - 27 Temmuz 1993', ['x86'])"><i class="fa-brands fa-windows"></i> Windows NT 3.1 (1993)</button>
+            <button class="item-btn" onclick="selectItem('Windows NT 3.5', 'Windows NT', 'Kod adı Daytona - 21 Eylül 1994', ['x86'])"><i class="fa-brands fa-windows"></i> Windows NT 3.5 (1994)</button>
+            <button class="item-btn" onclick="selectItem('Windows NT 3.51', 'Windows NT', 'Windows 95 uyumluluğu - 30 Mayıs 1995', ['x86'])"><i class="fa-brands fa-windows"></i> Windows NT 3.51 (1995)</button>
+            <button class="item-btn" onclick="selectItem('Windows 95', 'Windows', 'Windows 95 OSR2 ISO', ['x86'])"><i class="fa-brands fa-windows"></i> Windows 95 (1995)</button>
+            <button class="item-btn" onclick="selectItem('Windows NT 4.0', 'Windows NT', 'Windows 95 arayüzüyle NT - 24 Ağustos 1996', ['x86'])"><i class="fa-brands fa-windows"></i> Windows NT 4.0 (1996)</button>
+            <button class="item-btn" onclick="selectItem('Windows 98', 'Windows', 'Windows 98 İlk Sürüm ISO', ['x86'])"><i class="fa-brands fa-windows"></i> Windows 98 (1998)</button>
+            <button class="item-btn" onclick="selectItem('Windows 98 SE', 'Windows', 'Windows 98 Second Edition ISO', ['x86'])"><i class="fa-brands fa-windows"></i> Windows 98 SE (1999)</button>
+            <button class="item-btn" onclick="selectItem('Windows 2000', 'Windows NT', 'Windows 2000 Pro SP4 ISO (NT 5.0)', ['x86'])"><i class="fa-brands fa-windows"></i> Windows 2000 (2000)</button>
+            <button class="item-btn" onclick="selectItem('Windows ME', 'Windows', 'Windows Millennium Edition ISO', ['x86'])"><i class="fa-brands fa-windows"></i> Windows ME (2000)</button>
+            <button class="item-btn" onclick="selectItem('Windows XP Pro SP3', 'Windows NT', 'Windows XP Professional SP3 (NT 5.1)', ['x86'])"><i class="fa-brands fa-windows"></i> Windows XP (2001)</button>
+            <button class="item-btn" onclick="selectItem('Windows Vista SP2', 'Windows NT', 'Windows Vista Ultimate SP2 (NT 6.0)', ['x64','x86'])"><i class="fa-brands fa-windows"></i> Windows Vista (2007)</button>
+            <button class="item-btn" onclick="selectItem('Windows 7 SP1', 'Windows NT', 'Windows 7 Ultimate SP1 ISO (NT 6.1)', ['x64','x86'])"><i class="fa-brands fa-windows"></i> Windows 7 (2009)</button>
+            <button class="item-btn" onclick="selectItem('Windows 8', 'Windows NT', 'Windows 8 Pro ISO (NT 6.2)', ['x64','x86'])"><i class="fa-brands fa-windows"></i> Windows 8 (2012)</button>
+            <button class="item-btn" onclick="selectItem('Windows 8.1 Pro', 'Windows NT', 'Windows 8.1 Pro Orijinal ISO (NT 6.3)', ['x64','x86'])"><i class="fa-brands fa-windows"></i> Windows 8.1 (2013)</button>
+            <button class="item-btn" onclick="selectItem('Windows 10 (22H2)', 'Windows NT', 'Windows 10 Türkçe Orijinal ISO (NT 10.0)', ['x64','x86'])"><i class="fa-brands fa-windows"></i> Windows 10 (2015)</button>
+            <button class="item-btn" onclick="selectItem('Windows 11 (23H2)', 'Windows NT', 'Windows 11 Orijinal ISO Kalıbı (NT 10.0)', ['x64'])"><i class="fa-brands fa-windows"></i> Windows 11 (2021)</button>
         </div>
+
 
         <!-- Windows Betaları -->
         <button class="menu-btn" onclick="toggleSubmenu('beta-menu')">
@@ -364,11 +411,11 @@
             <i class="fa-solid fa-chevron-down"></i>
         </button>
         <div id="beta-menu" class="submenu">
-            <button class="item-btn" onclick="selectItem('Windows Chicago (95 Beta)', 'Windows Beta', 'Win 95 Chicago Build 58s')"><i class="fa-solid fa-bug"></i> Win Chicago (95 Beta)</button>
-            <button class="item-btn" onclick="selectItem('Windows Memphis (98 Beta)', 'Windows Beta', 'Win 98 Memphis Build 1400')"><i class="fa-solid fa-bug"></i> Win Memphis (98 Beta)</button>
-            <button class="item-btn" onclick="selectItem('Windows Whistler (XP Beta)', 'Windows Beta', 'Win XP Whistler Build 2419')"><i class="fa-solid fa-bug"></i> Win Whistler (XP Beta)</button>
-            <button class="item-btn" onclick="selectItem('Windows Longhorn (Vista Beta)', 'Windows Beta', 'Win Vista Longhorn Build 4074')"><i class="fa-solid fa-bug"></i> Win Longhorn (Vista Beta)</button>
-            <button class="item-btn" onclick="selectItem('Windows 11 Insider Dev', 'Windows Beta', 'Windows 11 Canary/Dev Build')"><i class="fa-solid fa-bug"></i> Win 11 Dev Build</button>
+            <button class="item-btn" onclick="selectItem('Windows Chicago (95 Beta)', 'Windows Beta', 'Win 95 Chicago Build 58s', ['x86'])"><i class="fa-solid fa-bug"></i> Win Chicago (95 Beta)</button>
+            <button class="item-btn" onclick="selectItem('Windows Memphis (98 Beta)', 'Windows Beta', 'Win 98 Memphis Build 1400', ['x86'])"><i class="fa-solid fa-bug"></i> Win Memphis (98 Beta)</button>
+            <button class="item-btn" onclick="selectItem('Windows Whistler (XP Beta)', 'Windows Beta', 'Win XP Whistler Build 2419', ['x86'])"><i class="fa-solid fa-bug"></i> Win Whistler (XP Beta)</button>
+            <button class="item-btn" onclick="selectItem('Windows Longhorn (Vista Beta)', 'Windows Beta', 'Win Vista Longhorn Build 4074', ['x64','x86'])"><i class="fa-solid fa-bug"></i> Win Longhorn (Vista Beta)</button>
+            <button class="item-btn" onclick="selectItem('Windows 11 Insider Dev', 'Windows Beta', 'Windows 11 Canary/Dev Build', ['x64'])"><i class="fa-solid fa-bug"></i> Win 11 Dev Build</button>
         </div>
 
         <!-- Linux -->
@@ -377,12 +424,23 @@
             <i class="fa-solid fa-chevron-down"></i>
         </button>
         <div id="linux-menu" class="submenu">
-            <button class="item-btn" onclick="selectItem('Ubuntu 24.04 LTS', 'Linux', 'Ubuntu Desktop LTS ISO')"><i class="fa-brands fa-ubuntu"></i> Ubuntu 24.04 LTS</button>
-            <button class="item-btn" onclick="selectItem('Debian 12 Bookworm', 'Linux', 'Debian Official ISO')"><i class="fa-brands fa-debian"></i> Debian 12</button>
-            <button class="item-btn" onclick="selectItem('Arch Linux', 'Linux', 'Arch Linux Rolling Release ISO')"><i class="fa-brands fa-linux"></i> Arch Linux</button>
-            <button class="item-btn" onclick="selectItem('Fedora 40 Workstation', 'Linux', 'Fedora Workstation Official')"><i class="fa-brands fa-fedora"></i> Fedora 40</button>
-            <button class="item-btn" onclick="selectItem('Linux Mint 21.3', 'Linux', 'Linux Mint Cinnamon Edition')"><i class="fa-brands fa-linux"></i> Linux Mint 21.3</button>
+            <button class="item-btn" onclick="selectItem('Linux Kernel 0.01', 'Linux', 'Linus Torvalds\'ın ilk yayınladığı çekirdek', ['x86'])"><i class="fa-brands fa-linux"></i> Linux Kernel 0.01 (1991)</button>
+            <button class="item-btn" onclick="selectItem('MCC Interim Linux', 'Linux', 'Kurulabilen ilk Linux dağıtımı', ['x86'])"><i class="fa-brands fa-linux"></i> MCC Interim Linux (1992)</button>
+            <button class="item-btn" onclick="selectItem('Softlanding Linux System (SLS)', 'Linux', 'Slackware ve Debian\'a ilham veren erken dağıtım', ['x86'])"><i class="fa-brands fa-linux"></i> SLS (1992)</button>
+            <button class="item-btn" onclick="selectItem('Slackware 1.0', 'Linux', 'Hala geliştirilen en eski dağıtım', ['x86'])"><i class="fa-brands fa-linux"></i> Slackware 1.0 (1993)</button>
+            <button class="item-btn" onclick="selectItem('Debian 0.91', 'Linux', 'Ian Murdock\'un ilk Debian yayını', ['x86'])"><i class="fa-brands fa-debian"></i> Debian 0.91 (1993)</button>
+            <button class="item-btn" onclick="selectItem('S.u.S.E Linux 1.0', 'Linux', 'Almanya merkezli ilk SUSE sürümü', ['x86'])"><i class="fa-brands fa-linux"></i> S.u.S.E Linux (1994)</button>
+            <button class="item-btn" onclick="selectItem('Red Hat Linux 1.0', 'Linux', 'Red Hat Commercial Linux ilk sürüm', ['x86'])"><i class="fa-brands fa-redhat"></i> Red Hat Linux (1994)</button>
+            <button class="item-btn" onclick="selectItem('Mandrake Linux 5.1', 'Linux', 'Red Hat tabanlı kullanıcı dostu dağıtım', ['x86'])"><i class="fa-brands fa-linux"></i> Mandrake Linux (1998)</button>
+            <button class="item-btn" onclick="selectItem('Gentoo Linux 1.0', 'Linux', 'Kaynaktan derleme tabanlı dağıtım', ['x86'])"><i class="fa-brands fa-linux"></i> Gentoo Linux (2002)</button>
+            <button class="item-btn" onclick="selectItem('Ubuntu 4.10 Warty Warthog', 'Linux', 'İlk Ubuntu sürümü', ['x86'])"><i class="fa-brands fa-ubuntu"></i> Ubuntu 4.10 "Warty Warthog" (2004)</button>
+            <button class="item-btn" onclick="selectItem('Ubuntu 24.04 LTS', 'Linux', 'Ubuntu Desktop LTS ISO', ['x64'])"><i class="fa-brands fa-ubuntu"></i> Ubuntu 24.04 LTS (2024)</button>
+            <button class="item-btn" onclick="selectItem('Debian 12 Bookworm', 'Linux', 'Debian Official ISO', ['x64','x86'])"><i class="fa-brands fa-debian"></i> Debian 12 (2023)</button>
+            <button class="item-btn" onclick="selectItem('Arch Linux', 'Linux', 'Arch Linux Rolling Release ISO', ['x64'])"><i class="fa-brands fa-linux"></i> Arch Linux (2002)</button>
+            <button class="item-btn" onclick="selectItem('Fedora 40 Workstation', 'Linux', 'Fedora Workstation Official', ['x64'])"><i class="fa-brands fa-fedora"></i> Fedora 40 (2024)</button>
+            <button class="item-btn" onclick="selectItem('Linux Mint 21.3', 'Linux', 'Linux Mint Cinnamon Edition', ['x64'])"><i class="fa-brands fa-linux"></i> Linux Mint 21.3 (2024)</button>
         </div>
+
 
         <!-- Mac -->
         <button class="menu-btn" onclick="toggleSubmenu('mac-menu')">
@@ -390,26 +448,51 @@
             <i class="fa-solid fa-chevron-down"></i>
         </button>
         <div id="mac-menu" class="submenu">
-            <button class="item-btn" onclick="selectItem('System 7.5.3', 'macOS', 'Classic Mac OS System 7.5.3')"><i class="fa-brands fa-apple"></i> System 7.5.3</button>
-            <button class="item-btn" onclick="selectItem('Mac OS 9.2.2', 'macOS', 'Classic Mac OS 9 ISO')"><i class="fa-brands fa-apple"></i> Mac OS 9.2.2</button>
-            <button class="item-btn" onclick="selectItem('Mac OS X 10.4 Tiger', 'macOS', 'Mac OS X Tiger Install DVD')"><i class="fa-brands fa-apple"></i> OS X 10.4 Tiger</button>
-            <button class="item-btn" onclick="selectItem('Mac OS X 10.6 Snow Leopard', 'macOS', 'OS X Snow Leopard Retail')"><i class="fa-brands fa-apple"></i> Snow Leopard</button>
-            <button class="item-btn" onclick="selectItem('macOS 14 Sonoma', 'macOS', 'macOS Sonoma Full Installer')"><i class="fa-brands fa-apple"></i> macOS Sonoma</button>
+            <button class="item-btn" onclick="selectItem('System 1.0', 'macOS', 'İlk Macintosh 128K ile gelen sistem', ['ppc'])"><i class="fa-brands fa-apple"></i> System 1.0 (1984)</button>
+            <button class="item-btn" onclick="selectItem('System 6', 'macOS', 'Üçlü sürüm numaralandırmasının ilki', ['ppc'])"><i class="fa-brands fa-apple"></i> System 6 (1988)</button>
+            <button class="item-btn" onclick="selectItem('System 7.0', 'macOS', 'Sanal bellek ve dosya paylaşımı geldi', ['ppc'])"><i class="fa-brands fa-apple"></i> System 7.0 (1991)</button>
+            <button class="item-btn" onclick="selectItem('System 7.5.3', 'macOS', 'Classic Mac OS System 7.5.3', ['ppc'])"><i class="fa-brands fa-apple"></i> System 7.5.3 (1996)</button>
+            <button class="item-btn" onclick="selectItem('Mac OS 8', 'macOS', 'Mac OS adının ilk kullanıldığı büyük sürüm', ['ppc'])"><i class="fa-brands fa-apple"></i> Mac OS 8 (1997)</button>
+            <button class="item-btn" onclick="selectItem('Mac OS 9.2.2', 'macOS', 'Classic Mac OS 9 ISO', ['ppc'])"><i class="fa-brands fa-apple"></i> Mac OS 9.2.2 (2001)</button>
+            <button class="item-btn" onclick="selectItem('Mac OS X 10.0 Cheetah', 'macOS', 'Mac OS X ailesinin ilk sürümü', ['ppc'])"><i class="fa-brands fa-apple"></i> OS X 10.0 Cheetah (2001)</button>
+            <button class="item-btn" onclick="selectItem('Mac OS X 10.1 Puma', 'macOS', 'Performans odaklı hızlı güncelleme', ['ppc'])"><i class="fa-brands fa-apple"></i> OS X 10.1 Puma (2001)</button>
+            <button class="item-btn" onclick="selectItem('Mac OS X 10.2 Jaguar', 'macOS', 'İlk kod adını pazarlamada kullanan sürüm', ['ppc'])"><i class="fa-brands fa-apple"></i> OS X 10.2 Jaguar (2002)</button>
+            <button class="item-btn" onclick="selectItem('Mac OS X 10.3 Panther', 'macOS', 'Finder ve Exposé yenilendi', ['ppc'])"><i class="fa-brands fa-apple"></i> OS X 10.3 Panther (2003)</button>
+            <button class="item-btn" onclick="selectItem('Mac OS X 10.4 Tiger', 'macOS', 'Mac OS X Tiger Install DVD', ['ppc','x86'])"><i class="fa-brands fa-apple"></i> OS X 10.4 Tiger (2005)</button>
+            <button class="item-btn" onclick="selectItem('Mac OS X 10.5 Leopard', 'macOS', 'Intel ve PowerPC\'yi birlikte destekleyen son sürüm', ['x86'])"><i class="fa-brands fa-apple"></i> OS X 10.5 Leopard (2007)</button>
+            <button class="item-btn" onclick="selectItem('Mac OS X 10.6 Snow Leopard', 'macOS', 'OS X Snow Leopard Retail', ['x64','x86'])"><i class="fa-brands fa-apple"></i> Snow Leopard (2009)</button>
+            <button class="item-btn" onclick="selectItem('Mac OS X 10.7 Lion', 'macOS', 'Yalnızca dijital dağıtımla satılan ilk sürüm', ['x64'])"><i class="fa-brands fa-apple"></i> OS X 10.7 Lion (2011)</button>
+            <button class="item-btn" onclick="selectItem('OS X 10.8 Mountain Lion', 'macOS', 'iCloud entegrasyonu güçlendirildi', ['x64'])"><i class="fa-brands fa-apple"></i> OS X 10.8 Mountain Lion (2012)</button>
+            <button class="item-btn" onclick="selectItem('OS X 10.9 Mavericks', 'macOS', 'İlk kez ücretsiz sunulan güncelleme', ['x64'])"><i class="fa-brands fa-apple"></i> OS X 10.9 Mavericks (2013)</button>
+            <button class="item-btn" onclick="selectItem('OS X 10.10 Yosemite', 'macOS', 'Yassı (flat) tasarım diline geçiş', ['x64'])"><i class="fa-brands fa-apple"></i> OS X 10.10 Yosemite (2014)</button>
+            <button class="item-btn" onclick="selectItem('OS X 10.11 El Capitan', 'macOS', 'Yosemite\'nin performans odaklı devamı', ['x64'])"><i class="fa-brands fa-apple"></i> OS X 10.11 El Capitan (2015)</button>
+            <button class="item-btn" onclick="selectItem('macOS 10.12 Sierra', 'macOS', '"Mac OS X" adı resmen "macOS" oldu', ['x64'])"><i class="fa-brands fa-apple"></i> macOS Sierra (2016)</button>
+            <button class="item-btn" onclick="selectItem('macOS 10.13 High Sierra', 'macOS', 'APFS dosya sistemi tanıtıldı', ['x64'])"><i class="fa-brands fa-apple"></i> macOS High Sierra (2017)</button>
+            <button class="item-btn" onclick="selectItem('macOS 10.14 Mojave', 'macOS', 'Karanlık mod (Dark Mode) geldi', ['x64'])"><i class="fa-brands fa-apple"></i> macOS Mojave (2018)</button>
+            <button class="item-btn" onclick="selectItem('macOS 10.15 Catalina', 'macOS', '32-bit uygulama desteği kaldırıldı', ['x64'])"><i class="fa-brands fa-apple"></i> macOS Catalina (2019)</button>
+            <button class="item-btn" onclick="selectItem('macOS 11 Big Sur', 'macOS', 'Apple Silicon (M1) desteğiyle gelen sürüm', ['x64'])"><i class="fa-brands fa-apple"></i> macOS Big Sur (2020)</button>
+            <button class="item-btn" onclick="selectItem('macOS 12 Monterey', 'macOS', 'Universal Control özelliği tanıtıldı', ['x64'])"><i class="fa-brands fa-apple"></i> macOS Monterey (2021)</button>
+            <button class="item-btn" onclick="selectItem('macOS 13 Ventura', 'macOS', 'Stage Manager özelliği geldi', ['x64'])"><i class="fa-brands fa-apple"></i> macOS Ventura (2022)</button>
+            <button class="item-btn" onclick="selectItem('macOS 14 Sonoma', 'macOS', 'macOS Sonoma Full Installer', ['x64'])"><i class="fa-brands fa-apple"></i> macOS Sonoma (2023)</button>
         </div>
     </div>
+
 
     <!-- SAĞ ANA İÇERİK ALANI -->
     <div class="main-content">
         <div class="content-card">
             
             <div class="content-header">
-                <h1 id="selected-title"><i class="fa-solid fa-hand-pointer"></i> Lütfen Seçim Yapın</h1>
+                <h1 id="selected-title"></h1>
                 
                 <!-- Mimari Seçimi (x64 / x86) -->
-                <div class="arch-selector">
-                    <button class="arch-btn active" onclick="setArch('x64', this)">x64 (64-Bit)</button>
-                    <button class="arch-btn" onclick="setArch('x86', this)">x86 (32-Bit)</button>
-                </div>
+                <div class="arch-selector" id="arch-selector" style="display:none;"></div>
+            </div>
+
+            <!-- BİLGİLENDİRME SEKMESİ (Sol üstteki Hoş Geldin butonuna basınca açılır) -->
+            <div id="info-section" style="display:none;">
+                <!-- JS içindeki infoData dizisinden otomatik doldurulur -->
+                <div id="info-content"></div>
             </div>
 
             <!-- Programlar Izgarası (40 Tane Düzenli Program Butonu) -->
@@ -449,6 +532,74 @@
         let currentItemName = '';
         let currentCategory = '';
         let currentDescription = '';
+
+        // Mimari kodlarının ekranda gösterilecek etiketleri
+        const archLabels = {
+            x64: 'x64 (64-Bit)',
+            x86: 'x86 (32-Bit)',
+            ppc: 'PowerPC'
+        };
+
+        // Seçilen sürümün desteklediği mimarilere göre butonları oluşturur.
+        // Tek mimari varsa seçici gizlenir ve otomatik o mimari seçilir.
+        function renderArchSelector(archs) {
+            const container = document.getElementById('arch-selector');
+            container.innerHTML = '';
+
+            if (archs.length <= 1) {
+                container.style.display = 'none';
+                currentArch = archs[0] || 'x64';
+                return;
+            }
+
+            container.style.display = 'flex';
+            archs.forEach((code, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'arch-btn' + (index === 0 ? ' active' : '');
+                btn.innerText = archLabels[code] || code;
+                btn.onclick = () => setArch(code, btn);
+                container.appendChild(btn);
+            });
+            currentArch = archs[0];
+        }
+
+        // ================================================================
+        // BİLGİLENDİRME SEKMESİ İÇERİĞİ - Buradaki başlık ve metinleri
+        // dilediğin gibi değiştirebilirsin. İstediğin kadar blok ekleyip
+        // çıkarabilirsin, her biri ayrı bir kutu olarak gösterilir.
+        // ================================================================
+        const infoData = {
+            pageTitle: 'Hoş Geldin!',
+            blocks: [
+                {
+                    heading: 'Hoş Geldin',
+                    icon: 'fa-hand-sparkles',
+                    text: 'Buraya kendi hoş geldin mesajını yazabilirsin.'
+                },
+                {
+                    heading: 'Site Kullanımı',
+                    icon: 'fa-circle-info',
+                    text: 'Buraya sitenin nasıl kullanılacağını anlatan metni yazabilirsin.'
+                }
+            ]
+        };
+
+        // Bilgilendirme Sekmesini Göster
+        function showInfo() {
+            document.getElementById('selected-title').innerHTML = `<i class="fa-solid fa-rocket"></i> ${infoData.pageTitle}`;
+            document.getElementById('programs-container').style.display = 'none';
+            document.getElementById('download-section').style.display = 'none';
+            document.getElementById('arch-selector').style.display = 'none';
+            document.getElementById('info-section').style.display = 'block';
+
+            const container = document.getElementById('info-content');
+            container.innerHTML = infoData.blocks.map(b => `
+                <div class="info-block">
+                    <h4><i class="fa-solid ${b.icon}"></i> ${b.heading}</h4>
+                    <p>${b.text}</p>
+                </div>
+            `).join('');
+        }
 
         // 40 Adet Gerçek Program Listesi Mimarisi
         const softwareList = [
@@ -494,8 +645,35 @@
             { name: 'CrystalDiskInfo', cat: 'Disk Sağlığı Kontrolü', icon: 'fa-database' }
         ];
 
+        // Saat & Tarih Güncelleme
+        // Not: new Date() her zaman ziyaretçinin KENDİ cihaz saatini/saat dilimini kullanır.
+        // Bu kod tarayıcıda (client-side) çalıştığı için Fransa'dan giren biri kendi saatini,
+        // ABD'den giren biri kendi saatini otomatik olarak görür - sunucudan bağımsızdır.
+        function updateClock() {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString('tr-TR');
+            const dateStr = now.toLocaleDateString('tr-TR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+
+            // Ziyaretçinin tarayıcısından saat dilimini ve UTC farkını otomatik algıla
+            const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            const offsetMinutes = -now.getTimezoneOffset();
+            const offsetSign = offsetMinutes >= 0 ? '+' : '-';
+            const offsetHours = Math.floor(Math.abs(offsetMinutes) / 60);
+            const tzStr = `${timeZone} (UTC${offsetSign}${offsetHours})`;
+
+            document.getElementById('clock-tz').innerText = tzStr;
+            document.getElementById('clock-time').innerText = timeStr;
+            document.getElementById('clock-date').innerText = dateStr;
+        }
+
         // Sayfa Yüklendiğinde 40 Programı Hazırla
         window.onload = function() {
+            updateClock();
+            setInterval(updateClock, 1000);
+
+            // Siteye girince hoşgeldin mesajını otomatik göster
+            showInfo();
+
             const grid = document.getElementById('prog-grid');
             softwareList.forEach((sw, index) => {
                 const card = document.createElement('div');
@@ -541,6 +719,8 @@
         function showAllPrograms() {
             document.getElementById('programs-container').style.display = 'block';
             document.getElementById('download-section').style.display = 'none';
+            document.getElementById('info-section').style.display = 'none';
+            document.getElementById('arch-selector').style.display = 'none';
             document.getElementById('selected-title').innerHTML = '<i class="fa-solid fa-cubes"></i> 40 Popüler Yazılım Portalı';
         }
 
@@ -556,26 +736,29 @@
         }
 
         // Sürüm veya Program Seçimi Yapıldığında
-        function selectItem(name, category, desc) {
+        function selectItem(name, category, desc, archs = ['x64', 'x86']) {
             currentItemName = name;
             currentCategory = category;
             currentDescription = desc;
 
             document.getElementById('selected-title').innerHTML = `<i class="fa-solid fa-circle-check" style="color:var(--accent-green);"></i> ${name}`;
+            document.getElementById('info-section').style.display = 'none';
+            document.getElementById('programs-container').style.display = 'none';
             document.getElementById('download-section').style.display = 'block';
 
+            renderArchSelector(archs);
             updateUI();
         }
 
         // Arayüz ve Tutorial Rehber Metnini Güncelleme
         function updateUI() {
-            document.getElementById('dl-item-title').innerText = `${currentItemName} - [Mimari: ${currentArch}]`;
-            document.getElementById('dl-btn-text').innerText = `${currentItemName} (${currentArch}) İndir`;
+            document.getElementById('dl-item-title').innerText = `${currentItemName} - [Mimari: ${archLabels[currentArch] || currentArch}]`;
+            document.getElementById('dl-btn-text').innerText = `${currentItemName} (${archLabels[currentArch] || currentArch}) İndir`;
 
             const tutText = document.getElementById('tutorial-text');
             tutText.innerHTML = `
                 <p style="margin-bottom:8px;"><strong>Seçilen İçerik:</strong> ${currentItemName} (${currentCategory})</p>
-                <p style="margin-bottom:8px;"><strong>Mimari Desteği:</strong> <span style="color:var(--accent);">${currentArch}</span></p>
+                <p style="margin-bottom:8px;"><strong>Mimari Desteği:</strong> <span style="color:var(--accent);">${archLabels[currentArch] || currentArch}</span></p>
                 <p style="margin-bottom:12px;"><strong>Açıklama:</strong> ${currentDescription}</p>
                 <hr style="border:0; border-top:1px solid var(--border); margin:12px 0;">
                 <p><strong>1. Adım:</strong> Aşağıdaki yeşil "İndirmeyi Başlat" butonuna tıklayarak kurulum dosyasını edinin.</p>
@@ -586,7 +769,7 @@
 
         // İndirme Tetikleyici
         function triggerDownload() {
-            alert(`${currentItemName} (${currentArch}) indirme bağlantısı çalıştırılıyor!`);
+            alert(`${currentItemName} (${archLabels[currentArch] || currentArch}) indirme bağlantısı çalıştırılıyor!`);
         }
     </script>
 </body>
