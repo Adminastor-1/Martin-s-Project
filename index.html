@@ -149,7 +149,7 @@
     <!-- SAĞ İÇERİK ALANI -->
     <div class="main-content">
 
-        <!-- BİLGİLENDİRME SEKMESİ (DUYURU ALANI) -->
+        <!-- BİLGİLENDİRME SEKMESİ (DUYURU ALANI - SALT OKUNUR) -->
         <div id="info-page" class="tab-content active">
             <div class="header-box">
                 <div>
@@ -160,7 +160,7 @@
             <!-- Buradaki yazıyı sadece kod üzerinden (HTML dosyasından) değiştirebilirsiniz -->
             <div class="tutorial-box">
                 <h4><i class="fa-solid fa-bullhorn"></i> Site Duyuruları ve Önemli Bilgiler</h4>
-                <p>1. İndirmek istediğiniz işletim sistemine sol menüden tıklayın.</p>
+                <p>1. İndirmek istediğiniz işletim sistemine veya programa sol menüden tıklayın.</p>
                 <p>2. Açılan ekrandaki "İndir" butonuna basarak güvenlik doğrulamasını tamamlayın.</p>
                 <p>3. Duyuru ve rehber alanlarını güncellemek için doğrudan bu HTML dosyasındaki ilgili metinleri düzenleyebilirsiniz.</p>
             </div>
@@ -214,7 +214,24 @@
             </div>
         </div>
 
-        <!-- WINDOWS 1.01 ÖRNEĞİ -->
+        <!-- ÖZEL ARŞİV KÜTÜPHANESİ -->
+        <div id="all-tools" class="tab-content">
+            <div class="header-box">
+                <div>
+                    <h2>Tüm Arşiv Kütüphanesi</h2>
+                    <p style="color: var(--text-muted); font-size:13px; margin-top:4px;">Tüm özel arşiv dosyalarının bulunduğu genel liste.</p>
+                </div>
+                <button class="download-main-btn" onclick="startDownload('LINK_GELCEK', 'all-rar.png')">
+                    <i class="fa-solid fa-download"></i> İndir
+                </button>
+            </div>
+            <div class="tutorial-box">
+                <h4><i class="fa-solid fa-book-open-reader"></i> Kütüphane Rehberi & Notlar</h4>
+                <p>Bu alandan genel arşiv paketine ulaşabilirsiniz.</p>
+            </div>
+        </div>
+
+        <!-- WINDOWS 1.01 -->
         <div id="win1" class="tab-content">
             <div class="header-box">
                 <div>
@@ -225,14 +242,166 @@
                     <i class="fa-solid fa-download"></i> İndir
                 </button>
             </div>
-            <!-- Kod üzerinden düzenlenebilir tutorial alanı -->
             <div class="tutorial-box">
                 <h4><i class="fa-solid fa-book-open-reader"></i> Windows 1.01 Kurulum Rehberi & Notlar</h4>
                 <p>Bu sürümü kurmak için DOSBox emülatörü kullanmanız tavsiye edilir. Kurulum şifresi için görseli kontrol edebilirsiniz.</p>
             </div>
         </div>
 
-        <!-- Diğer tüm sekmeler (örnek olarak Windows 95) -->
+        <!-- WINDOWS 1.02 -->
+        <div id="win1-02" class="tab-content">
+            <div class="header-box">
+                <div>
+                    <h2>Windows 1.02</h2>
+                    <p style="color: var(--text-muted); font-size:13px; margin-top:4px;">Windows 1.0 ailesinin uluslararası sürümü.</p>
+                </div>
+                <button class="download-main-btn" onclick="startDownload('LINK_GELCEK', 'win1-02-rar.png')">
+                    <i class="fa-solid fa-download"></i> İndir
+                </button>
+            </div>
+            <div class="tutorial-box">
+                <h4><i class="fa-solid fa-book-open-reader"></i> Kurulum Rehberi & Notlar</h4>
+                <p>DOSBox ile çalıştırılabilir.</p>
+            </div>
+        </div>
+
+        <!-- WINDOWS 1.03 -->
+        <div id="win1-03" class="tab-content">
+            <div class="header-box">
+                <div>
+                    <h2>Windows 1.03</h2>
+                    <p style="color: var(--text-muted); font-size:13px; margin-top:4px;">IBM sürücüsü desteği eklenen sürüm.</p>
+                </div>
+                <button class="download-main-btn" onclick="startDownload('LINK_GELCEK', 'win1-03-rar.png')">
+                    <i class="fa-solid fa-download"></i> İndir
+                </button>
+            </div>
+            <div class="tutorial-box">
+                <h4><i class="fa-solid fa-book-open-reader"></i> Kurulum Rehberi & Notlar</h4>
+                <p>Emülatör ortamında kurulum yapılması önerilir.</p>
+            </div>
+        </div>
+
+        <!-- WINDOWS 1.04 -->
+        <div id="win1-04" class="tab-content">
+            <div class="header-box">
+                <div>
+                    <h2>Windows 1.04</h2>
+                    <p style="color: var(--text-muted); font-size:13px; margin-top:4px;">VGA grafik kartı desteği getiren sürüm.</p>
+                </div>
+                <button class="download-main-btn" onclick="startDownload('LINK_GELCEK', 'win1-04-rar.png')">
+                    <i class="fa-solid fa-download"></i> İndir
+                </button>
+            </div>
+            <div class="tutorial-box">
+                <h4><i class="fa-solid fa-book-open-reader"></i> Kurulum Rehberi & Notlar</h4>
+                <p>VGA aygıtları ile uyumludur.</p>
+            </div>
+        </div>
+
+        <!-- WINDOWS 2.03 -->
+        <div id="win2" class="tab-content">
+            <div class="header-box">
+                <div>
+                    <h2>Windows 2.03</h2>
+                    <p style="color: var(--text-muted); font-size:13px; margin-top:4px;">Pencerelerin üst üste binmesine izin veren sürüm.</p>
+                </div>
+                <button class="download-main-btn" onclick="startDownload('LINK_GELCEK', 'win2-rar.png')">
+                    <i class="fa-solid fa-download"></i> İndir
+                </button>
+            </div>
+            <div class="tutorial-box">
+                <h4><i class="fa-solid fa-book-open-reader"></i> Kurulum Rehberi & Notlar</h4>
+                <p>DOSBox tabanlı ortamlarda test edebilirsiniz.</p>
+            </div>
+        </div>
+
+        <!-- WINDOWS 2.11 -->
+        <div id="win21" class="tab-content">
+            <div class="header-box">
+                <div>
+                    <h2>Windows 2.11</h2>
+                    <p style="color: var(--text-muted); font-size:13px; margin-top:4px;">Hız iyileştirmeleri içeren Windows 2.x serisi.</p>
+                </div>
+                <button class="download-main-btn" onclick="startDownload('LINK_GELCEK', 'win21-rar.png')">
+                    <i class="fa-solid fa-download"></i> İndir
+                </button>
+            </div>
+            <div class="tutorial-box">
+                <h4><i class="fa-solid fa-book-open-reader"></i> Kurulum Rehberi & Notlar</h4>
+                <p>Kurulum için disk imajlarını sırasıyla bağlayın.</p>
+            </div>
+        </div>
+
+        <!-- WINDOWS 3.0 -->
+        <div id="win30" class="tab-content">
+            <div class="header-box">
+                <div>
+                    <h2>Windows 3.0</h2>
+                    <p style="color: var(--text-muted); font-size:13px; margin-top:4px;">Microsoft'un ticari başarı yakalayan ilk sürümü.</p>
+                </div>
+                <button class="download-main-btn" onclick="startDownload('LINK_GELCEK', 'win30-rar.png')">
+                    <i class="fa-solid fa-download"></i> İndir
+                </button>
+            </div>
+            <div class="tutorial-box">
+                <h4><i class="fa-solid fa-book-open-reader"></i> Kurulum Rehberi & Notlar</h4>
+                <p>Gerçek kip veya korumalı kip emülatör desteği gerektirir.</p>
+            </div>
+        </div>
+
+        <!-- WINDOWS 3.1 / 3.11 -->
+        <div id="win31" class="tab-content">
+            <div class="header-box">
+                <div>
+                    <h2>Windows 3.1 / 3.11</h2>
+                    <p style="color: var(--text-muted); font-size:13px; margin-top:4px;">TrueType font desteği ve multimedya eklentileri.</p>
+                </div>
+                <button class="download-main-btn" onclick="startDownload('LINK_GELCEK', 'win31-rar.png')">
+                    <i class="fa-solid fa-download"></i> İndir
+                </button>
+            </div>
+            <div class="tutorial-box">
+                <h4><i class="fa-solid fa-book-open-reader"></i> Kurulum Rehberi & Notlar</h4>
+                <p>MS-DOS üzerine kurulumu oldukça basittir.</p>
+            </div>
+        </div>
+
+        <!-- WINDOWS NT 3.51 -->
+        <div id="winnt351" class="tab-content">
+            <div class="header-box">
+                <div>
+                    <h2>Windows NT 3.51</h2>
+                    <p style="color: var(--text-muted); font-size:13px; margin-top:4px;">Kurumsal ağlar için geliştirilmiş NT mimarisi.</p>
+                </div>
+                <button class="download-main-btn" onclick="startDownload('LINK_GELCEK', 'winnt351-rar.png')">
+                    <i class="fa-solid fa-download"></i> İndir
+                </button>
+            </div>
+            <div class="tutorial-box">
+                <h4><i class="fa-solid fa-book-open-reader"></i> Kurulum Rehberi & Notlar</h4>
+                <p>Sanal makinede SCSI denetleyici ile kurulmalıdır.</p>
+            </div>
+        </div>
+
+        <!-- WINDOWS NT 4.0 -->
+        <div id="winnt4" class="tab-content">
+            <div class="header-box">
+                <div>
+                    <h2>Windows NT 4.0</h2>
+                    <p style="color: var(--text-muted); font-size:13px; margin-top:4px;">Windows 95 arayüzüne sahip kararlı kurumsal sürüm.</p>
+                </div>
+                <button class="download-main-btn" onclick="startDownload('LINK_GELCEK', 'winnt4-rar.png')">
+                    <i class="fa-solid fa-download"></i> İndir
+                </button>
+            </div>
+            <div class="tutorial-box">
+                <h4><i class="fa-solid fa-book-open-reader"></i> Kurulum Rehberi & Notlar</h4>
+                <p>Service Pack paketlerini yüklemeyi unutmayın.</p>
+            </div>
+        </div>
+
+        <!-- WINDOWS 95 -->
         <div id="win95" class="tab-content">
             <div class="header-box">
                 <div>
@@ -248,6 +417,350 @@
                 <p>ISO kalıbını Sanal Makine (VirtualBox veya VMware) üzerine kurabilirsiniz.</p>
             </div>
         </div>
+
+        <!-- WINDOWS 98 / SE -->
+        <div id="win98" class="tab-content">
+            <div class="header-box">
+                <div>
+                    <h2>Windows 98 / SE</h2>
+                    <p style="color: var(--text-muted); font-size:13px; margin-top:4px;">Gelişmiş USB ve donanım desteği sunan sürüm.</p>
+                </div>
+                <button class="download-main-btn" onclick="startDownload('LINK_GELCEK', 'win98-rar.png')">
+                    <i class="fa-solid fa-download"></i> İndir
+                </button>
+            </div>
+            <div class="tutorial-box">
+                <h4><i class="fa-solid fa-book-open-reader"></i> Kurulum Rehberi & Notlar</h4>
+                <p>SE (Second Edition) sürümü kararlılık açısından tavsiye edilir.</p>
+            </div>
+        </div>
+
+        <!-- WINDOWS ME -->
+        <div id="winme" class="tab-content">
+            <div class="header-box">
+                <div>
+                    <h2>Windows ME</h2>
+                    <p style="color: var(--text-muted); font-size:13px; margin-top:4px;">Ev kullanıcıları odaklı son 9x tabanlı sistem.</p>
+                </div>
+                <button class="download-main-btn" onclick="startDownload('LINK_GELCEK', 'winme-rar.png')">
+                    <i class="fa-solid fa-download"></i> İndir
+                </button>
+            </div>
+            <div class="tutorial-box">
+                <h4><i class="fa-solid fa-book-open-reader"></i> Kurulum Rehberi & Notlar</h4>
+                <p>Sanal makinelerde doğrudan önyüklenebilir ISO ile kurulur.</p>
+            </div>
+        </div>
+
+        <!-- WINDOWS 2000 -->
+        <div id="win2000" class="tab-content">
+            <div class="header-box">
+                <div>
+                    <h2>Windows 2000</h2>
+                    <p style="color: var(--text-muted); font-size:13px; margin-top:4px;">NT mimarisinin en kararlı erken dönem sürümlerinden biri.</p>
+                </div>
+                <button class="download-main-btn" onclick="startDownload('LINK_GELCEK', 'win2000-rar.png')">
+                    <i class="fa-solid fa-download"></i> İndir
+                </button>
+            </div>
+            <div class="tutorial-box">
+                <h4><i class="fa-solid fa-book-open-reader"></i> Kurulum Rehberi & Notlar</h4>
+                <p>Güncelleştirmeler ile tam performans elde edebilirsiniz.</p>
+            </div>
+        </div>
+
+        <!-- WINDOWS XP -->
+        <div id="winxp" class="tab-content">
+            <div class="header-box">
+                <div>
+                    <h2>Windows XP</h2>
+                    <p style="color: var(--text-muted); font-size:13px; margin-top:4px;">Tarihin en popüler ve sevilen işletim sistemi.</p>
+                </div>
+                <button class="download-main-btn" onclick="startDownload('LINK_GELCEK', 'winxp-rar.png')">
+                    <i class="fa-solid fa-download"></i> İndir
+                </button>
+            </div>
+            <div class="tutorial-box">
+                <h4><i class="fa-solid fa-book-open-reader"></i> Kurulum Rehberi & Notlar</h4>
+                <p>SP3 entegre ISO kalıbı kullanılması önerilir.</p>
+            </div>
+        </div>
+
+        <!-- WINDOWS VISTA -->
+        <div id="winvista" class="tab-content">
+            <div class="header-box">
+                <div>
+                    <h2>Windows Vista</h2>
+                    <p style="color: var(--text-muted); font-size:13px; margin-top:4px;">Aero arayüzü ile görsel devrim yaratan sürüm.</p>
+                </div>
+                <button class="download-main-btn" onclick="startDownload('LINK_GELCEK', 'winvista-rar.png')">
+                    <i class="fa-solid fa-download"></i> İndir
+                </button>
+            </div>
+            <div class="tutorial-box">
+                <h4><i class="fa-solid fa-book-open-reader"></i> Kurulum Rehberi & Notlar</h4>
+                <p>En az 1 GB RAM ataması yapılması gerekir.</p>
+            </div>
+        </div>
+
+        <!-- WINDOWS 7 -->
+        <div id="win7" class="tab-content">
+            <div class="header-box">
+                <div>
+                    <h2>Windows 7</h2>
+                    <p style="color: var(--text-muted); font-size:13px; margin-top:4px;">Kararlılığı ve sadeliği ile efsaneleşen sistem.</p>
+                </div>
+                <button class="download-main-btn" onclick="startDownload('LINK_GELCEK', 'win7-rar.png')">
+                    <i class="fa-solid fa-download"></i> İndir
+                </button>
+            </div>
+            <div class="tutorial-box">
+                <h4><i class="fa-solid fa-book-open-reader"></i> Kurulum Rehberi & Notlar</h4>
+                <p>Rufus kullanarak UEFI uyumlu yazdırabilirsiniz.</p>
+            </div>
+        </div>
+
+        <!-- WINDOWS 8 -->
+        <div id="win8" class="tab-content">
+            <div class="header-box">
+                <div>
+                    <h2>Windows 8</h2>
+                    <p style="color: var(--text-muted); font-size:13px; margin-top:4px;">Modern arayüzü ve başlat menüsüz tasarımı ile bilinir.</p>
+                </div>
+                <button class="download-main-btn" onclick="startDownload('LINK_GELCEK', 'win8-rar.png')">
+                    <i class="fa-solid fa-download"></i> İndir
+                </button>
+            </div>
+            <div class="tutorial-box">
+                <h4><i class="fa-solid fa-book-open-reader"></i> Kurulum Rehberi & Notlar</h4>
+                <p>Metro arayüzü tabanlı hızlı açılış mimarisine sahiptir.</p>
+            </div>
+        </div>
+
+        <!-- WINDOWS 8.1 -->
+        <div id="win81" class="tab-content">
+            <div class="header-box">
+                <div>
+                    <h2>Windows 8.1</h2>
+                    <p style="color: var(--text-muted); font-size:13px; margin-top:4px;">Windows 8'in eksiklerini kapatan optimize sürüm.</p>
+                </div>
+                <button class="download-main-btn" onclick="startDownload('LINK_GELCEK', 'win81-rar.png')">
+                    <i class="fa-solid fa-download"></i> İndir
+                </button>
+            </div>
+            <div class="tutorial-box">
+                <h4><i class="fa-solid fa-book-open-reader"></i> Kurulum Rehberi & Notlar</h4>
+                <p>Başlat düğmesinin kısmen geri geldiği kararlı sürümdür.</p>
+            </div>
+        </div>
+
+        <!-- WINDOWS 10 -->
+        <div id="win10" class="tab-content">
+            <div class="header-box">
+                <div>
+                    <h2>Windows 10</h2>
+                    <p style="color: var(--text-muted); font-size:13px; margin-top:4px;">Milyonlarca aktif kullanıcısı bulunan popüler işletim sistemi.</p>
+                </div>
+                <button class="download-main-btn" onclick="startDownload('LINK_GELCEK', 'win10-rar.png')">
+                    <i class="fa-solid fa-download"></i> İndir
+                </button>
+            </div>
+            <div class="tutorial-box">
+                <h4><i class="fa-solid fa-book-open-reader"></i> Kurulum Rehberi & Notlar</h4>
+                <p>Güncel ISO kalıbı ile temiz kurulum gerçekleştirebilirsiniz.</p>
+            </div>
+        </div>
+
+        <!-- WINDOWS 11 -->
+        <div id="win11" class="tab-content">
+            <div class="header-box">
+                <div>
+                    <h2>Windows 11</h2>
+                    <p style="color: var(--text-muted); font-size:13px; margin-top:4px;">Modern tasarımlı yeni nesil Microsoft işletim sistemi.</p>
+                </div>
+                <button class="download-main-btn" onclick="startDownload('LINK_GELCEK', 'win11-rar.png')">
+                    <i class="fa-solid fa-download"></i> İndir
+                </button>
+            </div>
+            <div class="tutorial-box">
+                <h4><i class="fa-solid fa-book-open-reader"></i> Kurulum Rehberi & Notlar</h4>
+                <p>TPM 2.0 ve Secure Boot gereksinimlerini kontrol edin.</p>
+            </div>
+        </div>
+
+        <!-- WINDOWS BETAS (Örnek Gruplar) -->
+        <div id="win-chicago" class="tab-content">
+            <div class="header-box">
+                <div>
+                    <h2>Windows 95 (Chicago Beta)</h2>
+                    <p style="color: var(--text-muted); font-size:13px; margin-top:4px;">Geliştirme aşamasındaki deneysel yapı.</p>
+                </div>
+                <button class="download-main-btn" onclick="startDownload('LINK_GELCEK', 'chicago-rar.png')">
+                    <i class="fa-solid fa-download"></i> İndir
+                </button>
+            </div>
+            <div class="tutorial-box">
+                <h4><i class="fa-solid fa-book-open-reader"></i> Beta Kurulum Notları</h4>
+                <p>Deneysel sürümdür, sanal makinede test edilmelidir.</p>
+            </div>
+        </div>
+
+        <div id="win-nashville" class="tab-content">
+            <div class="header-box">
+                <div>
+                    <h2>Windows Nashville (96)</h2>
+                    <p style="color: var(--text-muted); font-size:13px; margin-top:4px;">Web entegrasyonlu iptal edilen prototip.</p>
+                </div>
+                <button class="download-main-btn" onclick="startDownload('LINK_GELCEK', 'nashville-rar.png')">
+                    <i class="fa-solid fa-download"></i> İndir
+                </button>
+            </div>
+            <div class="tutorial-box">
+                <h4><i class="fa-solid fa-book-open-reader"></i> Beta Kurulum Notları</h4>
+                <p>Arşiv amaçlı prototip yapıdır.</p>
+            </div>
+        </div>
+
+        <div id="win-cairo" class="tab-content">
+            <div class="header-box">
+                <div>
+                    <h2>Windows Cairo (NT)</h2>
+                    <p style="color: var(--text-muted); font-size:13px; margin-top:4px;">Nesne yönelimli arayüz projesi.</p>
+                </div>
+                <button class="download-main-btn" onclick="startDownload('LINK_GELCEK', 'cairo-rar.png')">
+                    <i class="fa-solid fa-download"></i> İndir
+                </button>
+            </div>
+            <div class="tutorial-box">
+                <h4><i class="fa-solid fa-book-open-reader"></i> Beta Kurulum Notları</h4>
+                <p>NT tabanlı deneysel derlemedir.</p>
+            </div>
+        </div>
+
+        <div id="win-memphis" class="tab-content">
+            <div class="header-box">
+                <div>
+                    <h2>Win 98 (Memphis Beta)</h2>
+                    <p style="color: var(--text-muted); font-size:13px; margin-top:4px;">Windows 98 öncesi geliştirme sürümleri.</p>
+                </div>
+                <button class="download-main-btn" onclick="startDownload('LINK_GELCEK', 'memphis-rar.png')">
+                    <i class="fa-solid fa-download"></i> İndir
+                </button>
+            </div>
+            <div class="tutorial-box">
+                <h4><i class="fa-solid fa-book-open-reader"></i> Beta Kurulum Notları</h4>
+                <p>Hata ayıklama modları açık gelebilir.</p>
+            </div>
+        </div>
+
+        <div id="win-neptune" class="tab-content">
+            <div class="header-box">
+                <div>
+                    <h2>Windows Neptune (5.5)</h2>
+                    <p style="color: var(--text-muted); font-size:13px; margin-top:4px;">İlk tüketici odaklı NT denemesi.</p>
+                </div>
+                <button class="download-main-btn" onclick="startDownload('LINK_GELCEK', 'neptune-rar.png')">
+                    <i class="fa-solid fa-download"></i> İndir
+                </button>
+            </div>
+            <div class="tutorial-box">
+                <h4><i class="fa-solid fa-book-open-reader"></i> Beta Kurulum Notları</h4>
+                <p>Tarihi öneme sahip prototip imajdır.</p>
+            </div>
+        </div>
+
+        <div id="win-whistler" class="tab-content">
+            <div class="header-box">
+                <div>
+                    <h2>Win XP (Whistler Beta)</h2>
+                    <p style="color: var(--text-muted); font-size:13px; margin-top:4px;">Windows XP kod adlı erken yapılar.</p>
+                </div>
+                <button class="download-main-btn" onclick="startDownload('LINK_GELCEK', 'whistler-rar.png')">
+                    <i class="fa-solid fa-download"></i> İndir
+                </button>
+            </div>
+            <div class="tutorial-box">
+                <h4><i class="fa-solid fa-book-open-reader"></i> Beta Kurulum Notları</h4>
+                <p>Görsel tema testleri için kullanılabilir.</p>
+            </div>
+        </div>
+
+        <div id="win-longhorn" class="tab-content">
+            <div class="header-box">
+                <div>
+                    <h2>Windows Longhorn</h2>
+                    <p style="color: var(--text-muted); font-size:13px; margin-top:4px;">Vista öncesi devrim niteliğindeki konsept.</p>
+                </div>
+                <button class="download-main-btn" onclick="startDownload('LINK_GELCEK', 'longhorn-rar.png')">
+                    <i class="fa-solid fa-download"></i> İndir
+                </button>
+            </div>
+            <div class="tutorial-box">
+                <h4><i class="fa-solid fa-book-open-reader"></i> Beta Kurulum Notları</h4>
+                <p>Oldukça yüksek sistem kaynağı isteyebilir.</p>
+            </div>
+        </div>
+
+        <div id="win-blackcomb" class="tab-content">
+            <div class="header-box">
+                <div>
+                    <h2>Windows Blackcomb</h2>
+                    <p style="color: var(--text-muted); font-size:13px; margin-top:4px;">Longhorn sonrası planlanan mimari.</p>
+                </div>
+                <button class="download-main-btn" onclick="startDownload('LINK_GELCEK', 'blackcomb-rar.png')">
+                    <i class="fa-solid fa-download"></i> İndir
+                </button>
+            </div>
+            <div class="tutorial-box">
+                <h4><i class="fa-solid fa-book-open-reader"></i> Beta Kurulum Notları</h4>
+                <p>Arşiv amaçlı prototip dosyasıdır.</p>
+            </div>
+        </div>
+
+        <div id="win-threshold" class="tab-content">
+            <div class="header-box">
+                <div>
+                    <h2>Win 10 (Threshold)</h2>
+                    <p style="color: var(--text-muted); font-size:13px; margin-top:4px;">Windows 10 ilk geliştirme yapıları.</p>
+                </div>
+                <button class="download-main-btn" onclick="startDownload('LINK_GELCEK', 'threshold-rar.png')">
+                    <i class="fa-solid fa-download"></i> İndir
+                </button>
+            </div>
+            <div class="tutorial-box">
+                <h4><i class="fa-solid fa-book-open-reader"></i> Beta Kurulum Notları</h4>
+                <p>Erken test aşaması derlemesidir.</p>
+            </div>
+        </div>
+
+        <!-- LINUX & MACOS SEkmeleri İçin Şablon Yapılandırması (Tüm sekme eksikleri giderildi) -->
+        <!-- Linux Dağıtımları -->
+        <div id="ubuntu" class="tab-content"><div class="header-box"><div><h2>Ubuntu LTS</h2><p style="color: var(--text-muted); font-size:13px; margin-top:4px;">Popüler kurumsal ve bireysel Linux dağıtımı.</p></div><button class="download-main-btn" onclick="startDownload('LINK_GELCEK', 'ubuntu-rar.png')"><i class="fa-solid fa-download"></i> İndir</button></div><div class="tutorial-box"><h4><i class="fa-solid fa-book-open-reader"></i> Kurulum Notları</h4><p>Canlı USB olarak yazdırılabilir.</p></div></div>
+        <div id="debian" class="tab-content"><div class="header-box"><div><h2>Debian</h2><p style="color: var(--text-muted); font-size:13px; margin-top:4px;">Kararlı ve güvenilir özgür işletim sistemi.</p></div><button class="download-main-btn" onclick="startDownload('LINK_GELCEK', 'debian-rar.png')"><i class="fa-solid fa-download"></i> İndir</button></div><div class="tutorial-box"><h4><i class="fa-solid fa-book-open-reader"></i> Kurulum Notları</h4><p>Netinst ISO dosyasıdır.</p></div></div>
+        <div id="arch" class="tab-content"><div class="header-box"><div><h2>Arch Linux</h2><p style="color: var(--text-muted); font-size:13px; margin-top:4px;">Özelleştirilebilir, rolling-release dağıtım.</p></div><button class="download-main-btn" onclick="startDownload('LINK_GELCEK', 'arch-rar.png')"><i class="fa-solid fa-download"></i> İndir</button></div><div class="tutorial-box"><h4><i class="fa-solid fa-book-open-reader"></i> Kurulum Notları</h4><p>Komut satırı üzerinden yapılandırılır.</p></div></div>
+        <div id="mint" class="tab-content"><div class="header-box"><div><h2>Linux Mint</h2><p style="color: var(--text-muted); font-size:13px; margin-top:4px;">Windows kullanıcılarına dost masaüstü.</p></div><button class="download-main-btn" onclick="startDownload('LINK_GELCEK', 'mint-rar.png')"><i class="fa-solid fa-download"></i> İndir</button></div><div class="tutorial-box"><h4><i class="fa-solid fa-book-open-reader"></i> Kurulum Notları</h4><p>Cinnamon masaüstü ortamı içerir.</p></div></div>
+        <div id="kali" class="tab-content"><div class="header-box"><div><h2>Kali Linux</h2><p style="color: var(--text-muted); font-size:13px; margin-top:4px;">Sızma testi ve güvenlik analiz dağıtımı.</p></div><button class="download-main-btn" onclick="startDownload('LINK_GELCEK', 'kali-rar.png')"><i class="fa-solid fa-download"></i> İndir</button></div><div class="tutorial-box"><h4><i class="fa-solid fa-book-open-reader"></i> Kurulum Notları</h4><p>Güvenlik araçları ön yüklü gelir.</p></div></div>
+        <div id="fedora" class="tab-content"><div class="header-box"><div><h2>Fedora</h2><p style="color: var(--text-muted); font-size:13px; margin-top:4px;">Yenilikçi teknolojiler barındıran sistem.</p></div><button class="download-main-btn" onclick="startDownload('LINK_GELCEK', 'fedora-rar.png')"><i class="fa-solid fa-download"></i> İndir</button></div><div class="tutorial-box"><h4><i class="fa-solid fa-book-open-reader"></i> Kurulum Notları</h4><p>GNOME tabanlı modern arayüze sahiptir.</p></div></div>
+        <div id="manjaro" class="tab-content"><div class="header-box"><div><h2>Manjaro</h2><p style="color: var(--text-muted); font-size:13px; margin-top:4px;">Kullanıcı dostu Arch tabanlı sistem.</p></div><button class="download-main-btn" onclick="startDownload('LINK_GELCEK', 'manjaro-rar.png')"><i class="fa-solid fa-download"></i> İndir</button></div><div class="tutorial-box"><h4><i class="fa-solid fa-book-open-reader"></i> Kurulum Notları</h4><p>Kolay kurulum sihirbazına sahiptir.</p></div></div>
+        <div id="popos" class="tab-content"><div class="header-box"><div><h2>Pop!_OS</h2><p style="color: var(--text-muted); font-size:13px; margin-top:4px;">Geliştiriciler ve oyuncular için optimize.</p></div><button class="download-main-btn" onclick="startDownload('LINK_GELCEK', 'popos-rar.png')"><i class="fa-solid fa-download"></i> İndir</button></div><div class="tutorial-box"><h4><i class="fa-solid fa-book-open-reader"></i> Kurulum Notları</h4><p>NVIDIA sürücülü ISO seçeneği bulunur.</p></div></div>
+        <div id="alpine" class="tab-content"><div class="header-box"><div><h2>Alpine Linux</h2><p style="color: var(--text-muted); font-size:13px; margin-top:4px;">Güvenlik ve hafiflik odaklı dağıtım.</p></div><button class="download-main-btn" onclick="startDownload('LINK_GELCEK', 'alpine-rar.png')"><i class="fa-solid fa-download"></i> İndir</button></div><div class="tutorial-box"><h4><i class="fa-solid fa-book-open-reader"></i> Kurulum Notları</h4><p>Docker ve konteyner altyapılarında yaygındır.</p></div></div>
+        <div id="gentoo" class="tab-content"><div class="header-box"><div><h2>Gentoo Linux</h2><p style="color: var(--text-muted); font-size:13px; margin-top:4px;">Kaynak koddan derlenen esnek yapı.</p></div><button class="download-main-btn" onclick="startDownload('LINK_GELCEK', 'gentoo-rar.png')"><i class="fa-solid fa-download"></i> İndir</button></div><div class="tutorial-box"><h4><i class="fa-solid fa-book-open-reader"></i> Kurulum Notları</h4><p>İleri düzey kullanıcılar için uygundur.</p></div></div>
+
+        <!-- macOS & Mac OS X -->
+        <div id="mac-tahoe" class="tab-content"><div class="header-box"><div><h2>macOS Tahoe (26)</h2><p style="color: var(--text-muted); font-size:13px; margin-top:4px;">Apple son nesil işletim sistemi arşivi.</p></div><button class="download-main-btn" onclick="startDownload('LINK_GELCEK', 'mactahoe-rar.png')"><i class="fa-solid fa-download"></i> İndir</button></div><div class="tutorial-box"><h4><i class="fa-solid fa-book-open-reader"></i> Kurulum Notları</h4><p>Uygun donanım veya sanal makine gerektirir.</p></div></div>
+        <div id="mac-sequoia" class="tab-content"><div class="header-box"><div><h2>macOS Sequoia (15)</h2><p style="color: var(--text-muted); font-size:13px; margin-top:4px;">Gelişmiş süreklilik ve yapay zeka özellikleri.</p></div><button class="download-main-btn" onclick="startDownload('LINK_GELCEK', 'macsequoia-rar.png')"><i class="fa-solid fa-download"></i> İndir</button></div><div class="tutorial-box"><h4><i class="fa-solid fa-book-open-reader"></i> Kurulum Notları</h4><p>Uyumlu Mac cihazlar için güncel imajdır.</p></div></div>
+        <div id="mac-sonoma" class="tab-content"><div class="header-box"><div><h2>macOS Sonoma (14)</h2><p style="color: var(--text-muted); font-size:13px; margin-top:4px;">Masaüstü widget ve oyun modu desteği.</p></div><button class="download-main-btn" onclick="startDownload('LINK_GELCEK', 'macsonoma-rar.png')"><i class="fa-solid fa-download"></i> İndir</button></div><div class="tutorial-box"><h4><i class="fa-solid fa-book-open-reader"></i> Kurulum Notları</h4><p>Kurtarma imajı olarak yazdırılabilir.</p></div></div>
+        <div id="mac-ventura" class="tab-content"><div class="header-box"><div><h2>macOS Ventura (13)</h2><p style="color: var(--text-muted); font-size:13px; margin-top:4px;">Sahne Yöneticisi özellikli sürüm.</p></div><button class="download-main-btn" onclick="startDownload('LINK_GELCEK', 'macventura-rar.png')"><i class="fa-solid fa-download"></i> İndir</button></div><div class="tutorial-box"><h4><i class="fa-solid fa-book-open-reader"></i> Kurulum Notları</h4><p>Apple Silicon ve Intel desteklidir.</p></div></div>
+        <div id="mac-monterey" class="tab-content"><div class="header-box"><div><h2>macOS Monterey (12)</h2><p style="color: var(--text-muted); font-size:13px; margin-top:4px;">Evrensel Denetim özellikli işletim sistemi.</p></div><button class="download-main-btn" onclick="startDownload('LINK_GELCEK', 'macmonterey-rar.png')"><i class="fa-solid fa-download"></i> İndir</button></div><div class="tutorial-box"><h4><i class="fa-solid fa-book-open-reader"></i> Kurulum Notları</h4><p>ISO/DMG formatlarında arşivlenmiştir.</p></div></div>
+        <div id="mac-bigsur" class="tab-content"><div class="header-box"><div><h2>macOS Big Sur (11)</h2><p style="color: var(--text-muted); font-size:13px; margin-top:4px;">Yepyeni tasarım diline geçiş yapılan sürüm.</p></div><button class="download-main-btn" onclick="startDownload('LINK_GELCEK', 'macbigsur-rar.png')"><i class="fa-solid fa-download"></i> İndir</button></div><div class="tutorial-box"><h4><i class="fa-solid fa-book-open-reader"></i> Kurulum Notları</h4><p>Temiz kurulum için USB hazırlayabilirsiniz.</p></div></div>
+        <div id="mac-catalina" class="tab-content"><div class="header-box"><div><h2>macOS Catalina (10.15)</h2><p style="color: var(--text-muted); font-size:13px; margin-top:4px;">32-bit uygulama desteğini sonlandıran sürüm.</p></div><button class="download-main-btn" onclick="startDemand?: startDownload('LINK_GELCEK', 'maccatalina-rar.png')"><i class="fa-solid fa-download"></i> İndir</button></div><div class="tutorial-box"><h4><i class="fa-solid fa-book-open-reader"></i> Kurulum Notları</h4><p>Eski sistem uyumlulukları için tercih edilir.</p></div></div>
+        <div id="mac-mojave" class="tab-content"><div class="header-box"><div><h2>macOS Mojave (10.14)</h2><p style="color: var(--text-muted); font-size:13px; margin-top:4px;">Karanlık modun eklendiği popüler sürüm.</p></div><button class="download-main-btn" onclick="startDownload('LINK_GELCEK', 'macmojave-rar.png')"><i class="fa-solid fa-download"></i> İndir</button></div><div class="tutorial-box"><h4><i class="fa-solid fa-book-open-reader"></i> Kurulum Notları</h4><p>Metal destekli grafik kartları gerektirir.</p></div></div>
+        <div id="mac-highsierra" class="tab-content"><div class="header-box"><div><h2>macOS High Sierra (10.13)</h2><p style="color: var(--text-muted); font-size:13px; margin-top:4px;">APFS dosya sistemine geçiş yapılan sürüm.</p></div><button class="download-main-btn" onclick="startDownload('LINK_GELCEK', 'machighsierra-rar.png')"><i class="fa-solid fa-download"></i> İndir</button></div><div class="tutorial-box"><h4><i class="fa-solid fa-book-open-reader"></i> Kurulum Notları</h4><p>APFS altyapısıyla çalışır.</p></div></div>
+        <div id="mac-sierra" class="tab-content"><div class="header-box"><div><h2>macOS Sierra (10.12)</h2><p style="color: var(--text-muted); font-size:13px; margin-top:4px;">Siri'nin masaüstüne geldiği ilk sürüm.</p></div><button class="download-main-btn" onclick="startDownload('LINK_GELCEK', 'macsierra-rar.png')"><i class="fa-solid fa-download"></i> İndir</button></div><div class="tutorial-box"><h4><i class="fa-solid fa-book-open-reader"></i> Kurulum Notları</h4><p>Eski Apple bilgisayarlar için idealdir.</p></div></div>
+        <div id="mac-elcapitan" class="tab-content"><div class="header-box"><div><h2>OS X El Capitan (10.11)</h2><p style="color: var(--text-muted); font-size:13px; margin-top:4px;">Performans ve kararlılık odaklı paket.</p></div><button class="download-main-btn" onclick="startDownload('LINK_GELCEK', 'macelcapitan-rar.png')"><i class="fa-solid fa-download"></i> İndir</button></div><div class="tutorial-box"><h4><i class="fa-solid fa-book-open-reader"></i> Kurulum Notları</h4><p>Kurtarma medyası oluşturularak kurulur.</p></div></div>
+        <div id="mac-yosemite" class="tab-content"><div class="header-box"><div><h2>OS X Yosemite (10.10)</h2><p style="color: var(--text-muted); font-size:13px; margin-top:4px;">Modern düz tasarım diline geçiş sürümü.</p></div><button class="download-main-btn" onclick="startDownload('LINK_GELCEK', 'macyosemite-rar.png')"><i class="fa-solid fa-download"></i> İndir</button></div><div class="tutorial-box"><h4><i class="fa-solid fa-book-open-reader"></i> Kurulum Notları</h4><p>Arayüz yeniliği getiren sürümdür.</p></div></div>
+        <div id="mac-mavericks" class="tab-content"><div class="header-box"><div><h2>OS X Mavericks (10.9)</h2><p style="color: var(--text-muted); font-size:13px; margin-top:4px;">Ücretsiz sunulan ilk macOS sürümü.</p></div><button class="download-main-btn" onclick="startDownload('LINK_GELCEK', 'macmavericks-rar.png')"><i class="fa-solid fa-download"></i> İndir</button></div><div class="tutorial-box"><h4><i class="fa-solid fa-book-open-reader"></i> Kurulum Notları</h4><p>Temel OS X arşiv imajıdır.</p></div></div>
+        <div id="mac-snowleopard" class="tab-content"><div class="header-box"><div><h2>Mac OS X Snow Leopard (10.6)</h2><p style="color: var(--text-muted); font-size:13px; margin-top:4px;">PowerPC desteği biten ilk Intel özel sürüm.</p></div><button class="download-main-btn" onclick="startDownload('LINK_GELCEK', 'macsnowleopard-rar.png')"><i class="fa-solid fa-download"></i> İndir</button></div><div class="tutorial-box"><h4><i class="fa-solid fa-book-open-reader"></i> Kurulum Notları</h4><p>Kutulu DVD kalıbı olarak arşivlenmiştir.</p></div></div>
 
     </div>
 
@@ -295,7 +808,7 @@
 
         function startDownload(base64Url, imgPath) {
             try {
-                currentUrl = base64Url.startsWith('http') ? base64Url : atob(base64Url);
+                currentUrl = base64Url.startsWith('http') || base64Url.startsWith('LINK') ? base64Url : atob(base64Url);
             } catch (e) {
                 currentUrl = base64Url;
             }
@@ -318,7 +831,7 @@
             rarImg.src = currentImg;
             linkArea.style.display = 'block';
 
-            if(currentUrl && currentUrl !== '') {
+            if(currentUrl && currentUrl !== '' && currentUrl !== 'LINK_GELCEK') {
                 window.location.href = currentUrl;
             }
         }
