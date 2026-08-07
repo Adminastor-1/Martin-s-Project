@@ -517,10 +517,24 @@
             });
         };
 
-        // Submenu Aç/Kapa
+        // Submenu Aç/Kapa (yalnızca bir tane açık kalır)
         function toggleSubmenu(id) {
             const menu = document.getElementById(id);
-            menu.classList.toggle('open');
+            const isOpen = menu.classList.contains('open');
+
+            // Diğer tüm açık submenüleri kapat
+            document.querySelectorAll('.submenu.open').forEach(openMenu => {
+                if (openMenu !== menu) {
+                    openMenu.classList.remove('open');
+                }
+            });
+
+            // Tıklanan menüyü aç/kapa (aynı butona tekrar basınca kapanabilsin)
+            if (isOpen) {
+                menu.classList.remove('open');
+            } else {
+                menu.classList.add('open');
+            }
         }
 
         // Tüm Programları Göster
