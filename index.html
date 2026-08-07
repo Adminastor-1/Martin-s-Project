@@ -38,6 +38,10 @@
         .nav-btn.tools-tab-btn { background-color: rgba(168, 85, 247, 0.1); color: #c084fc; border-color: rgba(168, 85, 247, 0.3); }
         .nav-btn.tools-tab-btn:hover { background-color: #c084fc; color: #000; }
 
+        .nav-btn.beta-btn { color: #f43f5e; }
+        .nav-btn.beta-btn:hover { background-color: rgba(244, 63, 94, 0.1); color: #f43f5e; }
+        .nav-btn.beta-btn.active { background-color: #f43f5e; color: #fff; }
+
         /* SAĞ İÇERİK ALANI */
         .main-content { flex: 1; padding: 35px; overflow-y: auto; display: flex; flex-direction: column; gap: 25px; }
         .tab-content { display: none; flex-direction: column; gap: 25px; }
@@ -82,7 +86,6 @@
             <i class="fa-solid fa-circle-info"></i> Bilgilendirme & Rehber
         </button>
 
-        <!-- EN ÜSTTE PROGRAMLAR / ARAÇLAR ALANI -->
         <h2>Programlar & Araçlar</h2>
         <button class="nav-btn tools-tab-btn" onclick="openTab('tools-hub', event)">
             <i class="fa-solid fa-toolbox"></i> Popüler Araçlar & Programlar
@@ -116,6 +119,17 @@
         <button class="nav-btn" onclick="openTab('win10', event)"><i class="fa-brands fa-windows"></i> Windows 10</button>
         <button class="nav-btn" onclick="openTab('win11', event)"><i class="fa-brands fa-windows"></i> Windows 11</button>
 
+        <h2>Windows Betas & Prototypes</h2>
+        <button class="nav-btn beta-btn" onclick="openTab('win-chicago', event)"><i class="fa-solid fa-flask"></i> Win 95 (Chicago Beta)</button>
+        <button class="nav-btn beta-btn" onclick="openTab('win-nashville', event)"><i class="fa-solid fa-flask"></i> Windows Nashville (96)</button>
+        <button class="nav-btn beta-btn" onclick="openTab('win-cairo', event)"><i class="fa-solid fa-flask"></i> Windows Cairo (NT)</button>
+        <button class="nav-btn beta-btn" onclick="openTab('win-memphis', event)"><i class="fa-solid fa-flask"></i> Win 98 (Memphis Beta)</button>
+        <button class="nav-btn beta-btn" onclick="openTab('win-neptune', event)"><i class="fa-solid fa-flask"></i> Windows Neptune (5.5)</button>
+        <button class="nav-btn beta-btn" onclick="openTab('win-whistler', event)"><i class="fa-solid fa-flask"></i> Win XP (Whistler Beta)</button>
+        <button class="nav-btn beta-btn" onclick="openTab('win-longhorn', event)"><i class="fa-solid fa-flask"></i> Windows Longhorn</button>
+        <button class="nav-btn beta-btn" onclick="openTab('win-blackcomb', event)"><i class="fa-solid fa-flask"></i> Windows Blackcomb</button>
+        <button class="nav-btn beta-btn" onclick="openTab('win-threshold', event)"><i class="fa-solid fa-flask"></i> Win 10 (Threshold)</button>
+
         <h2>Linux Distributions</h2>
         <button class="nav-btn" onclick="openTab('ubuntu', event)"><i class="fa-brands fa-ubuntu"></i> Ubuntu LTS</button>
         <button class="nav-btn" onclick="openTab('debian', event)"><i class="fa-linux"></i> Debian</button>
@@ -148,39 +162,30 @@
     <!-- SAĞ İÇERİK ALANI -->
     <div class="main-content">
 
-        <!-- 1. BİLGİLENDİRME SEKMESİ -->
+        <!-- BİLGİLENDİRME SEKMESİ -->
         <div id="info-page" class="tab-content active">
             <div class="header-box">
                 <div>
                     <h2><i class="fa-solid fa-circle-info" style="color:var(--accent-blue)"></i> İndirme Merkezi ve Sistem Kullanım Rehberi</h2>
-                    <p style="color: var(--text-muted); margin-top: 5px;">Arşiv paneline hoş geldiniz! Sol menüden dilediğiniz işletim sistemini veya programı seçebilirsiniz.</p>
+                    <p style="color: var(--text-muted); margin-top: 5px;">Arşiv paneline hoş geldiniz! Sol menüden kararlı sürümlerin yanı sıra özel beta projelerini seçebilirsiniz.</p>
                 </div>
-            </div>
-            <div class="tutorial-box">
-                <h3><i class="fa-solid fa-shield-halved"></i> Güvenlik ve Kaynak Bilgisi</h3>
-                <p>Tüm ISO kalıpları ve kurulum dosyaları güvenli kaynaklardan derlenmiştir.</p>
-                <ul>
-                    <li><b>İndirme Adımları:</b> İlgili sürüme tıklayıp indirme butonuna bastıktan sonra karşınıza çıkan güvenlik doğrulamasını tamamlayın.</li>
-                    <li><b>Şifreler:</b> Doğrulama sonrasında RAR dosyası şifre görseli ekranda belirecektir.</li>
-                </ul>
             </div>
         </div>
 
-        <!-- PROGRAMLAR & ARAÇLAR MERKEZİ (EN ÜSTTEKİ ALAN) -->
+        <!-- PROGRAMLAR & ARAÇLAR MERKEZİ -->
         <div id="tools-hub" class="tab-content">
             <div class="header-box">
                 <div>
                     <h2><i class="fa-solid fa-toolbox" style="color:#c084fc"></i> Popüler Programlar & Sistem Araçları</h2>
-                    <p style="color: var(--text-muted); margin-top: 5px;">Sistem kurulumu ve yönetimi için en çok ihtiyaç duyulan yardımcı araçlar.</p>
                 </div>
             </div>
             <div class="tools-grid">
-                <a href="#" class="tool-card" onclick="startDownload('BASE64_RUFUS', 'rufus-rar.png')"><i class="fa-solid fa-compact-disc"></i><h4>Rufus</h4><span style="font-size:11px; color:var(--text-muted)">USB Yazdırma Aracı</span></a>
-                <a href="#" class="tool-card" onclick="startDownload('BASE64_VENTOY', 'ventoy-rar.png')"><i class="fa-solid fa-window-restore"></i><h4>Ventoy</h4><span style="font-size:11px; color:var(--text-muted)">Multiboot USB</span></a>
-                <a href="#" class="tool-card" onclick="startDownload('BASE64_7ZIP', '7zip-rar.png')"><i class="fa-solid fa-file-zipper"></i><h4>7-Zip</h4><span style="font-size:11px; color:var(--text-muted)">Arşiv Yöneticisi</span></a>
-                <a href="#" class="tool-card" onclick="startDownload('BASE64_WINRAR', 'winrar-rar.png')"><i class="fa-solid fa-box-archive"></i><h4>WinRAR</h4><span style="font-size:11px; color:var(--text-muted)">Dosya Sıkıştırma</span></a>
-                <a href="#" class="tool-card" onclick="startDownload('BASE64_DOSBOX', 'dosbox-rar.png')"><i class="fa-solid fa-terminal"></i><h4>DOSBox-X</h4><span style="font-size:11px; color:var(--text-muted)">Eski İşletim Sistemleri</span></a>
-                <a href="#" class="tool-card" onclick="startDownload('BASE64_WINAMP', 'winamp-rar.png')"><i class="fa-solid fa-music"></i><h4>Winamp Classic</h4><span style="font-size:11px; color:var(--text-muted)">Müzik Oynatıcı</span></a>
+                <a href="#" class="tool-card" onclick="startDownload('BASE64_RUFUS', 'rufus-rar.png')"><i class="fa-solid fa-compact-disc"></i><h4>Rufus</h4></a>
+                <a href="#" class="tool-card" onclick="startDownload('BASE64_VENTOY', 'ventoy-rar.png')"><i class="fa-solid fa-window-restore"></i><h4>Ventoy</h4></a>
+                <a href="#" class="tool-card" onclick="startDownload('BASE64_7ZIP', '7zip-rar.png')"><i class="fa-solid fa-file-zipper"></i><h4>7-Zip</h4></a>
+                <a href="#" class="tool-card" onclick="startDownload('BASE64_WINRAR', 'winrar-rar.png')"><i class="fa-solid fa-box-archive"></i><h4>WinRAR</h4></a>
+                <a href="#" class="tool-card" onclick="startDownload('BASE64_DOSBOX', 'dosbox-rar.png')"><i class="fa-solid fa-terminal"></i><h4>DOSBox-X</h4></a>
+                <a href="#" class="tool-card" onclick="startDownload('BASE64_WINAMP', 'winamp-rar.png')"><i class="fa-solid fa-music"></i><h4>Winamp Classic</h4></a>
             </div>
         </div>
 
@@ -190,7 +195,6 @@
                 <div><h2>Windows 1.01 (20 Kasım 1985)</h2></div>
                 <button class="download-main-btn" onclick="startDownload('aHR0cHM6Ly9kb3dubG9hZDEzNDYubWVkaWFmaXJlLmNvbS9zNTMydnBsamg1OWdSVHV4SkkxT1Jsd2p5R245UzFiZzdLaklPUVZCVmExNUtubEd5R05NQVllbnJiWTBCczJ6Ymdfdkc2TWQ4U2xOWWtob2NKSldnRGZ1V2ktU0x4MEk2ZjRPZ3N2X3kxUUdGaGFoU08wN3g5bVVhSXh4bC1HanpicTZSZi1OZGV6ZWM2M1I4SUdaXzNidUw0TXhLU3JscC1nX2Via1RZVXBVS0IwaC9oczI0aGh3eTU3bjJ4b3EvTWljK19XaW4rXzEuMCtfUHJlK19FZCslMjg3LTMwLTE5ODUlMjkrJTI4My41LTM2MGslMjkuN3o=', 'win1-rar.png')"><i class="fa-solid fa-download"></i> Windows 1.01 İndir</button>
             </div>
-            <div class="tutorial-box"><h3><i class="fa-solid fa-book-open"></i> Kurulum Bilgisi</h3><p>DOSBox üzerinde çalıştırılması tavsiye edilir.</p></div>
         </div>
 
         <!-- WINDOWS 1.02 -->
@@ -371,7 +375,71 @@
             </div>
         </div>
 
-        <!-- LINUX: UBUNTU -->
+        <!-- WINDOWS BETAS & PROTOTYPES SEKMELERİ -->
+        <div id="win-chicago" class="tab-content">
+            <div class="header-box">
+                <div><h2>Windows 95 (Chicago Beta / Prototype)</h2></div>
+                <button class="download-main-btn" onclick="startDownload('BASE64_CHICAGO', 'chicago-rar.png')"><i class="fa-solid fa-download"></i> Chicago İndir</button>
+            </div>
+        </div>
+
+        <div id="win-nashville" class="tab-content">
+            <div class="header-box">
+                <div><h2>Windows Nashville (Project Cleveland / 1996)</h2></div>
+                <button class="download-main-btn" onclick="startDownload('BASE64_NASHVILLE', 'nashville-rar.png')"><i class="fa-solid fa-download"></i> Nashville İndir</button>
+            </div>
+        </div>
+
+        <div id="win-cairo" class="tab-content">
+            <div class="header-box">
+                <div><h2>Windows Cairo (Object-based NT Prototype)</h2></div>
+                <button class="download-main-btn" onclick="startDownload('BASE64_CAIRO', 'cairo-rar.png')"><i class="fa-solid fa-download"></i> Cairo İndir</button>
+            </div>
+        </div>
+
+        <div id="win-memphis" class="tab-content">
+            <div class="header-box">
+                <div><h2>Windows 98 (Memphis Beta / Build 1600+)</h2></div>
+                <button class="download-main-btn" onclick="startDownload('BASE64_MEMPHIS', 'memphis-rar.png')"><i class="fa-solid fa-download"></i> Memphis İndir</button>
+            </div>
+        </div>
+
+        <div id="win-neptune" class="tab-content">
+            <div class="header-box">
+                <div><h2>Windows Neptune (Build 5111 - Consumer NT)</h2></div>
+                <button class="download-main-btn" onclick="startDownload('BASE64_NEPTUNE', 'neptune-rar.png')"><i class="fa-solid fa-download"></i> Neptune İndir</button>
+            </div>
+        </div>
+
+        <div id="win-whistler" class="tab-content">
+            <div class="header-box">
+                <div><h2>Windows XP (Whistler Beta Builds)</h2></div>
+                <button class="download-main-btn" onclick="startDownload('BASE64_WHISTLER', 'whistler-rar.png')"><i class="fa-solid fa-download"></i> Whistler İndir</button>
+            </div>
+        </div>
+
+        <div id="win-longhorn" class="tab-content">
+            <div class="header-box">
+                <div><h2>Windows Longhorn (Vista Milestone / Early Builds)</h2></div>
+                <button class="download-main-btn" onclick="startDownload('BASE64_LONGHORN', 'longhorn-rar.png')"><i class="fa-solid fa-download"></i> Longhorn İndir</button>
+            </div>
+        </div>
+
+        <div id="win-blackcomb" class="tab-content">
+            <div class="header-box">
+                <div><h2>Windows Blackcomb (Original Concept / Pre-7)</h2></div>
+                <button class="download-main-btn" onclick="startDownload('BASE64_BLACKCOMB', 'blackcomb-rar.png')"><i class="fa-solid fa-download"></i> Blackcomb İndir</button>
+            </div>
+        </div>
+
+        <div id="win-threshold" class="tab-content">
+            <div class="header-box">
+                <div><h2>Windows 10 (Threshold Early Insider Preview)</h2></div>
+                <button class="download-main-btn" onclick="startDownload('BASE64_THRESHOLD', 'threshold-rar.png')"><i class="fa-solid fa-download"></i> Threshold İndir</button>
+            </div>
+        </div>
+
+        <!-- LINUX DAĞITIMLARI -->
         <div id="ubuntu" class="tab-content">
             <div class="header-box">
                 <div><h2>Ubuntu 24.04 LTS (Noble Numbat)</h2></div>
@@ -379,7 +447,6 @@
             </div>
         </div>
 
-        <!-- LINUX: DEBIAN -->
         <div id="debian" class="tab-content">
             <div class="header-box">
                 <div><h2>Debian 12 (Bookworm)</h2></div>
@@ -387,7 +454,6 @@
             </div>
         </div>
 
-        <!-- LINUX: ARCH -->
         <div id="arch" class="tab-content">
             <div class="header-box">
                 <div><h2>Arch Linux (Rolling Release)</h2></div>
@@ -395,7 +461,6 @@
             </div>
         </div>
 
-        <!-- LINUX: MINT -->
         <div id="mint" class="tab-content">
             <div class="header-box">
                 <div><h2>Linux Mint 21.3 (Cinnamon)</h2></div>
@@ -403,7 +468,6 @@
             </div>
         </div>
 
-        <!-- LINUX: KALI -->
         <div id="kali" class="tab-content">
             <div class="header-box">
                 <div><h2>Kali Linux (Penetration Testing)</h2></div>
@@ -411,7 +475,6 @@
             </div>
         </div>
 
-        <!-- LINUX: FEDORA -->
         <div id="fedora" class="tab-content">
             <div class="header-box">
                 <div><h2>Fedora Workstation 40</h2></div>
@@ -419,7 +482,6 @@
             </div>
         </div>
 
-        <!-- LINUX: MANJARO -->
         <div id="manjaro" class="tab-content">
             <div class="header-box">
                 <div><h2>Manjaro Linux (KDE Plasma)</h2></div>
@@ -427,7 +489,6 @@
             </div>
         </div>
 
-        <!-- LINUX: POPOS -->
         <div id="popos" class="tab-content">
             <div class="header-box">
                 <div><h2>Pop!_OS by System76</h2></div>
@@ -435,7 +496,6 @@
             </div>
         </div>
 
-        <!-- LINUX: ALPINE -->
         <div id="alpine" class="tab-content">
             <div class="header-box">
                 <div><h2>Alpine Linux (Lightweight Security)</h2></div>
@@ -443,7 +503,6 @@
             </div>
         </div>
 
-        <!-- LINUX: GENTOO -->
         <div id="gentoo" class="tab-content">
             <div class="header-box">
                 <div><h2>Gentoo Linux Minimal Installation</h2></div>
@@ -451,124 +510,27 @@
             </div>
         </div>
 
-        <!-- MACOS: TAHOE -->
-        <div id="mac-tahoe" class="tab-content">
-            <div class="header-box">
-                <div><h2>macOS Tahoe (26)</h2></div>
-                <button class="download-main-btn" onclick="startDownload('BASE64_MACOS_TAHOE', 'macos-tahoe-rar.png')"><i class="fa-solid fa-download"></i> macOS Tahoe İndir</button>
-            </div>
-        </div>
-
-        <!-- MACOS: SEQUOIA -->
-        <div id="mac-sequoia" class="tab-content">
-            <div class="header-box">
-                <div><h2>macOS Sequoia (15)</h2></div>
-                <button class="download-main-btn" onclick="startDownload('BASE64_MACOS_SEQUOIA', 'macos-sequoia-rar.png')"><i class="fa-solid fa-download"></i> macOS Sequoia İndir</button>
-            </div>
-        </div>
-
-        <!-- MACOS: SONOMA -->
-        <div id="mac-sonoma" class="tab-content">
-            <div class="header-box">
-                <div><h2>macOS Sonoma (14)</h2></div>
-                <button class="download-main-btn" onclick="startDownload('BASE64_MACOS_SONOMA', 'macos-sonoma-rar.png')"><i class="fa-solid fa-download"></i> macOS Sonoma İndir</button>
-            </div>
-        </div>
-
-        <!-- MACOS: VENTURA -->
-        <div id="mac-ventura" class="tab-content">
-            <div class="header-box">
-                <div><h2>macOS Ventura (13)</h2></div>
-                <button class="download-main-btn" onclick="startDownload('BASE64_MACOS_VENTURA', 'macos-ventura-rar.png')"><i class="fa-solid fa-download"></i> macOS Ventura İndir</button>
-            </div>
-        </div>
-
-        <!-- MACOS: MONTEREY -->
-        <div id="mac-monterey" class="tab-content">
-            <div class="header-box">
-                <div><h2>macOS Monterey (12)</h2></div>
-                <button class="download-main-btn" onclick="startDownload('BASE64_MACOS_MONTEREY', 'macos-monterey-rar.png')"><i class="fa-solid fa-download"></i> macOS Monterey İndir</button>
-            </div>
-        </div>
-
-        <!-- MACOS: BIG SUR -->
-        <div id="mac-bigsur" class="tab-content">
-            <div class="header-box">
-                <div><h2>macOS Big Sur (11)</h2></div>
-                <button class="download-main-btn" onclick="startDownload('BASE64_MACOS_BIGSUR', 'macos-bigsur-rar.png')"><i class="fa-solid fa-download"></i> macOS Big Sur İndir</button>
-            </div>
-        </div>
-
-        <!-- MACOS: CATALINA -->
-        <div id="mac-catalina" class="tab-content">
-            <div class="header-box">
-                <div><h2>macOS Catalina (10.15)</h2></div>
-                <button class="download-main-btn" onclick="startDownload('BASE64_MACOS_CATALINA', 'macos-catalina-rar.png')"><i class="fa-solid fa-download"></i> macOS Catalina İndir</button>
-            </div>
-        </div>
-
-        <!-- MACOS: MOJAVE -->
-        <div id="mac-mojave" class="tab-content">
-            <div class="header-box">
-                <div><h2>macOS Mojave (10.14)</h2></div>
-                <button class="download-main-btn" onclick="startDownload('BASE64_MACOS_MOJAVE', 'macos-mojave-rar.png')"><i class="fa-solid fa-download"></i> macOS Mojave İndir</button>
-            </div>
-        </div>
-
-        <!-- MACOS: HIGH SIERRA -->
-        <div id="mac-highsierra" class="tab-content">
-            <div class="header-box">
-                <div><h2>macOS High Sierra (10.13)</h2></div>
-                <button class="download-main-btn" onclick="startDownload('BASE64_MACOS_HIGHSIERRA', 'macos-highsierra-rar.png')"><i class="fa-solid fa-download"></i> macOS High Sierra İndir</button>
-            </div>
-        </div>
-
-        <!-- MACOS: SIERRA -->
-        <div id="mac-sierra" class="tab-content">
-            <div class="header-box">
-                <div><h2>macOS Sierra (10.12)</h2></div>
-                <button class="download-main-btn" onclick="startDownload('BASE64_MACOS_SIERRA', 'macos-sierra-rar.png')"><i class="fa-solid fa-download"></i> macOS Sierra İndir</button>
-            </div>
-        </div>
-
-        <!-- MACOS: EL CAPITAN -->
-        <div id="mac-elcapitan" class="tab-content">
-            <div class="header-box">
-                <div><h2>OS X El Capitan (10.11)</h2></div>
-                <button class="download-main-btn" onclick="startDownload('BASE64_MACOS_ELCAPITAN', 'macos-elcapitan-rar.png')"><i class="fa-solid fa-download"></i> OS X El Capitan İndir</button>
-            </div>
-        </div>
-
-        <!-- MACOS: YOSEMITE -->
-        <div id="mac-yosemite" class="tab-content">
-            <div class="header-box">
-                <div><h2>OS X Yosemite (10.10)</h2></div>
-                <button class="download-main-btn" onclick="startDownload('BASE64_MACOS_YOSEMITE', 'macos-yosemite-rar.png')"><i class="fa-solid fa-download"></i> OS X Yosemite İndir</button>
-            </div>
-        </div>
-
-        <!-- MACOS: MAVERICKS -->
-        <div id="mac-mavericks" class="tab-content">
-            <div class="header-box">
-                <div><h2>OS X Mavericks (10.9)</h2></div>
-                <button class="download-main-btn" onclick="startDownload('BASE64_MACOS_MAVERICKS', 'macos-mavericks-rar.png')"><i class="fa-solid fa-download"></i> OS X Mavericks İndir</button>
-            </div>
-        </div>
-
-        <!-- MACOS: SNOW LEOPARD -->
-        <div id="mac-snowleopard" class="tab-content">
-            <div class="header-box">
-                <div><h2>Mac OS X Snow Leopard (10.6)</h2></div>
-                <button class="download-main-btn" onclick="startDownload('BASE64_MACOS_SNOWLEOPARD', 'macos-snowleopard-rar.png')"><i class="fa-solid fa-download"></i> Snow Leopard İndir</button>
-            </div>
-        </div>
+        <!-- MACOS SÜRÜMLERİ -->
+        <div id="mac-tahoe" class="tab-content"><div class="header-box"><div><h2>macOS Tahoe (26)</h2></div><button class="download-main-btn" onclick="startDownload('BASE64_MACOS_TAHOE', 'macos-tahoe-rar.png')"><i class="fa-solid fa-download"></i> İndir</button></div></div>
+        <div id="mac-sequoia" class="tab-content"><div class="header-box"><div><h2>macOS Sequoia (15)</h2></div><button class="download-main-btn" onclick="startDownload('BASE64_MACOS_SEQUOIA', 'macos-sequoia-rar.png')"><i class="fa-solid fa-download"></i> İndir</button></div></div>
+        <div id="mac-sonoma" class="tab-content"><div class="header-box"><div><h2>macOS Sonoma (14)</h2></div><button class="download-main-btn" onclick="startDownload('BASE64_MACOS_SONOMA', 'macos-sonoma-rar.png')"><i class="fa-solid fa-download"></i> İndir</button></div></div>
+        <div id="mac-ventura" class="tab-content"><div class="header-box"><div><h2>macOS Ventura (13)</h2></div><button class="download-main-btn" onclick="startDownload('BASE64_MACOS_VENTURA', 'macos-ventura-rar.png')"><i class="fa-solid fa-download"></i> İndir</button></div></div>
+        <div id="mac-monterey" class="tab-content"><div class="header-box"><div><h2>macOS Monterey (12)</h2></div><button class="download-main-btn" onclick="startDownload('BASE64_MACOS_MONTEREY', 'macos-monterey-rar.png')"><i class="fa-solid fa-download"></i> İndir</button></div></div>
+        <div id="mac-bigsur" class="tab-content"><div class="header-box"><div><h2>macOS Big Sur (11)</h2></div><button class="download-main-btn" onclick="startDownload('BASE64_MACOS_BIGSUR', 'macos-bigsur-rar.png')"><i class="fa-solid fa-download"></i> İndir</button></div></div>
+        <div id="mac-catalina" class="tab-content"><div class="header-box"><div><h2>macOS Catalina (10.15)</h2></div><button class="download-main-btn" onclick="startDownload('BASE64_MACOS_CATALINA', 'macos-catalina-rar.png')"><i class="fa-solid fa-download"></i> İndir</button></div></div>
+        <div id="mac-mojave" class="tab-content"><div class="header-box"><div><h2>macOS Mojave (10.14)</h2></div><button class="download-main-btn" onclick="startDownload('BASE64_MACOS_MOJAVE', 'macos-mojave-rar.png')"><i class="fa-solid fa-download"></i> İndir</button></div></div>
+        <div id="mac-highsierra" class="tab-content"><div class="header-box"><div><h2>macOS High Sierra (10.13)</h2></div><button class="download-main-btn" onclick="startDownload('BASE64_MACOS_HIGHSIERRA', 'macos-highsierra-rar.png')"><i class="fa-solid fa-download"></i> İndir</button></div></div>
+        <div id="mac-sierra" class="tab-content"><div class="header-box"><div><h2>macOS Sierra (10.12)</h2></div><button class="download-main-btn" onclick="startDownload('BASE64_MACOS_SIERRA', 'macos-sierra-rar.png')"><i class="fa-solid fa-download"></i> İndir</button></div></div>
+        <div id="mac-elcapitan" class="tab-content"><div class="header-box"><div><h2>OS X El Capitan (10.11)</h2></div><button class="download-main-btn" onclick="startDownload('BASE64_MACOS_ELCAPITAN', 'macos-elcapitan-rar.png')"><i class="fa-solid fa-download"></i> İndir</button></div></div>
+        <div id="mac-yosemite" class="tab-content"><div class="header-box"><div><h2>OS X Yosemite (10.10)</h2></div><button class="download-main-btn" onclick="startDownload('BASE64_MACOS_YOSEMITE', 'macos-yosemite-rar.png')"><i class="fa-solid fa-download"></i> İndir</button></div></div>
+        <div id="mac-mavericks" class="tab-content"><div class="header-box"><div><h2>OS X Mavericks (10.9)</h2></div><button class="download-main-btn" onclick="startDownload('BASE64_MACOS_MAVERICKS', 'macos-mavericks-rar.png')"><i class="fa-solid fa-download"></i> İndir</button></div></div>
+        <div id="mac-snowleopard" class="tab-content"><div class="header-box"><div><h2>Mac OS X Snow Leopard (10.6)</h2></div><button class="download-main-btn" onclick="startDownload('BASE64_MACOS_SNOWLEOPARD', 'macos-snowleopard-rar.png')"><i class="fa-solid fa-download"></i> İndir</button></div></div>
 
         <!-- TÜM ARAÇLAR KÜTÜPHANESİ -->
         <div id="all-tools" class="tab-content">
             <div class="header-box">
                 <div>
                     <h2><i class="fa-solid fa-folder-open" style="color:#eab308"></i> Tüm Arşiv Kütüphanesi</h2>
-                    <p style="color: var(--text-muted); margin-top: 5px;">Tüm sistemler ve paketler tek bir yerde.</p>
                 </div>
             </div>
         </div>
