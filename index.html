@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>İndirme & İS Arşivi Portal</title>
-    <!-- FontAwesome İkonlar -->
+    <title>Yazılım ve İşletim Sistemleri İndirme Portalı</title>
+    <!-- FontAwesome İkon Seti -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -12,9 +12,12 @@
             --bg-card: #1e293b;
             --accent: #38bdf8;
             --accent-hover: #0284c7;
+            --accent-green: #22c55e;
+            --accent-green-hover: #16a34a;
             --text-main: #f8fafc;
             --text-sub: #94a3b8;
             --border: #334155;
+            --badge-bg: #334155;
         }
 
         * {
@@ -31,47 +34,53 @@
             min-height: 100vh;
         }
 
-        /* Sol Panel (Sidebar) */
+        /* Sol Yan Panel (Sidebar) */
         .sidebar {
-            width: 320px;
+            width: 350px;
             background-color: var(--bg-card);
             border-right: 1px solid var(--border);
             padding: 20px;
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 15px;
             overflow-y: auto;
             max-height: 100vh;
         }
 
         .welcome-box {
             background: linear-gradient(135deg, #1e1b4b, #312e81);
-            padding: 15px;
+            padding: 16px;
             border-radius: 12px;
             border: 1px solid #4338ca;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         }
 
         .welcome-box h2 {
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             color: #a5b4fc;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .welcome-box p {
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             color: #c7d2fe;
+            line-height: 1.4;
         }
 
         .category-title {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.2px;
             color: var(--text-sub);
             margin-top: 10px;
             margin-bottom: 5px;
+            font-weight: 700;
         }
 
-        .btn {
+        .menu-btn {
             background-color: #0f172a;
             color: var(--text-main);
             border: 1px solid var(--border);
@@ -82,32 +91,50 @@
             transition: all 0.2s ease;
             display: flex;
             align-items: center;
-            gap: 10px;
+            justify-content: space-between;
             width: 100%;
+            font-weight: 600;
+            font-size: 0.92rem;
         }
 
-        .btn:hover, .btn.active {
-            background-color: var(--accent-hover);
+        .menu-btn:hover {
             border-color: var(--accent);
-            color: white;
+            color: var(--accent);
         }
 
         .submenu {
             display: none;
             flex-direction: column;
-            gap: 5px;
-            padding-left: 10px;
-            margin-top: 5px;
+            gap: 6px;
+            padding-left: 8px;
+            margin-top: 4px;
         }
 
         .submenu.open {
             display: flex;
         }
 
-        .submenu .btn {
-            font-size: 0.9rem;
-            padding: 8px 12px;
+        /* Tekil Seçim Butonları */
+        .item-btn {
             background-color: #1a2332;
+            color: var(--text-sub);
+            border: 1px solid var(--border);
+            padding: 9px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            text-align: left;
+            font-size: 0.85rem;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            width: 100%;
+        }
+
+        .item-btn:hover, .item-btn.active {
+            background-color: var(--accent-hover);
+            color: white;
+            border-color: var(--accent);
         }
 
         /* Sağ Ana İçerik Alanı */
@@ -121,8 +148,8 @@
             background-color: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 16px;
-            padding: 25px;
-            margin-bottom: 20px;
+            padding: 28px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
         }
 
         .content-header {
@@ -130,150 +157,253 @@
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid var(--border);
-            padding-bottom: 15px;
-            margin-bottom: 20px;
+            padding-bottom: 18px;
+            margin-bottom: 22px;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
-        /* Mimari Seçimi (x64 / x86) */
-        .arch-selector {
+        .content-header h1 {
+            font-size: 1.5rem;
+            color: var(--text-main);
             display: flex;
+            align-items: center;
             gap: 10px;
         }
 
-        .arch-btn {
-            padding: 6px 16px;
-            border-radius: 20px;
-            border: 1px solid var(--border);
+        /* Mimari Butonları (x64 / x86) */
+        .arch-selector {
+            display: flex;
+            gap: 10px;
             background: #0f172a;
+            padding: 4px;
+            border-radius: 25px;
+            border: 1px solid var(--border);
+        }
+
+        .arch-btn {
+            padding: 6px 18px;
+            border-radius: 20px;
+            border: none;
+            background: transparent;
             color: var(--text-sub);
             cursor: pointer;
-            font-weight: bold;
+            font-weight: 700;
+            font-size: 0.85rem;
+            transition: all 0.2s;
         }
 
         .arch-btn.active {
             background: var(--accent);
-            color: #000;
-            border-color: var(--accent);
+            color: #0f172a;
         }
 
-        /* Programlar Izgarası (40 Butonluk Alan) */
+        /* Programlar Izgarası (40 Program Alanı) */
         .programs-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 10px;
-            max-height: 400px;
-            overflow-y: auto;
-            padding-right: 5px;
+            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+            gap: 12px;
+            margin-top: 15px;
         }
 
-        .prog-btn {
+        .prog-card-btn {
             background: #0f172a;
             border: 1px solid var(--border);
-            color: var(--text-main);
-            padding: 10px;
-            border-radius: 8px;
+            border-radius: 10px;
+            padding: 12px 14px;
             cursor: pointer;
-            font-size: 0.85rem;
-            text-align: center;
-            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.2s ease;
+            text-align: left;
+            color: var(--text-main);
         }
 
-        .prog-btn:hover {
+        .prog-card-btn:hover, .prog-card-btn.active {
             border-color: var(--accent);
-            color: var(--accent);
+            background: #1a2332;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(56, 189, 248, 0.15);
         }
 
-        /* Indirme ve Rehber (Tutorial) Alanı */
+        .prog-icon {
+            width: 38px;
+            height: 38px;
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--accent);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .prog-info {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .prog-name {
+            font-weight: 600;
+            font-size: 0.88rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .prog-cat {
+            font-size: 0.72rem;
+            color: var(--text-sub);
+            margin-top: 2px;
+        }
+
+        /* İndirme & Rehber Kutusu */
         .tutorial-box {
             background-color: #0f172a;
+            border: 1px solid var(--border);
             border-left: 4px solid var(--accent);
-            padding: 15px;
-            border-radius: 0 8px 8px 0;
-            margin-top: 15px;
+            padding: 22px;
+            border-radius: 0 12px 12px 0;
+            margin-top: 22px;
             line-height: 1.6;
         }
 
+        .tutorial-box h4 {
+            color: var(--accent);
+            font-size: 1.05rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
         .download-action-btn {
-            background: #22c55e;
+            background: var(--accent-green);
             color: white;
             border: none;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-weight: bold;
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-weight: 700;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            margin-top: 15px;
-            font-size: 1rem;
+            gap: 10px;
+            margin-top: 22px;
+            font-size: 1.02rem;
+            transition: all 0.2s;
+            box-shadow: 0 4px 14px rgba(34, 197, 94, 0.3);
         }
 
         .download-action-btn:hover {
-            background: #16a34a;
+            background: var(--accent-green-hover);
+            transform: translateY(-2px);
+        }
+
+        .info-badge {
+            background: var(--badge-bg);
+            color: var(--accent);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: auto;
         }
     </style>
 </head>
 <body>
 
-    <!-- SOL SIDEBAR -->
+    <!-- SOL PANEL (SIDEBAR) -->
     <div class="sidebar">
-        <!-- 1. Karşılama Yazısı -->
+        <!-- 1. Karşılama Alanı -->
         <div class="welcome-box">
-            <h2><i class="fa-solid fa-hand-wave"></i> Hoş Geldin!</h2>
-            <p>Aradığın tüm İşletim Sistemleri, Beta sürümleri ve Programlar burada. Seçim yapıp hemen indir!</p>
+            <h2><i class="fa-solid fa-rocket"></i> Hoş Geldin!</h2>
+            <p>Aşağıdan istediğin İşletim Sistemi sürümüne veya 40 popüler yazılımdan birine tıklayarak rehber ve indirme bağlantılarına erişebilirsin.</p>
         </div>
 
-        <!-- 2. Programlar Ana Butonu -->
-        <button class="btn" onclick="toggleSubmenu('programs-menu')">
-            <i class="fa-solid fa-cubes"></i> Programlar Portalı
-            <i class="fa-solid fa-chevron-down" style="margin-left:auto;"></i>
+        <!-- 2. Programlar Menüsü -->
+        <div class="category-title">Yazılımlar & Araçlar</div>
+        <button class="menu-btn" onclick="toggleSubmenu('prog-menu')">
+            <span><i class="fa-solid fa-cubes"></i> Popüler Programlar (40)</span>
+            <i class="fa-solid fa-chevron-down"></i>
         </button>
+        <div id="prog-menu" class="submenu">
+            <button class="item-btn" onclick="showAllPrograms()"><i class="fa-solid fa-border-all"></i> Tüm 40 Programı Listele</button>
+        </div>
 
-        <!-- 3. İşletim Sistemleri ve Betalar -->
+        <!-- 3. İşletim Sistemleri -->
         <div class="category-title">İşletim Sistemleri Arşivi</div>
 
         <!-- Windows -->
-        <button class="btn" onclick="toggleSubmenu('win-menu')">
-            <i class="fa-brands fa-windows"></i> Windows & Betalar
+        <button class="menu-btn" onclick="toggleSubmenu('win-menu')">
+            <span><i class="fa-brands fa-windows"></i> Windows Sürümleri</span>
+            <i class="fa-solid fa-chevron-down"></i>
         </button>
         <div id="win-menu" class="submenu">
-            <button class="btn" onclick="loadContent('Windows 1.0 - 3.11', 'win')">Win 1.0 - 3.11 (Betalar Dahil)</button>
-            <button class="btn" onclick="loadContent('Windows 95 / 98 / ME', 'win')">Win 95 / 98 / ME</button>
-            <button class="btn" onclick="loadContent('Windows XP / Vista / 7', 'win')">Win XP / Vista / 7</button>
-            <button class="btn" onclick="loadContent('Windows 8.1 / 10 / 11', 'win')">Win 8.1 / 10 / 11</button>
-            <button class="btn" onclick="loadContent('Windows Insider Betaları', 'win')">Insider Betaları (Dev/Canary)</button>
+            <button class="item-btn" onclick="selectItem('Windows 1.01', 'Windows', 'Win 1.01 ISO / IMG Kalıbı')"><i class="fa-brands fa-windows"></i> Windows 1.01</button>
+            <button class="item-btn" onclick="selectItem('Windows 2.03', 'Windows', 'Win 2.03 Disket Kalıpları')"><i class="fa-brands fa-windows"></i> Windows 2.03</button>
+            <button class="item-btn" onclick="selectItem('Windows 3.1', 'Windows', 'Win 3.1 Orijinal Kurulum')"><i class="fa-brands fa-windows"></i> Windows 3.1</button>
+            <button class="item-btn" onclick="selectItem('Windows 3.11', 'Windows', 'Windows for Workgroups 3.11')"><i class="fa-brands fa-windows"></i> Windows 3.11</button>
+            <button class="item-btn" onclick="selectItem('Windows 95', 'Windows', 'Windows 95 OSR2 ISO')"><i class="fa-brands fa-windows"></i> Windows 95</button>
+            <button class="item-btn" onclick="selectItem('Windows 98 SE', 'Windows', 'Windows 98 Second Edition ISO')"><i class="fa-brands fa-windows"></i> Windows 98 SE</button>
+            <button class="item-btn" onclick="selectItem('Windows ME', 'Windows', 'Windows Millennium Edition ISO')"><i class="fa-brands fa-windows"></i> Windows ME</button>
+            <button class="item-btn" onclick="selectItem('Windows 2000', 'Windows', 'Windows 2000 Pro SP4 ISO')"><i class="fa-brands fa-windows"></i> Windows 2000</button>
+            <button class="item-btn" onclick="selectItem('Windows XP Pro SP3', 'Windows', 'Windows XP Professional SP3')"><i class="fa-brands fa-windows"></i> Windows XP</button>
+            <button class="item-btn" onclick="selectItem('Windows Vista SP2', 'Windows', 'Windows Vista Ultimate SP2')"><i class="fa-brands fa-windows"></i> Windows Vista</button>
+            <button class="item-btn" onclick="selectItem('Windows 7 SP1', 'Windows', 'Windows 7 Ultimate SP1 ISO')"><i class="fa-brands fa-windows"></i> Windows 7</button>
+            <button class="item-btn" onclick="selectItem('Windows 8.1 Pro', 'Windows', 'Windows 8.1 Pro Orijinal ISO')"><i class="fa-brands fa-windows"></i> Windows 8.1</button>
+            <button class="item-btn" onclick="selectItem('Windows 10 (22H2)', 'Windows', 'Windows 10 Türkçe Orijinal ISO')"><i class="fa-brands fa-windows"></i> Windows 10</button>
+            <button class="item-btn" onclick="selectItem('Windows 11 (23H2)', 'Windows', 'Windows 11 Orijinal ISO Kalıbı')"><i class="fa-brands fa-windows"></i> Windows 11</button>
+        </div>
+
+        <!-- Windows Betaları -->
+        <button class="menu-btn" onclick="toggleSubmenu('beta-menu')">
+            <span><i class="fa-solid fa-vial"></i> Windows Betaları</span>
+            <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div id="beta-menu" class="submenu">
+            <button class="item-btn" onclick="selectItem('Windows Chicago (95 Beta)', 'Windows Beta', 'Win 95 Chicago Build 58s')"><i class="fa-solid fa-bug"></i> Win Chicago (95 Beta)</button>
+            <button class="item-btn" onclick="selectItem('Windows Memphis (98 Beta)', 'Windows Beta', 'Win 98 Memphis Build 1400')"><i class="fa-solid fa-bug"></i> Win Memphis (98 Beta)</button>
+            <button class="item-btn" onclick="selectItem('Windows Whistler (XP Beta)', 'Windows Beta', 'Win XP Whistler Build 2419')"><i class="fa-solid fa-bug"></i> Win Whistler (XP Beta)</button>
+            <button class="item-btn" onclick="selectItem('Windows Longhorn (Vista Beta)', 'Windows Beta', 'Win Vista Longhorn Build 4074')"><i class="fa-solid fa-bug"></i> Win Longhorn (Vista Beta)</button>
+            <button class="item-btn" onclick="selectItem('Windows 11 Insider Dev', 'Windows Beta', 'Windows 11 Canary/Dev Build')"><i class="fa-solid fa-bug"></i> Win 11 Dev Build</button>
         </div>
 
         <!-- Linux -->
-        <button class="btn" onclick="toggleSubmenu('linux-menu')">
-            <i class="fa-brands fa-linux"></i> Linux Dağıtımları
+        <button class="menu-btn" onclick="toggleSubmenu('linux-menu')">
+            <span><i class="fa-brands fa-linux"></i> Linux Dağıtımları</span>
+            <i class="fa-solid fa-chevron-down"></i>
         </button>
         <div id="linux-menu" class="submenu">
-            <button class="btn" onclick="loadContent('Ubuntu / Debian', 'linux')">Ubuntu & Debian</button>
-            <button class="btn" onclick="loadContent('Arch / Manjaro', 'linux')">Arch & Manjaro</button>
-            <button class="btn" onclick="loadContent('Fedora / RHEL', 'linux')">Fedora & RHEL</button>
-            <button class="btn" onclick="loadContent('Linux Beta/Testing Iso', 'linux')">Beta/Testing ISO'lar</button>
+            <button class="item-btn" onclick="selectItem('Ubuntu 24.04 LTS', 'Linux', 'Ubuntu Desktop LTS ISO')"><i class="fa-brands fa-ubuntu"></i> Ubuntu 24.04 LTS</button>
+            <button class="item-btn" onclick="selectItem('Debian 12 Bookworm', 'Linux', 'Debian Official ISO')"><i class="fa-brands fa-debian"></i> Debian 12</button>
+            <button class="item-btn" onclick="selectItem('Arch Linux', 'Linux', 'Arch Linux Rolling Release ISO')"><i class="fa-brands fa-linux"></i> Arch Linux</button>
+            <button class="item-btn" onclick="selectItem('Fedora 40 Workstation', 'Linux', 'Fedora Workstation Official')"><i class="fa-brands fa-fedora"></i> Fedora 40</button>
+            <button class="item-btn" onclick="selectItem('Linux Mint 21.3', 'Linux', 'Linux Mint Cinnamon Edition')"><i class="fa-brands fa-linux"></i> Linux Mint 21.3</button>
         </div>
 
         <!-- Mac -->
-        <button class="btn" onclick="toggleSubmenu('mac-menu')">
-            <i class="fa-brands fa-apple"></i> macOS & Mac OS Classic
+        <button class="menu-btn" onclick="toggleSubmenu('mac-menu')">
+            <span><i class="fa-brands fa-apple"></i> macOS & Classic Mac</span>
+            <i class="fa-solid fa-chevron-down"></i>
         </button>
         <div id="mac-menu" class="submenu">
-            <button class="btn" onclick="loadContent('Mac OS Classic (9 ve öncesi)', 'mac')">Mac OS Classic (Sistem 1-9)</button>
-            <button class="btn" onclick="loadContent('macOS OS X (10.0 - 10.15)', 'mac')">OS X (Cheetah -> Catalina)</button>
-            <button class="btn" onclick="loadContent('macOS Big Sur / Monterey / Sonoma', 'mac')">macOS (Big Sur ve Üzeri)</button>
-            <button class="btn" onclick="loadContent('macOS Developer Betaları', 'mac')">Developer Betaları</button>
+            <button class="item-btn" onclick="selectItem('System 7.5.3', 'macOS', 'Classic Mac OS System 7.5.3')"><i class="fa-brands fa-apple"></i> System 7.5.3</button>
+            <button class="item-btn" onclick="selectItem('Mac OS 9.2.2', 'macOS', 'Classic Mac OS 9 ISO')"><i class="fa-brands fa-apple"></i> Mac OS 9.2.2</button>
+            <button class="item-btn" onclick="selectItem('Mac OS X 10.4 Tiger', 'macOS', 'Mac OS X Tiger Install DVD')"><i class="fa-brands fa-apple"></i> OS X 10.4 Tiger</button>
+            <button class="item-btn" onclick="selectItem('Mac OS X 10.6 Snow Leopard', 'macOS', 'OS X Snow Leopard Retail')"><i class="fa-brands fa-apple"></i> Snow Leopard</button>
+            <button class="item-btn" onclick="selectItem('macOS 14 Sonoma', 'macOS', 'macOS Sonoma Full Installer')"><i class="fa-brands fa-apple"></i> macOS Sonoma</button>
         </div>
     </div>
 
     <!-- SAĞ ANA İÇERİK ALANI -->
     <div class="main-content">
-        
-        <!-- İçerik Kartı -->
         <div class="content-card">
+            
             <div class="content-header">
-                <h1 id="selected-title">Lütfen Sol Menüden Seçim Yapın</h1>
+                <h1 id="selected-title"><i class="fa-solid fa-hand-pointer"></i> Lütfen Seçim Yapın</h1>
                 
                 <!-- Mimari Seçimi (x64 / x86) -->
                 <div class="arch-selector">
@@ -282,23 +412,27 @@
                 </div>
             </div>
 
-            <!-- Programlar Alanı (Varsayılan Olarak 40 Buton Buraya Üretilir) -->
+            <!-- Programlar Izgarası (40 Tane Düzenli Program Butonu) -->
             <div id="programs-container" style="display:none;">
-                <h3>Program Listesi (40 Adet)</h3>
-                <p style="color:var(--text-sub); margin-bottom:15px; font-size:0.9rem;">İndirmek istediğiniz programa tıklayın:</p>
+                <h3 style="margin-bottom:8px; font-size:1.1rem; color:var(--accent);">
+                    <i class="fa-solid fa-layer-group"></i> 40 Adet Popüler Yazılım Listesi
+                </h3>
+                <p style="font-size:0.85rem; color:var(--text-sub); margin-bottom:15px;">Aşağıdaki butonlardan dilediğiniz programa tıklayarak indirme bağlantısına ve kurulum rehberine erişebilirsiniz:</p>
                 <div class="programs-grid" id="prog-grid">
-                    <!-- JS ile 40 Buton Buraya Basılacak -->
+                    <!-- JS Tarafından 40 Gerçek İsimli Program Butonu Üretilecek -->
                 </div>
             </div>
 
             <!-- İndirme ve Tutorial (Rehber) Alanı -->
-            <div id="download-section" style="margin-top:25px; display:none;">
-                <h3 id="dl-item-title">Seçilen Öğe</h3>
+            <div id="download-section" style="display:none; margin-top:20px;">
+                <h2 id="dl-item-title" style="color:var(--accent); font-size:1.3rem;">Seçilen Öğe</h2>
                 
                 <!-- TUTORIAL / REHBER ALANI -->
                 <div class="tutorial-box">
-                    <h4><i class="fa-solid fa-book-open"></i> Kurulum & Kullanım Rehberi (Tutorial):</h4>
-                    <p id="tutorial-text">Lütfen sol taraftan bir işletim sistemi sürümü veya program seçiniz.</p>
+                    <h4><i class="fa-solid fa-book-open"></i> Kurulum & İndirme Rehberi (Tutorial):</h4>
+                    <div id="tutorial-text" style="font-size:0.92rem; color:var(--text-main);">
+                        Detaylar yükleniyor...
+                    </div>
                 </div>
 
                 <!-- İNDİRME BUTONU -->
@@ -306,13 +440,82 @@
                     <i class="fa-solid fa-download"></i> <span id="dl-btn-text">İndirmeyi Başlat</span>
                 </button>
             </div>
-        </div>
 
+        </div>
     </div>
 
     <script>
         let currentArch = 'x64';
-        let currentSelectedItem = '';
+        let currentItemName = '';
+        let currentCategory = '';
+        let currentDescription = '';
+
+        // 40 Adet Gerçek Program Listesi Mimarisi
+        const softwareList = [
+            { name: 'WinRAR 7.0', cat: 'Arşiv & Sıkıştırma', icon: 'fa-file-zipper' },
+            { name: '7-Zip 24.0', cat: 'Arşiv & Sıkıştırma', icon: 'fa-box-archive' },
+            { name: 'Rufus 4.5', cat: 'USB Araçları', icon: 'fa-usb' },
+            { name: 'IDM (Internet Download Mgr)', cat: 'İndirme Yöneticisi', icon: 'fa-download' },
+            { name: 'VLC Media Player', cat: 'Medya Oynatıcı', icon: 'fa-play' },
+            { name: 'Google Chrome', cat: 'Web Tarayıcı', icon: 'fa-globe' },
+            { name: 'Mozilla Firefox', cat: 'Web Tarayıcı', icon: 'fa-compass' },
+            { name: 'Brave Browser', cat: 'Web Tarayıcı', icon: 'fa-shield-halved' },
+            { name: 'Obs Studio', cat: 'Ekran Kayıt & Yayın', icon: 'fa-video' },
+            { name: 'VMware Workstation Pro', cat: 'Sanal Makine', icon: 'fa-server' },
+            { name: 'Oracle VirtualBox', cat: 'Sanal Makine', icon: 'fa-desktop' },
+            { name: 'Notepad++', cat: 'Kod Editörü', icon: 'fa-code' },
+            { name: 'VS Code', cat: 'Kod Editörü', icon: 'fa-laptop-code' },
+            { name: 'Malwarebytes Anti-Malware', cat: 'Güvenlik & Virüs', icon: 'fa-bug-slash' },
+            { name: 'qBittorrent', cat: 'Torrent Yöneticisi', icon: 'fa-cloud-arrow-down' },
+            { name: 'AnyDesk', cat: 'Uzak Masaüstü', icon: 'fa-headset' },
+            { name: 'TeamViewer', cat: 'Uzak Masaüstü', icon: 'fa-display' },
+            { name: 'Discord', cat: 'Sesli İletişim', icon: 'fa-comments' },
+            { name: 'Steam', cat: 'Oyun Platformu', icon: 'fa-gamepad' },
+            { name: 'Epic Games Launcher', cat: 'Oyun Platformu', icon: 'fa-cubes-stacked' },
+            { name: 'GIMP Photo Editor', cat: 'Grafik & Tasarım', icon: 'fa-image' },
+            { name: 'Audacity', cat: 'Ses Düzenleyici', icon: 'fa-microphone' },
+            { name: 'HandBrake', cat: 'Video Dönüştürücü', icon: 'fa-file-video' },
+            { name: 'CPU-Z Hardware Info', cat: 'Sistem Bilgisi', icon: 'fa-microchip' },
+            { name: 'GPU-Z Graphics Info', cat: 'Sistem Bilgisi', icon: 'fa-memory' },
+            { name: 'HWMonitor', cat: 'Donanım İzleme', icon: 'fa-temperature-high' },
+            { name: 'CCleaner System Cleaner', cat: 'Sistem Temizlik', icon: 'fa-broom' },
+            { name: 'Revo Uninstaller', cat: 'Program Kaldırıcı', icon: 'fa-trash-can' },
+            { name: 'Geek Uninstaller', cat: 'Program Kaldırıcı', icon: 'fa-xmark' },
+            { name: 'AIDA64 Extreme', cat: 'Sistem Teşhis', icon: 'fa-chart-line' },
+            { name: 'Driver Booster', cat: 'Sürücü Güncelleyici', icon: 'fa-wrench' },
+            { name: 'PowerISO', cat: 'Sanal Sürücü & ISO', icon: 'fa-compact-disc' },
+            { name: 'UltraISO', cat: 'ISO Düzenleyici', icon: 'fa-disc-drive' },
+            { name: 'Everything Search', cat: 'Hızlı Dosya Arama', icon: 'fa-magnifying-glass' },
+            { name: 'BleachBit', cat: 'Gizlilik & Temizlik', icon: 'fa-wind' },
+            { name: 'K-Lite Codec Pack', cat: 'Medya Kodek', icon: 'fa-film' },
+            { name: 'ShareX Screen Capture', cat: 'Ekran Görüntüsü', icon: 'fa-camera' },
+            { name: 'FastStone Capture', cat: 'Ekran Yakalama', icon: 'fa-crop' },
+            { name: 'Ventoy USB Creator', cat: 'Çoklu ISO USB', icon: 'fa-hard-drive' },
+            { name: 'CrystalDiskInfo', cat: 'Disk Sağlığı Kontrolü', icon: 'fa-database' }
+        ];
+
+        // Sayfa Yüklendiğinde 40 Programı Hazırla
+        window.onload = function() {
+            const grid = document.getElementById('prog-grid');
+            softwareList.forEach((sw, index) => {
+                const card = document.createElement('div');
+                card.className = 'prog-card-btn';
+                card.onclick = (e) => {
+                    document.querySelectorAll('.prog-card-btn').forEach(c => c.classList.remove('active'));
+                    card.classList.add('active');
+                    selectItem(sw.name, sw.cat, `${sw.name} Güncel Kurulum Dosyası`);
+                };
+
+                card.innerHTML = `
+                    <div class="prog-icon"><i class="fa-solid ${sw.icon}"></i></div>
+                    <div class="prog-info">
+                        <div class="prog-name">${sw.name}</div>
+                        <div class="prog-cat">${sw.cat}</div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        };
 
         // Submenu Aç/Kapa
         function toggleSubmenu(id) {
@@ -320,64 +523,56 @@
             menu.classList.toggle('open');
         }
 
-        // Mimari Değiştirme (x64 / x86)
+        // Tüm Programları Göster
+        function showAllPrograms() {
+            document.getElementById('programs-container').style.display = 'block';
+            document.getElementById('download-section').style.display = 'none';
+            document.getElementById('selected-title').innerHTML = '<i class="fa-solid fa-cubes"></i> 40 Popüler Yazılım Portalı';
+        }
+
+        // Mimari Seçimi (x64 / x86)
         function setArch(arch, btn) {
             currentArch = arch;
             document.querySelectorAll('.arch-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             
-            if(currentSelectedItem) {
-                updateTutorialText();
+            if(currentItemName) {
+                updateUI();
             }
         }
 
-        // 40 Adet Program Butonunu Oluşturma
-        const grid = document.getElementById('prog-grid');
-        for(let i = 1; i <= 40; i++) {
-            const pBtn = document.createElement('button');
-            pBtn.className = 'prog-btn';
-            pBtn.innerHTML = `<i class="fa-solid fa-gear"></i> Program ${i}`;
-            pBtn.onclick = () => loadContent(`Program ${i}`, 'program');
-            grid.appendChild(pBtn);
+        // Sürüm veya Program Seçimi Yapıldığında
+        function selectItem(name, category, desc) {
+            currentItemName = name;
+            currentCategory = category;
+            currentDescription = desc;
+
+            document.getElementById('selected-title').innerHTML = `<i class="fa-solid fa-circle-check" style="color:var(--accent-green);"></i> ${name}`;
+            document.getElementById('download-section').style.display = 'block';
+
+            updateUI();
         }
 
-        // İçerik Yükleme (Her Butona Basıldığında Tetiklenir)
-        function loadContent(itemName, type) {
-            currentSelectedItem = itemName;
-            document.getElementById('selected-title').innerText = itemName;
-            
-            const progContainer = document.getElementById('programs-container');
-            const dlSection = document.getElementById('download-section');
+        // Arayüz ve Tutorial Rehber Metnini Güncelleme
+        function updateUI() {
+            document.getElementById('dl-item-title').innerText = `${currentItemName} - [Mimari: ${currentArch}]`;
+            document.getElementById('dl-btn-text').innerText = `${currentItemName} (${currentArch}) İndir`;
 
-            if(itemName === 'Programlar Portalı') {
-                progContainer.style.display = 'block';
-                dlSection.style.display = 'none';
-            } else {
-                if(type !== 'program') progContainer.style.display = 'none';
-                dlSection.style.display = 'block';
-                document.getElementById('dl-item-title').innerText = `${itemName} (${currentArch})`;
-                updateTutorialText();
-            }
-        }
-
-        // Dinamik Tutorial (Rehber) Yazısı Güncelleme
-        function updateTutorialText() {
             const tutText = document.getElementById('tutorial-text');
-            const dlBtnText = document.getElementById('dl-btn-text');
-            
-            dlBtnText.innerText = `${currentSelectedItem} (${currentArch}) İndir`;
-
             tutText.innerHTML = `
-                <strong>${currentSelectedItem}</strong> sürümünü <strong>${currentArch}</strong> mimarisinde indirmek üzeresiniz.<br><br>
-                <strong>Adım 1:</strong> Aşağıdaki indirme butonuna basarak <code>.iso</code> / <code>.exe</code> dosyasını bilgisayarınıza çekin.<br>
-                <strong>Adım 2:</strong> Eğer ISO dosyasıysa Rufus yardımıyla USB belleğinize yazdırın.<br>
-                <strong>Adım 3:</strong> RAR şifresi gerekirse varsayılan şifre: <code>12345</code>'tir.
+                <p style="margin-bottom:8px;"><strong>Seçilen İçerik:</strong> ${currentItemName} (${currentCategory})</p>
+                <p style="margin-bottom:8px;"><strong>Mimari Desteği:</strong> <span style="color:var(--accent);">${currentArch}</span></p>
+                <p style="margin-bottom:12px;"><strong>Açıklama:</strong> ${currentDescription}</p>
+                <hr style="border:0; border-top:1px solid var(--border); margin:12px 0;">
+                <p><strong>1. Adım:</strong> Aşağıdaki yeşil "İndirmeyi Başlat" butonuna tıklayarak kurulum dosyasını edinin.</p>
+                <p><strong>2. Adım:</strong> İnen dosya <code>.rar</code> / <code>.zip</code> ise klasöre çıkarın. Şifre gerekirse varsayılan: <code>12345</code>.</p>
+                <p><strong>3. Adım:</strong> Sistem/ISO dosyası ise Rufus veya Ventoy ile USB'ye yazdırıp kurulumu tamamlayabilirsiniz.</p>
             `;
         }
 
-        // İndirme İşlemi Tetikleyici
+        // İndirme Tetikleyici
         function triggerDownload() {
-            alert(`${currentSelectedItem} (${currentArch}) indirmesi başlatılıyor! Kendi Base64/Mediafire linkini buraya bağlayabilirsin.`);
+            alert(`${currentItemName} (${currentArch}) indirme bağlantısı çalıştırılıyor!`);
         }
     </script>
 </body>
