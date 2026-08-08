@@ -335,47 +335,7 @@
             { name: 'Ventoy USB Creator', cat: 'Çoklu ISO USB', icon: 'fa-hard-drive' },
             { name: 'CrystalDiskInfo', cat: 'Disk Sağlığı Kontrolü', icon: 'fa-database' }
         ];
-
-        // Saat & Tarih Güncelleme
-        // Not: new Date() normalde ziyaretçinin cihaz saatini kullanır ve VPN'den ETKİLENMEZ
-        // (VPN sadece IP'yi değiştirir, işletim sistemi saat dilimini değiştirmez).
-        // Bunun yerine ziyaretçinin görünen IP adresinden (yani VPN çıkış noktasından)
-        // saat dilimini bulup ona göre saat gösteriyoruz.
-        let ipTimeZone = null;
-
-       /*
-        async function detectTimeZoneFromIP() {
-            try {
-                const res = await fetch('https://ipapi.co/json/');
-                const data = await res.json();
-                if (data && data.timezone) {
-                    ipTimeZone = data.timezone;
-                    document.getElementById('clock-tz').innerText = `${data.city || ''}${data.city ? ', ' : ''}${data.country_name || ''} — ${ipTimeZone}`.trim();
-                }
-            } catch (e) {
-                console.warn('IP saat dilimi alınamadı, cihaz saati kullanılıyor.');
-            }
-        }
-
-        function updateClock() {
-            const now = new Date();
-            const options = ipTimeZone ? { timeZone: ipTimeZone } : {};
-            const timeStr = now.toLocaleTimeString('tr-TR', options);
-            const dateStr = now.toLocaleDateString('tr-TR', { ...options, weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
-
-            document.getElementById('clock-time').innerText = timeStr;
-            document.getElementById('clock-date').innerText = dateStr;
-
-            if (!ipTimeZone) {
-                const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-                const offsetMinutes = -now.getTimezoneOffset();
-                const offsetSign = offsetMinutes >= 0 ? '+' : '-';
-                const offsetHours = Math.floor(Math.abs(offsetMinutes) / 60);
-                document.getElementById('clock-tz').innerText = `${timeZone} (UTC${offsetSign}${offsetHours}) - tespit ediliyor...`;
-            }
-        }
-*/
-        window.onload = function() {
+            window.onload = function() {
             updateClock();
             detectTimeZoneFromIP().then(updateClock);
             setInterval(updateClock, 1000);
