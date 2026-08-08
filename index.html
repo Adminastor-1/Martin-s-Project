@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yazılım ve İşletim Sistemleri İndirme Portalı</title>
-    <!-- FontAwesome İkon Seti -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -19,344 +18,53 @@
             --border: #334155;
             --badge-bg: #334155;
         }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-main);
-            color: var(--text-main);
-            display: flex;
-            min-height: 100vh;
-        }
-
-        /* Sol Yan Panel (Sidebar) */
-        .sidebar {
-            width: 350px;
-            background-color: var(--bg-card);
-            border-right: 1px solid var(--border);
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            overflow-y: auto;
-            max-height: 100vh;
-        }
-
-        .clock-widget {
-            background: linear-gradient(135deg, #1e1b4b, #312e81);
-            padding: 16px;
-            border-radius: 12px;
-            border: 1px solid #4338ca;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            text-align: center;
-        }
-
-        .clock-widget .clock-time {
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: #a5b4fc;
-            letter-spacing: 1px;
-        }
-
-        .clock-widget .clock-date {
-            font-size: 0.85rem;
-            color: #c7d2fe;
-            margin-top: 4px;
-            text-transform: capitalize;
-        }
-
-        .clock-widget .clock-tz {
-            font-size: 0.72rem;
-            color: #8b8fd8;
-            margin-top: 6px;
-        }
-
-        /* Bilgilendirme Sekmesi İçerik Blokları */
-        .info-block {
-            background-color: #0f172a;
-            border: 1px solid var(--border);
-            border-left: 4px solid var(--accent);
-            padding: 20px;
-            border-radius: 0 12px 12px 0;
-            margin-bottom: 18px;
-            line-height: 1.7;
-        }
-
-        .info-block h4 {
-            color: var(--accent);
-            font-size: 1.05rem;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .info-block p {
-            font-size: 0.92rem;
-            color: var(--text-main);
-        }
-
-        .category-title {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1.2px;
-            color: var(--text-sub);
-            margin-top: 10px;
-            margin-bottom: 5px;
-            font-weight: 700;
-        }
-
-        .menu-btn {
-            background-color: #0f172a;
-            color: var(--text-main);
-            border: 1px solid var(--border);
-            padding: 12px 15px;
-            border-radius: 8px;
-            cursor: pointer;
-            text-align: left;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-            font-weight: 600;
-            font-size: 0.92rem;
-        }
-
-        .menu-btn:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
-
-        .submenu {
-            display: none;
-            flex-direction: column;
-            gap: 6px;
-            padding-left: 8px;
-            margin-top: 4px;
-        }
-
-        .submenu.open {
-            display: flex;
-        }
-
-        /* Tekil Seçim Butonları */
-        .item-btn {
-            background-color: #1a2332;
-            color: var(--text-sub);
-            border: 1px solid var(--border);
-            padding: 9px 12px;
-            border-radius: 6px;
-            cursor: pointer;
-            text-align: left;
-            font-size: 0.85rem;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            gap: 9px;
-            width: 100%;
-        }
-
-        .item-btn:hover, .item-btn.active {
-            background-color: var(--accent-hover);
-            color: white;
-            border-color: var(--accent);
-        }
-
-        /* Sağ Ana İçerik Alanı */
-        .main-content {
-            flex: 1;
-            padding: 30px;
-            overflow-y: auto;
-        }
-
-        .content-card {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 28px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-        }
-
-        .content-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 18px;
-            margin-bottom: 22px;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .content-header h1 {
-            font-size: 1.5rem;
-            color: var(--text-main);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        /* Mimari Butonları (x64 / x86) */
-        .arch-selector {
-            display: flex;
-            gap: 10px;
-            background: #0f172a;
-            padding: 4px;
-            border-radius: 25px;
-            border: 1px solid var(--border);
-        }
-
-        .arch-btn {
-            padding: 6px 18px;
-            border-radius: 20px;
-            border: none;
-            background: transparent;
-            color: var(--text-sub);
-            cursor: pointer;
-            font-weight: 700;
-            font-size: 0.85rem;
-            transition: all 0.2s;
-        }
-
-        .arch-btn.active {
-            background: var(--accent);
-            color: #0f172a;
-        }
-
-        /* Programlar Izgarası (40 Program Alanı) */
-        .programs-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-            gap: 12px;
-            margin-top: 15px;
-        }
-
-        .prog-card-btn {
-            background: #0f172a;
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 12px 14px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            transition: all 0.2s ease;
-            text-align: left;
-            color: var(--text-main);
-        }
-
-        .prog-card-btn:hover, .prog-card-btn.active {
-            border-color: var(--accent);
-            background: #1a2332;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(56, 189, 248, 0.15);
-        }
-
-        .prog-icon {
-            width: 38px;
-            height: 38px;
-            background: rgba(56, 189, 248, 0.1);
-            color: var(--accent);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
-            flex-shrink: 0;
-        }
-
-        .prog-info {
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-
-        .prog-name {
-            font-weight: 600;
-            font-size: 0.88rem;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .prog-cat {
-            font-size: 0.72rem;
-            color: var(--text-sub);
-            margin-top: 2px;
-        }
-
-        /* İndirme & Rehber Kutusu */
-        .tutorial-box {
-            background-color: #0f172a;
-            border: 1px solid var(--border);
-            border-left: 4px solid var(--accent);
-            padding: 22px;
-            border-radius: 0 12px 12px 0;
-            margin-top: 22px;
-            line-height: 1.6;
-        }
-
-        .tutorial-box h4 {
-            color: var(--accent);
-            font-size: 1.05rem;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .download-action-btn {
-            background: var(--accent-green);
-            color: white;
-            border: none;
-            padding: 14px 28px;
-            border-radius: 10px;
-            font-weight: 700;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            margin-top: 22px;
-            font-size: 1.02rem;
-            transition: all 0.2s;
-            box-shadow: 0 4px 14px rgba(34, 197, 94, 0.3);
-        }
-
-        .download-action-btn:hover {
-            background: var(--accent-green-hover);
-            transform: translateY(-2px);
-        }
-
-        .info-badge {
-            background: var(--badge-bg);
-            color: var(--accent);
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            margin-left: auto;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--bg-main); color: var(--text-main); display: flex; min-height: 100vh; }
+        .sidebar { width: 350px; background-color: var(--bg-card); border-right: 1px solid var(--border); padding: 20px; display: flex; flex-direction: column; gap: 15px; overflow-y: auto; max-height: 100vh; }
+        .clock-widget { background: linear-gradient(135deg, #1e1b4b, #312e81); padding: 16px; border-radius: 12px; border: 1px solid #4338ca; box-shadow: 0 4px 12px rgba(0,0,0,0.3); text-align: center; }
+        .clock-widget .clock-time { font-size: 1.6rem; font-weight: 700; color: #a5b4fc; letter-spacing: 1px; }
+        .clock-widget .clock-date { font-size: 0.85rem; color: #c7d2fe; margin-top: 4px; text-transform: capitalize; }
+        .clock-widget .clock-tz { font-size: 0.72rem; color: #8b8fd8; margin-top: 6px; }
+        .info-block { background-color: #0f172a; border: 1px solid var(--border); border-left: 4px solid var(--accent); padding: 20px; border-radius: 0 12px 12px 0; margin-bottom: 18px; line-height: 1.7; }
+        .info-block h4 { color: var(--accent); font-size: 1.05rem; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+        .info-block p { font-size: 0.92rem; color: var(--text-main); }
+        .category-title { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.2px; color: var(--text-sub); margin-top: 10px; margin-bottom: 5px; font-weight: 700; }
+        .menu-btn { background-color: #0f172a; color: var(--text-main); border: 1px solid var(--border); padding: 12px 15px; border-radius: 8px; cursor: pointer; text-align: left; transition: all 0.2s ease; display: flex; align-items: center; justify-content: space-between; width: 100%; font-weight: 600; font-size: 0.92rem; }
+        .menu-btn:hover { border-color: var(--accent); color: var(--accent); }
+        .submenu { display: none; flex-direction: column; gap: 6px; padding-left: 8px; margin-top: 4px; }
+        .submenu.open { display: flex; }
+        .item-btn { background-color: #1a2332; color: var(--text-sub); border: 1px solid var(--border); padding: 9px 12px; border-radius: 6px; cursor: pointer; text-align: left; font-size: 0.85rem; transition: all 0.2s ease; display: flex; align-items: center; gap: 9px; width: 100%; }
+        .item-btn:hover, .item-btn.active { background-color: var(--accent-hover); color: white; border-color: var(--accent); }
+        .main-content { flex: 1; padding: 30px; overflow-y: auto; }
+        .content-card { background-color: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 28px; box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+        .content-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 18px; margin-bottom: 22px; flex-wrap: wrap; gap: 15px; }
+        .content-header h1 { font-size: 1.5rem; color: var(--text-main); display: flex; align-items: center; gap: 10px; }
+        .arch-selector { display: flex; gap: 10px; background: #0f172a; padding: 4px; border-radius: 25px; border: 1px solid var(--border); }
+        .arch-btn { padding: 6px 18px; border-radius: 20px; border: none; background: transparent; color: var(--text-sub); cursor: pointer; font-weight: 700; font-size: 0.85rem; transition: all 0.2s; }
+        .arch-btn.active { background: var(--accent); color: #0f172a; }
+        .programs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 12px; margin-top: 15px; }
+        .prog-card-btn { background: #0f172a; border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; cursor: pointer; display: flex; align-items: center; gap: 12px; transition: all 0.2s ease; text-align: left; color: var(--text-main); }
+        .prog-card-btn:hover, .prog-card-btn.active { border-color: var(--accent); background: #1a2332; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(56, 189, 248, 0.15); }
+        .prog-icon { width: 38px; height: 38px; background: rgba(56, 189, 248, 0.1); color: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+        .prog-info { display: flex; flex-direction: column; overflow: hidden; }
+        .prog-name { font-weight: 600; font-size: 0.88rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .prog-cat { font-size: 0.72rem; color: var(--text-sub); margin-top: 2px; }
+        .tutorial-box { background-color: #0f172a; border: 1px solid var(--border); border-left: 4px solid var(--accent); padding: 22px; border-radius: 0 12px 12px 0; margin-top: 22px; line-height: 1.6; }
+        .tutorial-box h4 { color: var(--accent); font-size: 1.05rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+        .download-action-btn { background: var(--accent-green); color: white; border: none; padding: 14px 28px; border-radius: 10px; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 10px; margin-top: 22px; font-size: 1.02rem; transition: all 0.2s; box-shadow: 0 4px 14px rgba(34, 197, 94, 0.3); }
+        .download-action-btn:hover { background: var(--accent-green-hover); transform: translateY(-2px); }
+        .info-badge { background: var(--badge-bg); color: var(--accent); padding: 3px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; margin-left: auto; }
     </style>
 </head>
 <body>
 
-    <!-- SOL PANEL (SIDEBAR) -->
     <div class="sidebar">
-        <!-- 1. Karşılama Alanı (artık buton - tıklanınca sağda bilgi sekmesi açılır) -->
-        <!-- 1. Saat & Tarih Alanı -->
         <div class="clock-widget">
             <div class="clock-time" id="clock-time">--:--:--</div>
             <div class="clock-date" id="clock-date">--</div>
             <div class="clock-tz" id="clock-tz">--</div>
         </div>
 
-        <!-- 2. Programlar Menüsü -->
         <div class="category-title">Yazılımlar & Araçlar</div>
         <button class="menu-btn" onclick="toggleSubmenu('prog-menu')">
             <span><i class="fa-solid fa-cubes"></i> Popüler Programlar (40)</span>
@@ -366,19 +74,17 @@
             <button class="item-btn" onclick="showAllPrograms()"><i class="fa-solid fa-border-all"></i> Tüm 40 Programı Listele</button>
         </div>
 
-        <!-- 3. İşletim Sistemleri -->
         <div class="category-title">İşletim Sistemleri Arşivi</div>
 
-        <!-- Windows -->
         <button class="menu-btn" onclick="toggleSubmenu('win-menu')">
             <span><i class="fa-brands fa-windows"></i> Windows Sürümleri</span>
             <i class="fa-solid fa-chevron-down"></i>
         </button>
         <div id="win-menu" class="submenu">
-            <button class="item-btn" onclick="selectItem('Windows 1.01', 'Windows', 'İlk kamu sürümü - 20 Kasım 1985', ['aHR0cHM6Ly9kb3dubG9hZDkzOS5tZWRpYWZpcmUuY29tL3BsY3JrZjl4czlvZ01IUmEtMk9OTmp6M0FuSkwtTWNTcUhkaWZvMVhGOHRTTFU0UU9UN1o0d1lRTHNVblpsVmpnTE42SXpyWWw5bXRBZmllX3NZd2gtNmctR2ZBQVVvNjVQYUxhSld3dXFvbFZsZEhyZTY4WlREd3NON3cwWi1jdVhON3JDblFzQkFtd0J4Q1RjQmxpQmpPV2FqcVN1LVdla2YtLTBHVmNOUkcwbXJWL3JvYzN4Nng5MXhrdTE3dy9NaWNfV2luXzEuMDErJTI4NS4yNSUyOS43eg=='])"><i class="fa-brands fa-windows"></i> Windows 1.01 (1985)</button>
+            <button class="item-btn" onclick="selectItem('Windows 1.01', 'Windows', 'İlk kamu sürümü - 20 Kasım 1985', ['aHR0cHM6Ly9kb3dubG9hZDkzOS5tZWRpYWZpcmUuY29tL3BsY3JrZjl4czlvZ01IUmEtMk9OTmp6M0FuSkwtTWNTcUhkaWZvMVhGOHRTTFU0UU9UN1o0d1lRTHNVblpsVmpnTE42SXpyWWw5bXRBZmllX3NZd2gtNmctR2ZBQVVvNjVQYUxhSld3dXFvbFZsZEhyZTY4WlREd3NON3cwWi1jdVhON3JDblFzQkFtd0J4Q1RjQmxpQmpPV2FqcVN1LVdla2YtLTBHVmNOUkcwbXJWL3JvYzN4Nng5MXhrdTE3dy9NaWNfV2luXzEuMDErJTI4NS4yNSUyOSU3eg=='])"><i class="fa-brands fa-windows"></i> Windows 1.01 (1985)</button>
             <button class="item-btn" onclick="selectItem('Windows 1.02', 'Windows', 'Uluslararası (Avrupa) sürüm - Mayıs 1986', ['x86'])"><i class="fa-brands fa-windows"></i> Windows 1.02 (1986)</button>
             <button class="item-btn" onclick="selectItem('Windows 1.03', 'Windows', 'ABD ve uluslararası düzeltme sürümü - Ağustos 1986', ['x86'])"><i class="fa-brands fa-windows"></i> Windows 1.03 (1986)</button>
-            <button class="item-btn" onclick="selectItem('Windows 1.04', 'Windows', 'IBM PS/2 desteği eklendi - Nisan 1987', ['aHR0cHM6Ly9kb3dubG9hZDEzMjUubWVkaWFmaXJlLmNvbS9idDNsY29xNDViNmdHMFBrMHp2S0p4YzUweElFc0FOa1dEZFJZMzV1Uk1lOHB4Q2xJMEhMSjZCQndESTFoZkVTd1dtNlpaNE1SQ2NPc2RVWVNnLWx0cDhaSUd6M0pDTVpqQ0hWd2FQcXBSc0RrS3dJMmVmemtCY29XZk5yTEdFYWFmNlF1UmdZMktWTjk3QkprVFRZQ1c5YXl3b1ZYcVY5aTh1U2dVaktpd3RzRm9GVy9idDZoanViYWhhYm1qcm8vTWljX1dpbl8xLjA0KyUyODA1LTExLTE5ODclMjkrJTI4NS4yNSUyOS43eg=='])"><i class="fa-brands fa-windows"></i> Windows 1.04 (1987)</button>
+            <button class="item-btn" onclick="selectItem('Windows 1.04', 'Windows', 'IBM PS/2 desteği eklendi - Nisan 1987', ['aHR0cHM6Ly9kb3dubG9hZDEzMjUubWVkaWFmaXJlLmNvbS9idDNsY29xNDViNmdHMFBrMHp2S0p4YzUweElFc0FOa1dEZFJZMzV1Uk1lOHB4Q2xJMEhMSjZCQndESTFoZkVTd1dtNlpaNE1SQ2NPc2RVWVNnLWx0cDhaSUd6M0pDTVpqQ0hWd2FQcXBSc0RrS3dJMmVmemtCY29XZk5yTEdFYWFmNlF1UmdZMktWTjk3QkprVFRZQ1c5YXl3b1ZYcVY5aTh1U2dVaktpd3RzRm9GVy9idDZoanViYWhhYm1qcm8vTWljX1dpbl8xLjA0KyUyODA1LTExLTE5ODclMjkrJTI4NS4yNSUyOSU3eg=='])"><i class="fa-brands fa-windows"></i> Windows 1.04 (1987)</button>
             <button class="item-btn" onclick="selectItem('Windows 2.01', 'Windows', 'OEM sürümü - Eylül 1987', ['x86'])"><i class="fa-brands fa-windows"></i> Windows 2.01 (1987)</button>
             <button class="item-btn" onclick="selectItem('Windows 2.03', 'Windows', 'Perakende sürüm - Aralık 1987', ['x86'])"><i class="fa-brands fa-windows"></i> Windows 2.03 (1987)</button>
             <button class="item-btn" onclick="selectItem('Windows 2.10', 'Windows', 'Windows 2.1x güncellemesi - 1988', ['x86'])"><i class="fa-brands fa-windows"></i> Windows 2.10 (1988)</button>
@@ -405,20 +111,24 @@
         </div>
 
 
-        <!-- Windows Betaları -->
         <button class="menu-btn" onclick="toggleSubmenu('beta-menu')">
-            <span><i class="fa-solid fa-vial"></i> Windows Betaları</span>
+            <span><i class="fa-solid fa-vial"></i> Windows Betaları & İptal Projeler</span>
             <i class="fa-solid fa-chevron-down"></i>
         </button>
         <div id="beta-menu" class="submenu">
             <button class="item-btn" onclick="selectItem('Windows Chicago (95 Beta)', 'Windows Beta', 'Win 95 Chicago Build 58s', ['x86'])"><i class="fa-solid fa-bug"></i> Win Chicago (95 Beta)</button>
+            <button class="item-btn" onclick="selectItem('Windows Cairo', 'Windows İptal Proje', 'NT 3.1 sonrası için planlanan, nesne yönelimli dosya sistemi (OFS) içeren dev proje. 1991-1996 arası geliştirildi, hiç çıkmadı. Arayüzü Windows 95, OFS fikri ise yıllar sonra WinFS olarak yeniden doğdu.', ['x86'])"><i class="fa-solid fa-ban"></i> Windows Cairo (İptal, 1991-1996)</button>
+            <button class="item-btn" onclick="selectItem('Windows Nashville', 'Windows İptal Proje', 'Basında "Windows 96" olarak anılan, Windows 95 ile Internet Explorer\'ı bütünleştirmeyi hedefleyen küçük güncelleme projesi. 1996\'da iptal edildi, özellikleri IE4 ve Windows Desktop Update ile geldi.', ['x86'])"><i class="fa-solid fa-ban"></i> Windows Nashville / 96 (İptal, 1996)</button>
             <button class="item-btn" onclick="selectItem('Windows Memphis (98 Beta)', 'Windows Beta', 'Win 98 Memphis Build 1400', ['x86'])"><i class="fa-solid fa-bug"></i> Win Memphis (98 Beta)</button>
+            <button class="item-btn" onclick="selectItem('Windows Neptune', 'Windows İptal Proje', 'Windows 2000 tabanlı, tüketicilere yönelik ilk NT çekirdekli Windows olması planlanan proje. Aralık 1999\'da sadece tek build (5111) sızdırıldı, sonra iptal edildi.', ['x86'])"><i class="fa-solid fa-ban"></i> Windows Neptune (İptal, 1999)</button>
+            <button class="item-btn" onclick="selectItem('Windows Odyssey', 'Windows İptal Proje', 'Windows 2000\'in kurumsal/iş dünyası halefi olarak planlandı, hiç build\'i yapılmadı. Neptune ile birleştirilip Whistler (XP) projesine dönüştü.', ['x86'])"><i class="fa-solid fa-ban"></i> Windows Odyssey (İptal, 2000)</button>
+            <button class="item-btn" onclick="selectItem('Windows Triton', 'Windows İptal Proje', 'Neptune\'un ardından 2001\'in son çeyreğinde çıkması planlanan, sonra iptal edilen ara sürüm projesi.', ['x86'])"><i class="fa-solid fa-ban"></i> Windows Triton (İptal, 2000)</button>
             <button class="item-btn" onclick="selectItem('Windows Whistler (XP Beta)', 'Windows Beta', 'Win XP Whistler Build 2419', ['x86'])"><i class="fa-solid fa-bug"></i> Win Whistler (XP Beta)</button>
             <button class="item-btn" onclick="selectItem('Windows Longhorn (Vista Beta)', 'Windows Beta', 'Win Vista Longhorn Build 4074', ['x64','x86'])"><i class="fa-solid fa-bug"></i> Win Longhorn (Vista Beta)</button>
+            <button class="item-btn" onclick="selectItem('Windows Blackcomb / Vienna', 'Windows İptal Proje', 'XP sonrası için planlanan büyük halef proje. Vista bitince "Vienna" adını aldı, kapsamı çok büyüdüğü için iptal edildi ve küçültülerek Windows 7 oldu.', ['x86'])"><i class="fa-solid fa-ban"></i> Windows Blackcomb / Vienna (İptal, 2002-2006)</button>
             <button class="item-btn" onclick="selectItem('Windows 11 Insider Dev', 'Windows Beta', 'Windows 11 Canary/Dev Build', ['x64'])"><i class="fa-solid fa-bug"></i> Win 11 Dev Build</button>
         </div>
 
-        <!-- Linux -->
         <button class="menu-btn" onclick="toggleSubmenu('linux-menu')">
             <span><i class="fa-brands fa-linux"></i> Linux Dağıtımları</span>
             <i class="fa-solid fa-chevron-down"></i>
@@ -442,7 +152,6 @@
         </div>
 
 
-        <!-- Mac -->
         <button class="menu-btn" onclick="toggleSubmenu('mac-menu')">
             <span><i class="fa-brands fa-apple"></i> macOS & Classic Mac</span>
             <i class="fa-solid fa-chevron-down"></i>
@@ -466,7 +175,7 @@
             <button class="item-btn" onclick="selectItem('OS X 10.9 Mavericks', 'macOS', 'İlk kez ücretsiz sunulan güncelleme', ['x64'])"><i class="fa-brands fa-apple"></i> OS X 10.9 Mavericks (2013)</button>
             <button class="item-btn" onclick="selectItem('OS X 10.10 Yosemite', 'macOS', 'Yassı (flat) tasarım diline geçiş', ['x64'])"><i class="fa-brands fa-apple"></i> OS X 10.10 Yosemite (2014)</button>
             <button class="item-btn" onclick="selectItem('OS X 10.11 El Capitan', 'macOS', 'Yosemite\'nin performans odaklı devamı', ['x64'])"><i class="fa-brands fa-apple"></i> OS X 10.11 El Capitan (2015)</button>
-            <button class="item-btn" onclick="selectItem('macOS 10.12 Sierra', 'macOS', '"Mac OS X" adı resmen "macOS" oldu', ['x64'])"><i class="fa-brands fa-apple"></i> macOS Sierra (2016)</button>
+            <button class="item-btn" onclick="selectItem('macOS 10.12 Sierra', 'macOS', 'Mac OS X adı resmen macOS oldu', ['x64'])"><i class="fa-brands fa-apple"></i> macOS Sierra (2016)</button>
             <button class="item-btn" onclick="selectItem('macOS 10.13 High Sierra', 'macOS', 'APFS dosya sistemi tanıtıldı', ['x64'])"><i class="fa-brands fa-apple"></i> macOS High Sierra (2017)</button>
             <button class="item-btn" onclick="selectItem('macOS 10.14 Mojave', 'macOS', 'Karanlık mod (Dark Mode) geldi', ['x64'])"><i class="fa-brands fa-apple"></i> macOS Mojave (2018)</button>
             <button class="item-btn" onclick="selectItem('macOS 10.15 Catalina', 'macOS', '32-bit uygulama desteği kaldırıldı', ['x64'])"><i class="fa-brands fa-apple"></i> macOS Catalina (2019)</button>
@@ -478,47 +187,34 @@
     </div>
 
 
-    <!-- SAĞ ANA İÇERİK ALANI -->
     <div class="main-content">
         <div class="content-card">
             
             <div class="content-header">
                 <h1 id="selected-title"></h1>
-                
-                <!-- Mimari Seçimi (x64 / x86) -->
                 <div class="arch-selector" id="arch-selector" style="display:none;"></div>
             </div>
 
-            <!-- BİLGİLENDİRME SEKMESİ (Sol üstteki Hoş Geldin butonuna basınca açılır) -->
             <div id="info-section" style="display:none;">
-                <!-- JS içindeki infoData dizisinden otomatik doldurulur -->
                 <div id="info-content"></div>
             </div>
 
-            <!-- Programlar Izgarası (40 Tane Düzenli Program Butonu) -->
             <div id="programs-container" style="display:none;">
                 <h3 style="margin-bottom:8px; font-size:1.1rem; color:var(--accent);">
                     <i class="fa-solid fa-layer-group"></i> 40 Adet Popüler Yazılım Listesi
                 </h3>
                 <p style="font-size:0.85rem; color:var(--text-sub); margin-bottom:15px;">Aşağıdaki butonlardan dilediğiniz programa tıklayarak indirme bağlantısına ve kurulum rehberine erişebilirsiniz:</p>
-                <div class="programs-grid" id="prog-grid">
-                    <!-- JS Tarafından 40 Gerçek İsimli Program Butonu Üretilecek -->
-                </div>
+                <div class="programs-grid" id="prog-grid"></div>
             </div>
 
-            <!-- İndirme ve Tutorial (Rehber) Alanı -->
             <div id="download-section" style="display:none; margin-top:20px;">
                 <h2 id="dl-item-title" style="color:var(--accent); font-size:1.3rem;">Seçilen Öğe</h2>
-                
-                <!-- TUTORIAL / REHBER ALANI -->
                 <div class="tutorial-box">
                     <h4><i class="fa-solid fa-book-open"></i> Kurulum & İndirme Rehberi (Tutorial):</h4>
                     <div id="tutorial-text" style="font-size:0.92rem; color:var(--text-main);">
                         Detaylar yükleniyor...
                     </div>
                 </div>
-
-                <!-- İNDİRME BUTONU -->
                 <button class="download-action-btn" onclick="triggerDownload()">
                     <i class="fa-solid fa-download"></i> <span id="dl-btn-text">İndirmeyi Başlat</span>
                 </button>
@@ -533,15 +229,12 @@
         let currentCategory = '';
         let currentDescription = '';
 
-        // Mimari kodlarının ekranda gösterilecek etiketleri
         const archLabels = {
             x64: 'x64 (64-Bit)',
             x86: 'x86 (32-Bit)',
             ppc: 'PowerPC'
         };
 
-        // Seçilen sürümün desteklediği mimarilere göre butonları oluşturur.
-        // Tek mimari varsa seçici gizlenir ve otomatik o mimari seçilir.
         function renderArchSelector(archs) {
             const container = document.getElementById('arch-selector');
             container.innerHTML = '';
@@ -563,11 +256,6 @@
             currentArch = archs[0];
         }
 
-        // ================================================================
-        // BİLGİLENDİRME SEKMESİ İÇERİĞİ - Buradaki başlık ve metinleri
-        // dilediğin gibi değiştirebilirsin. İstediğin kadar blok ekleyip
-        // çıkarabilirsin, her biri ayrı bir kutu olarak gösterilir.
-        // ================================================================
         const infoData = {
             pageTitle: 'Hoş Geldin!',
             blocks: [
@@ -584,7 +272,6 @@
             ]
         };
 
-        // Bilgilendirme Sekmesini Göster
         function showInfo() {
             document.getElementById('selected-title').innerHTML = `<i class="fa-solid fa-rocket"></i> ${infoData.pageTitle}`;
             document.getElementById('programs-container').style.display = 'none';
@@ -601,7 +288,6 @@
             `).join('');
         }
 
-        // 40 Adet Gerçek Program Listesi Mimarisi
         const softwareList = [
             { name: 'WinRAR 7.0', cat: 'Arşiv & Sıkıştırma', icon: 'fa-file-zipper' },
             { name: '7-Zip 24.0', cat: 'Arşiv & Sıkıştırma', icon: 'fa-box-archive' },
@@ -646,32 +332,48 @@
         ];
 
         // Saat & Tarih Güncelleme
-        // Not: new Date() her zaman ziyaretçinin KENDİ cihaz saatini/saat dilimini kullanır.
-        // Bu kod tarayıcıda (client-side) çalıştığı için Fransa'dan giren biri kendi saatini,
-        // ABD'den giren biri kendi saatini otomatik olarak görür - sunucudan bağımsızdır.
-        function updateClock() {
-            const now = new Date();
-            const timeStr = now.toLocaleTimeString('tr-TR');
-            const dateStr = now.toLocaleDateString('tr-TR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+        // Not: new Date() normalde ziyaretçinin cihaz saatini kullanır ve VPN'den ETKİLENMEZ
+        // (VPN sadece IP'yi değiştirir, işletim sistemi saat dilimini değiştirmez).
+        // Bunun yerine ziyaretçinin görünen IP adresinden (yani VPN çıkış noktasından)
+        // saat dilimini bulup ona göre saat gösteriyoruz.
+        let ipTimeZone = null;
 
-            // Ziyaretçinin tarayıcısından saat dilimini ve UTC farkını otomatik algıla
-            const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-            const offsetMinutes = -now.getTimezoneOffset();
-            const offsetSign = offsetMinutes >= 0 ? '+' : '-';
-            const offsetHours = Math.floor(Math.abs(offsetMinutes) / 60);
-            const tzStr = `${timeZone} (UTC${offsetSign}${offsetHours})`;
-
-            document.getElementById('clock-tz').innerText = tzStr;
-            document.getElementById('clock-time').innerText = timeStr;
-            document.getElementById('clock-date').innerText = dateStr;
+        async function detectTimeZoneFromIP() {
+            try {
+                const res = await fetch('https://ipapi.co/json/');
+                const data = await res.json();
+                if (data && data.timezone) {
+                    ipTimeZone = data.timezone;
+                    document.getElementById('clock-tz').innerText = `${data.city || ''}${data.city ? ', ' : ''}${data.country_name || ''} — ${ipTimeZone}`.trim();
+                }
+            } catch (e) {
+                console.warn('IP saat dilimi alınamadı, cihaz saati kullanılıyor.');
+            }
         }
 
-        // Sayfa Yüklendiğinde 40 Programı Hazırla
+        function updateClock() {
+            const now = new Date();
+            const options = ipTimeZone ? { timeZone: ipTimeZone } : {};
+            const timeStr = now.toLocaleTimeString('tr-TR', options);
+            const dateStr = now.toLocaleDateString('tr-TR', { ...options, weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+
+            document.getElementById('clock-time').innerText = timeStr;
+            document.getElementById('clock-date').innerText = dateStr;
+
+            if (!ipTimeZone) {
+                const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+                const offsetMinutes = -now.getTimezoneOffset();
+                const offsetSign = offsetMinutes >= 0 ? '+' : '-';
+                const offsetHours = Math.floor(Math.abs(offsetMinutes) / 60);
+                document.getElementById('clock-tz').innerText = `${timeZone} (UTC${offsetSign}${offsetHours}) - tespit ediliyor...`;
+            }
+        }
+
         window.onload = function() {
             updateClock();
+            detectTimeZoneFromIP().then(updateClock);
             setInterval(updateClock, 1000);
 
-            // Siteye girince hoşgeldin mesajını otomatik göster
             showInfo();
 
             const grid = document.getElementById('prog-grid');
@@ -695,19 +397,16 @@
             });
         };
 
-        // Submenu Aç/Kapa (yalnızca bir tane açık kalır)
         function toggleSubmenu(id) {
             const menu = document.getElementById(id);
             const isOpen = menu.classList.contains('open');
 
-            // Diğer tüm açık submenüleri kapat
             document.querySelectorAll('.submenu.open').forEach(openMenu => {
                 if (openMenu !== menu) {
                     openMenu.classList.remove('open');
                 }
             });
 
-            // Tıklanan menüyü aç/kapa (aynı butona tekrar basınca kapanabilsin)
             if (isOpen) {
                 menu.classList.remove('open');
             } else {
@@ -715,7 +414,6 @@
             }
         }
 
-        // Tüm Programları Göster
         function showAllPrograms() {
             document.getElementById('programs-container').style.display = 'block';
             document.getElementById('download-section').style.display = 'none';
@@ -724,7 +422,6 @@
             document.getElementById('selected-title').innerHTML = '<i class="fa-solid fa-cubes"></i> 40 Popüler Yazılım Portalı';
         }
 
-        // Mimari Seçimi (x64 / x86)
         function setArch(arch, btn) {
             currentArch = arch;
             document.querySelectorAll('.arch-btn').forEach(b => b.classList.remove('active'));
@@ -735,7 +432,6 @@
             }
         }
 
-        // Sürüm veya Program Seçimi Yapıldığında
         function selectItem(name, category, desc, archs = ['x64', 'x86']) {
             currentItemName = name;
             currentCategory = category;
@@ -750,7 +446,6 @@
             updateUI();
         }
 
-        // Arayüz ve Tutorial Rehber Metnini Güncelleme
         function updateUI() {
             document.getElementById('dl-item-title').innerText = `${currentItemName} - [Mimari: ${archLabels[currentArch] || currentArch}]`;
             document.getElementById('dl-btn-text').innerText = `${currentItemName} (${archLabels[currentArch] || currentArch}) İndir`;
@@ -767,7 +462,6 @@
             `;
         }
 
-        // İndirme Tetikleyici
         function triggerDownload() {
             alert(`${currentItemName} (${archLabels[currentArch] || currentArch}) indirme bağlantısı çalıştırılıyor!`);
         }
