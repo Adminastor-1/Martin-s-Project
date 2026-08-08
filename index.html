@@ -336,9 +336,30 @@
             { name: 'CrystalDiskInfo', cat: 'Disk Sağlığı Kontrolü', icon: 'fa-database' }
         ];
             window.onload = function() {
-            updateClock();
-            detectTimeZoneFromIP().then(updateClock);
-            setInterval(updateClock, 1000);
+                window.onload = function() {
+    showInfo();
+
+    const grid = document.getElementById('prog-grid');
+    softwareList.forEach((sw, index) => {
+        const card = document.createElement('div');
+        card.className = 'prog-card-btn';
+        card.onclick = (e) => {
+            document.querySelectorAll('.prog-card-btn').forEach(c => c.classList.remove('active'));
+            card.classList.add('active');
+            selectItem(sw.name, sw.cat, `${sw.name} Güncel Kurulum Dosyası`);
+        };
+
+        card.innerHTML = `
+            <div class="prog-icon"><i class="fa-solid ${sw.icon}"></i></div>
+            <div class="prog-info">
+                <div class="prog-name">${sw.name}</div>
+                <div class="prog-cat">${sw.cat}</div>
+            </div>
+        `;
+        grid.appendChild(card);
+    });
+};
+            
 
             showInfo();
 
